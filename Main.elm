@@ -115,22 +115,16 @@ view model =
         [ stylesheet
         , nav model.authors
         , renderAuthors model.authors
-        , div [] (renderDataLists (getUnfocusedAffiliations model))
+        , div [] (renderDataLists (getBlurredAuthorAffiliations model))
         ]
 
 
-getUnfocusedAffiliations : Model -> List Affiliation
-getUnfocusedAffiliations model =
-    let
-        getAffiliationsFromAuthor author =
-            if author.id == model.focusedAuthorId then
-                List.filter (\a -> a.id /= model.focusedAffiliationId) author.affiliations
-            else
-                author.affiliations
-    in
-        model.authors
-            |> List.map getAffiliationsFromAuthor
-            |> List.concat
+getBlurredAuthorAffiliations : Model -> List Affiliation
+getBlurredAuthorAffiliations model =
+    model.authors
+        |> List.filter (\a -> a.id /= model.focusedAuthorId)
+        |> List.map .affiliations
+        |> List.concat
 
 
 nav : List Author -> Html Msg
@@ -303,7 +297,7 @@ update msg model =
                     if (model.lastAffiliationKey == -1 && new /= "") || (new == "" && model.lastAffiliationKey == 8) then
                         let
                             matchingAffiliation =
-                                getUnfocusedAffiliations model
+                                getBlurredAuthorAffiliations model
                                     |> List.filter (\a -> a.institution == new)
                                     |> List.head
                                     |> Maybe.withDefault (Affiliation "" affiliation.country affiliation.city affiliation.id)

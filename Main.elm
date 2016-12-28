@@ -1,5 +1,6 @@
 module Main exposing (..)
 
+import Countries
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onClick, onInput, onFocus)
@@ -48,7 +49,7 @@ type alias Affiliation =
 
 blankAuthor : Int -> Author
 blankAuthor id =
-    Author "" "" False [] 0 id
+    Author "" "" False [ blankAffiliation 0 ] 1 id
 
 
 blankAffiliation : Int -> Affiliation
@@ -200,14 +201,6 @@ renderAffiliation authorId affiliation =
             ]
             []
         , input
-            [ list "countries-list"
-            , placeholder "Country"
-            , onInput (UpdateCountry authorId affiliation.id)
-            , onFocus (SetFocusedIds authorId affiliation.id)
-            , value affiliation.country
-            ]
-            []
-        , input
             [ list "cities-list"
             , placeholder "City"
             , onInput (UpdateCity authorId affiliation.id)
@@ -215,6 +208,13 @@ renderAffiliation authorId affiliation =
             , value affiliation.city
             ]
             []
+        , select
+            [ list "countries-list"
+            , onInput (UpdateCountry authorId affiliation.id)
+            , onFocus (SetFocusedIds authorId affiliation.id)
+            , value affiliation.country
+            ]
+            (Countries.options affiliation.country)
         , button [ onClick (DeleteAffiliation authorId affiliation.id) ] [ text "x" ]
         ]
 

@@ -3,7 +3,7 @@ module Main exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onClick, onInput, onFocus)
-import Utils exposing (dropDuplicates)
+import Utils exposing (dropDuplicates, onKeyDown)
 
 
 -- MODEL
@@ -77,6 +77,7 @@ type Msg
     | UpdateCity Int Int String
     | DeleteAffiliation Int Int
     | SetFocusedIds Int Int
+    | SetAffiliationKeyDown Int Int
 
 
 type Focused
@@ -194,6 +195,7 @@ renderAffiliation authorId affiliation =
             , placeholder "Institution"
             , onInput (UpdateInstitution authorId affiliation.id)
             , onFocus (SetFocusedIds authorId affiliation.id)
+            , onKeyDown (SetAffiliationKeyDown affiliation.id)
             , value affiliation.institution
             ]
             []
@@ -298,9 +300,28 @@ update msg model =
         UpdateInstitution authorId affiliationId new ->
             let
                 updateInstitution affiliation =
-                    { affiliation | institution = new }
+                    if (model.lastAffiliationKey == -1 && new /= "") || (new == "" && model.lastAffiliationKey == 8) then
+                        let
+                            matchingAffiliation =
+                                getUnfocusedAffiliations model
+                                    |> List.filter (\a -> a.institution == new)
+                                    |> List.head
+                                    |> Maybe.withDefault (Affiliation "" affiliation.country affiliation.city affiliation.id)
+                        in
+                            { affiliation
+                                | institution = matchingAffiliation.institution
+                                , city = matchingAffiliation.city
+                                , country = matchingAffiliation.country
+                            }
+                    else
+                        { affiliation | institution = new }
             in
-                updateAffiliation model authorId affiliationId updateInstitution
+                ( { model
+                    | authors = getAffiliationUpdate model authorId affiliationId updateInstitution
+                    , lastAffiliationKey = -1
+                  }
+                , Cmd.none
+                )
 
         UpdateCountry authorId affiliationId new ->
             let
@@ -333,6 +354,13 @@ update msg model =
             , Cmd.none
             )
 
+        SetAffiliationKeyDown affiliationId key ->
+            ( { model
+                | lastAffiliationKey = key
+              }
+            , Cmd.none
+            )
+
 
 updateAuthor : Model -> Int -> (Author -> Author) -> ( Model, Cmd Msg )
 updateAuthor model id change =
@@ -352,6 +380,20 @@ updateAffiliation model authorId affiliationId change =
             }
     in
         updateAuthor model authorId updateAffiliation
+
+
+getAuthorUpdate model id change =
+    updateIfHasId model.authors id change
+
+
+getAffiliationUpdate model authorId affiliationId change =
+    let
+        updateAffiliation author =
+            { author
+                | affiliations = (updateIfHasId author.affiliations affiliationId change)
+            }
+    in
+        getAuthorUpdate model authorId updateAffiliation
 
 
 updateIfHasId list id change =

@@ -100,7 +100,7 @@ stylesheet =
         attrs =
             [ attribute "Rel" "stylesheet"
             , attribute "property" "stylesheet"
-            , attribute "href" "https://cdnjs.cloudflare.com/ajax/libs/pure/0.6.1/base-min.css"
+            , attribute "href" "https://unpkg.com/tachyons/css/tachyons.min.css"
             ]
 
         children =
@@ -113,7 +113,7 @@ view : Model -> Html Msg
 view model =
     div []
         [ stylesheet
-        , nav model.authors
+          -- , nav model.authors
         , renderAuthors model.authors
         , div [] (renderDataLists (getBlurredAuthorAffiliations model))
         ]
@@ -127,45 +127,38 @@ getBlurredAuthorAffiliations model =
         |> List.concat
 
 
-nav : List Author -> Html Msg
-nav authors =
-    div [ class "clearfix mb2 white bg-black" ]
-        [ div [ class "left p2" ] [ text "Authors" ] ]
-
-
 renderAuthors : List Author -> Html Msg
 renderAuthors authors =
-    div [ class "max-width-4 mx-auto" ]
-        [ div [ class "p1 m1 border" ]
-            [ div [ class "clearfix" ] (List.concat (List.map renderAuthor authors))
-            , button [ onClick AddAuthor ] [ text "Add Author" ]
+    div [ class "" ]
+        [ div [ class "" ] (List.map renderAuthor authors)
+        , button [ onClick AddAuthor ] [ text "Add Author" ]
+        ]
+
+
+authorDataClass : String
+authorDataClass =
+    "ma2"
+
+
+renderAuthor : Author -> Html Msg
+renderAuthor author =
+    div [ class "shadow-1 ma3 pa2" ]
+        [ span [ class authorDataClass ]
+            [ text "First Name: ", input [ onInput (UpdateFirstName author.id), value author.firstName ] [] ]
+        , span [ class authorDataClass ]
+            [ text "Last Name: ", input [ onInput (UpdateLastName author.id), value author.lastName ] [] ]
+        , span [ class authorDataClass ]
+            [ text "Presenting: ", input [ onClick (TogglePresenting author.id), type_ "checkbox", checked (author.presenting) ] [] ]
+        , span [ class authorDataClass ]
+            [ button [ onClick (DeleteAuthor author.id) ] [ text "Remove Author" ]
+            ]
+        , div [ class authorDataClass ]
+            [ (renderAffiliations author.affiliations author.id) ]
+        , div [ class authorDataClass ]
+            [ button [ onClick (AddAffiliation author.id) ]
+                [ text "Add Affiliation" ]
             ]
         ]
-
-
-colWidthClass : String
-colWidthClass =
-    "col col-3"
-
-
-renderAuthor : Author -> List (Html Msg)
-renderAuthor author =
-    [ span [ class colWidthClass ]
-        [ text "First Name: ", input [ onInput (UpdateFirstName author.id), value author.firstName ] [] ]
-    , span [ class colWidthClass ]
-        [ text "Last Name: ", input [ onInput (UpdateLastName author.id), value author.lastName ] [] ]
-    , span [ class colWidthClass ]
-        [ text "Presenting: ", input [ onClick (TogglePresenting author.id), type_ "checkbox", checked (author.presenting) ] [] ]
-    , div [ class colWidthClass ]
-        [ (renderAffiliations author.affiliations author.id) ]
-    , div [ class colWidthClass ]
-        [ button [ onClick (AddAffiliation author.id) ]
-            [ text "Add Affiliation" ]
-        ]
-    , div [ class colWidthClass ]
-        [ button [ onClick (DeleteAuthor author.id) ] [ text "x" ]
-        ]
-    ]
 
 
 renderAffiliations : List Affiliation -> Int -> Html Msg
@@ -300,7 +293,7 @@ update msg model =
                                 getBlurredAuthorAffiliations model
                                     |> List.filter (\a -> a.institution == new)
                                     |> List.head
-                                    |> Maybe.withDefault (Affiliation "" affiliation.country affiliation.city affiliation.id)
+                                    |> Maybe.withDefault (Affiliation new affiliation.city affiliation.country affiliation.id)
                         in
                             { affiliation
                                 | institution = matchingAffiliation.institution

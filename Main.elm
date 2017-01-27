@@ -142,7 +142,7 @@ authorDataClass =
 
 renderAuthor : Author -> Html Msg
 renderAuthor author =
-    div [ class "shadow-1 ma3 pa2" ]
+    div [ class "author form__question-sub-section" ]
         [ span [ class authorDataClass ]
             [ text "First Name: ", input [ onInput (UpdateFirstName author.id), value author.firstName ] [] ]
         , span [ class authorDataClass ]

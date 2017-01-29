@@ -138,7 +138,7 @@ renderAuthors authors =
     in
         div [ class "" ]
             [ div [ class "" ] (List.map renderAuthor authorIndexTuples)
-            , input [ onClick AddAuthor ] [ text "Add Author" ]
+            , button [ onClick AddAuthor ] [ text "Add Author" ]
             ]
 
 
@@ -166,12 +166,14 @@ renderAuthor ( author, index ) =
                 ]
             ]
         , span [ class "remove button button--secondary" ]
-            [ input [ onClick (DeleteAuthor author.id) ] [ text "Remove Author" ]
+            [ button
+                [ onClick (DeleteAuthor author.id) ]
+                [ text "Remove Author" ]
             ]
         , div [ class "affiliates-dropdowns" ]
             [ (renderAffiliations author.affiliations author.id) ]
         , div [ class "add-affiliation-to-author button button--tertiary" ]
-            [ input [ onClick (AddAffiliation author.id) ]
+            [ button [ onClick (AddAffiliation author.id) ]
                 [ text "Add Affiliation to Author" ]
             ]
         ]

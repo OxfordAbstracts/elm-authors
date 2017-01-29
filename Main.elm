@@ -138,7 +138,7 @@ renderAuthors authors =
     in
         div [ class "" ]
             [ div [ class "" ] (List.map renderAuthor authorIndexTuples)
-            , button [ onClick AddAuthor ] [ text "Add Author" ]
+            , div [ class "button button--tertiary", onClick AddAuthor ] [ text "Add Author" ]
             ]
 
 
@@ -195,9 +195,10 @@ affiliationsHeader =
 
 renderAffiliation : Int -> Affiliation -> Html Msg
 renderAffiliation authorId affiliation =
-    div []
+    div [ class="form__question-sub-section--inline"]
         [ input
-            [ list "institutions-list"
+            [class "inline-element"
+            ,list "institutions-list"
             , placeholder "Institution"
             , onInput (UpdateInstitution authorId affiliation.id)
             , onFocus (SetFocusedIds authorId affiliation.id)
@@ -206,7 +207,8 @@ renderAffiliation authorId affiliation =
             ]
             []
         , input
-            [ list "cities-list"
+            [class "inline-element"
+            ,list "cities-list"
             , placeholder "City"
             , onInput (UpdateCity authorId affiliation.id)
             , onFocus (SetFocusedIds authorId affiliation.id)
@@ -214,13 +216,16 @@ renderAffiliation authorId affiliation =
             ]
             []
         , select
-            [ list "countries-list"
+            [class "inline-element"
+            , list "countries-list"
             , onInput (UpdateCountry authorId affiliation.id)
             , onFocus (SetFocusedIds authorId affiliation.id)
             , value affiliation.country
             ]
             (Countries.options affiliation.country)
-        , button [ onClick (DeleteAffiliation authorId affiliation.id) ] [ text "x" ]
+        , button [ class "remove button button--secondary"
+                 ,onClick (DeleteAffiliation authorId affiliation.id)
+                 ] [ text "Remove Affiliation" ]
         ]
 
 

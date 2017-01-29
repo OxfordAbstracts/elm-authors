@@ -181,10 +181,20 @@ renderAuthor ( author, index ) =
 
 renderAffiliations : List Affiliation -> Int -> Html Msg
 renderAffiliations affiliations authorId =
-    div []
-        [ affiliationsHeader
-        , div [] (List.map (renderAffiliation authorId) affiliations)
-        ]
+    let
+        authorsLength =
+            List.length affiliations
+
+        indexList =
+            List.range 1 authorsLength
+
+        affilIndexTuples =
+            List.map2 (,) affiliations indexList
+    in
+        div []
+            [ affiliationsHeader
+            , div [] (List.map (renderAffiliation authorId) affiliations)
+            ]
 
 
 affiliationsHeader : Html Msg
@@ -193,41 +203,45 @@ affiliationsHeader =
         []
 
 
-renderAffiliation : Int -> Affiliation -> Html Msg
+renderAffiliation : Int -> Int -> Affiliation -> Html Msg
 renderAffiliation authorId affiliation =
-    div [ class "form__question-sub-section--inline" ]
-        [ input
-            [ class "inline-element"
-            , list "institutions-list"
-            , placeholder "Institution"
-            , onInput (UpdateInstitution authorId affiliation.id)
-            , onFocus (SetFocusedIds authorId affiliation.id)
-            , onKeyDown (SetAffiliationKeyDown affiliation.id)
-            , value affiliation.institution
+    div [ class "affiliation form__question-sub-section" ]
+        [ div [ class "form__label" ] [ text ("Affiliation " ++ toString index) ]
+        , div
+            [ class "form__question-sub-section--inline" ]
+            [ input
+                [ class "inline-element"
+                , list "institutions-list"
+                , placeholder "Institution"
+                , onInput (UpdateInstitution authorId affiliation.id)
+                , onFocus (SetFocusedIds authorId affiliation.id)
+                , onKeyDown (SetAffiliationKeyDown affiliation.id)
+                , value affiliation.institution
+                ]
+                []
+            , input
+                [ class "inline-element"
+                , list "cities-list"
+                , placeholder "City"
+                , onInput (UpdateCity authorId affiliation.id)
+                , onFocus (SetFocusedIds authorId affiliation.id)
+                , value affiliation.city
+                ]
+                []
+            , select
+                [ class "inline-element"
+                , list "countries-list"
+                , onInput (UpdateCountry authorId affiliation.id)
+                , onFocus (SetFocusedIds authorId affiliation.id)
+                , value affiliation.country
+                ]
+                (Countries.options affiliation.country)
+            , div
+                [ class "remove button button--secondary"
+                , onClick (DeleteAffiliation authorId affiliation.id)
+                ]
+                [ text "Remove Affiliation" ]
             ]
-            []
-        , input
-            [ class "inline-element"
-            , list "cities-list"
-            , placeholder "City"
-            , onInput (UpdateCity authorId affiliation.id)
-            , onFocus (SetFocusedIds authorId affiliation.id)
-            , value affiliation.city
-            ]
-            []
-        , select
-            [ class "inline-element"
-            , list "countries-list"
-            , onInput (UpdateCountry authorId affiliation.id)
-            , onFocus (SetFocusedIds authorId affiliation.id)
-            , value affiliation.country
-            ]
-            (Countries.options affiliation.country)
-        , button
-            [ class "remove button button--secondary"
-            , onClick (DeleteAffiliation authorId affiliation.id)
-            ]
-            [ text "Remove Affiliation" ]
         ]
 
 

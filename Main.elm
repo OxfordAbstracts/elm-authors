@@ -100,7 +100,7 @@ stylesheet =
         attrs =
             [ attribute "Rel" "stylesheet"
             , attribute "property" "stylesheet"
-            , attribute "href" "https://unpkg.com/tachyons/css/tachyons.min.css"
+            , attribute "href" "./src/app.css"
             ]
 
         children =
@@ -156,15 +156,15 @@ renderAuthor author =
                 [ label [ class "form__label" ] [ text "Presenting Author" ]
                 , input [ class "form__checkbox is-presenting question-checkbox", onClick (TogglePresenting author.id), type_ "checkbox", checked (author.presenting) ] []
                 ]
-            , span [ class authorDataClass ]
-                [ button [ onClick (DeleteAuthor author.id) ] [ text "Remove Author" ]
-                ]
-            , div [ class authorDataClass ]
-                [ (renderAffiliations author.affiliations author.id) ]
-            , div [ class authorDataClass ]
-                [ button [ onClick (AddAffiliation author.id) ]
-                    [ text "Add Affiliation" ]
-                ]
+            ]
+        , span [ class "remove button button--secondary" ]
+            [ button [ onClick (DeleteAuthor author.id) ] [ text "Remove Author" ]
+            ]
+        , div [ class "affiliates-dropdowns" ]
+            [ (renderAffiliations author.affiliations author.id) ]
+        , div [ class "add-affiliation-to-author button button--tertiary" ]
+            [ button [ onClick (AddAffiliation author.id) ]
+                [ text "Add Affiliation to Author" ]
             ]
         ]
 

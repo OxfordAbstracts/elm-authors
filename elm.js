@@ -9610,19 +9610,7 @@ var _user$project$Main$getBlurredAuthorAffiliations = function (model) {
 };
 var _user$project$Main$stylesheet = function () {
 	var children = {ctor: '[]'};
-	var attrs = {
-		ctor: '::',
-		_0: A2(_elm_lang$html$Html_Attributes$attribute, 'Rel', 'stylesheet'),
-		_1: {
-			ctor: '::',
-			_0: A2(_elm_lang$html$Html_Attributes$attribute, 'property', 'stylesheet'),
-			_1: {
-				ctor: '::',
-				_0: A2(_elm_lang$html$Html_Attributes$attribute, 'href', './src/app.css'),
-				_1: {ctor: '[]'}
-			}
-		}
-	};
+	var attrs = {ctor: '[]'};
 	var tag = 'link';
 	return A3(_elm_lang$html$Html$node, tag, attrs, children);
 }();
@@ -10007,7 +9995,7 @@ var _user$project$Main$renderAuthor = function (_p2) {
 		{
 			ctor: '::',
 			_0: A2(
-				_elm_lang$html$Html$label,
+				_elm_lang$html$Html$div,
 				{
 					ctor: '::',
 					_0: _elm_lang$html$Html_Attributes$class('form__label'),
@@ -10018,7 +10006,7 @@ var _user$project$Main$renderAuthor = function (_p2) {
 					_0: _elm_lang$html$Html$text(
 						A2(
 							_elm_lang$core$Basics_ops['++'],
-							'Author',
+							'Author ',
 							_elm_lang$core$Basics$toString(_p3._1))),
 					_1: {ctor: '[]'}
 				}),
@@ -10186,7 +10174,7 @@ var _user$project$Main$renderAuthor = function (_p2) {
 						{
 							ctor: '::',
 							_0: A2(
-								_elm_lang$html$Html$button,
+								_elm_lang$html$Html$input,
 								{
 									ctor: '::',
 									_0: _elm_lang$html$Html_Events$onClick(
@@ -10226,7 +10214,7 @@ var _user$project$Main$renderAuthor = function (_p2) {
 								{
 									ctor: '::',
 									_0: A2(
-										_elm_lang$html$Html$button,
+										_elm_lang$html$Html$input,
 										{
 											ctor: '::',
 											_0: _elm_lang$html$Html_Events$onClick(
@@ -10279,7 +10267,7 @@ var _user$project$Main$renderAuthors = function (authors) {
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_elm_lang$html$Html$button,
+					_elm_lang$html$Html$input,
 					{
 						ctor: '::',
 						_0: _elm_lang$html$Html_Events$onClick(_user$project$Main$AddAuthor),

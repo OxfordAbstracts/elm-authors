@@ -9994,7 +9994,9 @@ var _user$project$Main$UpdateFirstName = F2(
 var _user$project$Main$DeleteAuthor = function (a) {
 	return {ctor: 'DeleteAuthor', _0: a};
 };
-var _user$project$Main$renderAuthor = function (author) {
+var _user$project$Main$renderAuthor = function (_p2) {
+	var _p3 = _p2;
+	var _p4 = _p3._0;
 	return A2(
 		_elm_lang$html$Html$div,
 		{
@@ -10005,58 +10007,31 @@ var _user$project$Main$renderAuthor = function (author) {
 		{
 			ctor: '::',
 			_0: A2(
-				_elm_lang$html$Html$div,
+				_elm_lang$html$Html$label,
 				{
 					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('form__question-sub-section--inline'),
+					_0: _elm_lang$html$Html_Attributes$class('form__label'),
 					_1: {ctor: '[]'}
 				},
 				{
 					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$div,
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('inline-element'),
-							_1: {ctor: '[]'}
-						},
-						{
-							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$label,
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$class('form__label'),
-									_1: {ctor: '[]'}
-								},
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html$text('First Name'),
-									_1: {ctor: '[]'}
-								}),
-							_1: {
-								ctor: '::',
-								_0: A2(
-									_elm_lang$html$Html$input,
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$class('form__input first-name'),
-										_1: {
-											ctor: '::',
-											_0: _elm_lang$html$Html_Events$onInput(
-												_user$project$Main$UpdateFirstName(author.id)),
-											_1: {
-												ctor: '::',
-												_0: _elm_lang$html$Html_Attributes$value(author.firstName),
-												_1: {ctor: '[]'}
-											}
-										}
-									},
-									{ctor: '[]'}),
-								_1: {ctor: '[]'}
-							}
-						}),
-					_1: {
+					_0: _elm_lang$html$Html$text(
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							'Author',
+							_elm_lang$core$Basics$toString(_p3._1))),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('form__question-sub-section--inline'),
+						_1: {ctor: '[]'}
+					},
+					{
 						ctor: '::',
 						_0: A2(
 							_elm_lang$html$Html$div,
@@ -10076,7 +10051,7 @@ var _user$project$Main$renderAuthor = function (author) {
 									},
 									{
 										ctor: '::',
-										_0: _elm_lang$html$Html$text('Last Name'),
+										_0: _elm_lang$html$Html$text('First Name'),
 										_1: {ctor: '[]'}
 									}),
 								_1: {
@@ -10085,14 +10060,14 @@ var _user$project$Main$renderAuthor = function (author) {
 										_elm_lang$html$Html$input,
 										{
 											ctor: '::',
-											_0: _elm_lang$html$Html_Attributes$class('form__input last-name'),
+											_0: _elm_lang$html$Html_Attributes$class('form__input first-name'),
 											_1: {
 												ctor: '::',
 												_0: _elm_lang$html$Html_Events$onInput(
-													_user$project$Main$UpdateLastName(author.id)),
+													_user$project$Main$UpdateFirstName(_p4.id)),
 												_1: {
 													ctor: '::',
-													_0: _elm_lang$html$Html_Attributes$value(author.lastName),
+													_0: _elm_lang$html$Html_Attributes$value(_p4.firstName),
 													_1: {ctor: '[]'}
 												}
 											}
@@ -10121,7 +10096,7 @@ var _user$project$Main$renderAuthor = function (author) {
 										},
 										{
 											ctor: '::',
-											_0: _elm_lang$html$Html$text('Presenting Author'),
+											_0: _elm_lang$html$Html$text('Last Name'),
 											_1: {ctor: '[]'}
 										}),
 									_1: {
@@ -10130,19 +10105,15 @@ var _user$project$Main$renderAuthor = function (author) {
 											_elm_lang$html$Html$input,
 											{
 												ctor: '::',
-												_0: _elm_lang$html$Html_Attributes$class('form__checkbox is-presenting question-checkbox'),
+												_0: _elm_lang$html$Html_Attributes$class('form__input last-name'),
 												_1: {
 													ctor: '::',
-													_0: _elm_lang$html$Html_Events$onClick(
-														_user$project$Main$TogglePresenting(author.id)),
+													_0: _elm_lang$html$Html_Events$onInput(
+														_user$project$Main$UpdateLastName(_p4.id)),
 													_1: {
 														ctor: '::',
-														_0: _elm_lang$html$Html_Attributes$type_('checkbox'),
-														_1: {
-															ctor: '::',
-															_0: _elm_lang$html$Html_Attributes$checked(author.presenting),
-															_1: {ctor: '[]'}
-														}
+														_0: _elm_lang$html$Html_Attributes$value(_p4.lastName),
+														_1: {ctor: '[]'}
 													}
 												}
 											},
@@ -10150,48 +10121,83 @@ var _user$project$Main$renderAuthor = function (author) {
 										_1: {ctor: '[]'}
 									}
 								}),
-							_1: {ctor: '[]'}
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$div,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('inline-element'),
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$label,
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$class('form__label'),
+												_1: {ctor: '[]'}
+											},
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html$text('Presenting Author'),
+												_1: {ctor: '[]'}
+											}),
+										_1: {
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$input,
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$class('form__checkbox is-presenting question-checkbox'),
+													_1: {
+														ctor: '::',
+														_0: _elm_lang$html$Html_Events$onClick(
+															_user$project$Main$TogglePresenting(_p4.id)),
+														_1: {
+															ctor: '::',
+															_0: _elm_lang$html$Html_Attributes$type_('checkbox'),
+															_1: {
+																ctor: '::',
+																_0: _elm_lang$html$Html_Attributes$checked(_p4.presenting),
+																_1: {ctor: '[]'}
+															}
+														}
+													}
+												},
+												{ctor: '[]'}),
+											_1: {ctor: '[]'}
+										}
+									}),
+								_1: {ctor: '[]'}
+							}
 						}
-					}
-				}),
-			_1: {
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$span,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('remove button button--secondary'),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$button,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Events$onClick(
-									_user$project$Main$DeleteAuthor(author.id)),
-								_1: {ctor: '[]'}
-							},
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html$text('Remove Author'),
-								_1: {ctor: '[]'}
-							}),
-						_1: {ctor: '[]'}
 					}),
 				_1: {
 					ctor: '::',
 					_0: A2(
-						_elm_lang$html$Html$div,
+						_elm_lang$html$Html$span,
 						{
 							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('affiliates-dropdowns'),
+							_0: _elm_lang$html$Html_Attributes$class('remove button button--secondary'),
 							_1: {ctor: '[]'}
 						},
 						{
 							ctor: '::',
-							_0: A2(_user$project$Main$renderAffiliations, author.affiliations, author.id),
+							_0: A2(
+								_elm_lang$html$Html$button,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Events$onClick(
+										_user$project$Main$DeleteAuthor(_p4.id)),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text('Remove Author'),
+									_1: {ctor: '[]'}
+								}),
 							_1: {ctor: '[]'}
 						}),
 					_1: {
@@ -10200,27 +10206,42 @@ var _user$project$Main$renderAuthor = function (author) {
 							_elm_lang$html$Html$div,
 							{
 								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$class('add-affiliation-to-author button button--tertiary'),
+								_0: _elm_lang$html$Html_Attributes$class('affiliates-dropdowns'),
 								_1: {ctor: '[]'}
 							},
 							{
 								ctor: '::',
-								_0: A2(
-									_elm_lang$html$Html$button,
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html_Events$onClick(
-											_user$project$Main$AddAffiliation(author.id)),
-										_1: {ctor: '[]'}
-									},
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html$text('Add Affiliation to Author'),
-										_1: {ctor: '[]'}
-									}),
+								_0: A2(_user$project$Main$renderAffiliations, _p4.affiliations, _p4.id),
 								_1: {ctor: '[]'}
 							}),
-						_1: {ctor: '[]'}
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$div,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('add-affiliation-to-author button button--tertiary'),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$button,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Events$onClick(
+												_user$project$Main$AddAffiliation(_p4.id)),
+											_1: {ctor: '[]'}
+										},
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html$text('Add Affiliation to Author'),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
 					}
 				}
 			}
@@ -10228,6 +10249,16 @@ var _user$project$Main$renderAuthor = function (author) {
 };
 var _user$project$Main$AddAuthor = {ctor: 'AddAuthor'};
 var _user$project$Main$renderAuthors = function (authors) {
+	var authorsLength = _elm_lang$core$List$length(authors);
+	var indexList = A2(_elm_lang$core$List$range, 1, authorsLength);
+	var authorIndexTuples = A3(
+		_elm_lang$core$List$map2,
+		F2(
+			function (v0, v1) {
+				return {ctor: '_Tuple2', _0: v0, _1: v1};
+			}),
+		authors,
+		indexList);
 	return A2(
 		_elm_lang$html$Html$div,
 		{
@@ -10244,7 +10275,7 @@ var _user$project$Main$renderAuthors = function (authors) {
 					_0: _elm_lang$html$Html_Attributes$class(''),
 					_1: {ctor: '[]'}
 				},
-				A2(_elm_lang$core$List$map, _user$project$Main$renderAuthor, authors)),
+				A2(_elm_lang$core$List$map, _user$project$Main$renderAuthor, authorIndexTuples)),
 			_1: {
 				ctor: '::',
 				_0: A2(

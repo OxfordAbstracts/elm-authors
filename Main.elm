@@ -129,10 +129,20 @@ getBlurredAuthorAffiliations model =
 
 renderAuthors : List Author -> Html Msg
 renderAuthors authors =
-    div [ class "" ]
-        [ div [ class "" ] (List.map renderAuthor authors)
-        , button [ onClick AddAuthor ] [ text "Add Author" ]
-        ]
+    let
+        authorsLength =
+            List.length authors
+
+        indexList =
+            List.range 1 authorsLength
+
+        authorIndexTuples =
+            List.map2 (,) authors indexList
+    in
+        div [ class "" ]
+            [ div [ class "" ] (List.map renderAuthor authorIndexTuples)
+            , button [ onClick AddAuthor ] [ text "Add Author" ]
+            ]
 
 
 authorDataClass : String
@@ -140,10 +150,11 @@ authorDataClass =
     "ma2"
 
 
-renderAuthor : Author -> Html Msg
-renderAuthor author =
+renderAuthor : ( Author, Int ) -> Html Msg
+renderAuthor ( author, index ) =
     div [ class "author form__question-sub-section" ]
-        [ div [ class "form__question-sub-section--inline" ]
+        [ label [ class "form__label" ] [ text ("Author" ++ toString index) ]
+        , div [ class "form__question-sub-section--inline" ]
             [ div [ class "inline-element" ]
                 [ label [ class "form__label" ] [ text "First Name" ]
                 , input [ class "form__input first-name", onInput (UpdateFirstName author.id), value author.firstName ] []

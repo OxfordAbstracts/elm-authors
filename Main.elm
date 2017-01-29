@@ -195,10 +195,10 @@ affiliationsHeader =
 
 renderAffiliation : Int -> Affiliation -> Html Msg
 renderAffiliation authorId affiliation =
-    div [ class="form__question-sub-section--inline"]
+    div [ class "form__question-sub-section--inline" ]
         [ input
-            [class "inline-element"
-            ,list "institutions-list"
+            [ class "inline-element"
+            , list "institutions-list"
             , placeholder "Institution"
             , onInput (UpdateInstitution authorId affiliation.id)
             , onFocus (SetFocusedIds authorId affiliation.id)
@@ -207,8 +207,8 @@ renderAffiliation authorId affiliation =
             ]
             []
         , input
-            [class "inline-element"
-            ,list "cities-list"
+            [ class "inline-element"
+            , list "cities-list"
             , placeholder "City"
             , onInput (UpdateCity authorId affiliation.id)
             , onFocus (SetFocusedIds authorId affiliation.id)
@@ -216,16 +216,18 @@ renderAffiliation authorId affiliation =
             ]
             []
         , select
-            [class "inline-element"
+            [ class "inline-element"
             , list "countries-list"
             , onInput (UpdateCountry authorId affiliation.id)
             , onFocus (SetFocusedIds authorId affiliation.id)
             , value affiliation.country
             ]
             (Countries.options affiliation.country)
-        , button [ class "remove button button--secondary"
-                 ,onClick (DeleteAffiliation authorId affiliation.id)
-                 ] [ text "Remove Affiliation" ]
+        , button
+            [ class "remove button button--secondary"
+            , onClick (DeleteAffiliation authorId affiliation.id)
+            ]
+            [ text "Remove Affiliation" ]
         ]
 
 

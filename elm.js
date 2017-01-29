@@ -10174,7 +10174,7 @@ var _user$project$Main$renderAuthor = function (_p2) {
 						{
 							ctor: '::',
 							_0: A2(
-								_elm_lang$html$Html$input,
+								_elm_lang$html$Html$button,
 								{
 									ctor: '::',
 									_0: _elm_lang$html$Html_Events$onClick(
@@ -10214,7 +10214,7 @@ var _user$project$Main$renderAuthor = function (_p2) {
 								{
 									ctor: '::',
 									_0: A2(
-										_elm_lang$html$Html$input,
+										_elm_lang$html$Html$button,
 										{
 											ctor: '::',
 											_0: _elm_lang$html$Html_Events$onClick(
@@ -10267,7 +10267,7 @@ var _user$project$Main$renderAuthors = function (authors) {
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_elm_lang$html$Html$input,
+					_elm_lang$html$Html$button,
 					{
 						ctor: '::',
 						_0: _elm_lang$html$Html_Events$onClick(_user$project$Main$AddAuthor),

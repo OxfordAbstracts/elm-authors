@@ -138,7 +138,7 @@ renderAuthors authors =
     in
         div [ class "" ]
             [ div [ class "" ] (List.map renderAuthor authorIndexTuples)
-            , [ onClick AddAuthor ] [ text "Add Author" ]
+            , button [ onClick AddAuthor ] [ text "Add Author" ]
             ]
 
 

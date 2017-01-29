@@ -98,10 +98,7 @@ stylesheet =
             "link"
 
         attrs =
-            [ attribute "Rel" "stylesheet"
-            , attribute "property" "stylesheet"
-            , attribute "href" "./src/app.css"
-            ]
+            []
 
         children =
             []
@@ -153,7 +150,7 @@ authorDataClass =
 renderAuthor : ( Author, Int ) -> Html Msg
 renderAuthor ( author, index ) =
     div [ class "author form__question-sub-section" ]
-        [ div [ class "form__label" ] [ text ("Author" ++ toString index) ]
+        [ div [ class "form__label" ] [ text ("Author " ++ toString index) ]
         , div [ class "form__question-sub-section--inline" ]
             [ div [ class "inline-element" ]
                 [ label [ class "form__label" ] [ text "First Name" ]

@@ -19,6 +19,12 @@ type alias Model =
     }
 
 
+type alias Flags =
+    { authorsArray : String
+    , affiliationsArray : String
+    }
+
+
 initialModel : Model
 initialModel =
     { authorMaxId = 0
@@ -57,9 +63,18 @@ blankAffiliation id =
     Affiliation "" "" "" id
 
 
-init : ( Model, Cmd Msg )
-init =
-    ( initialModel, Cmd.none )
+
+--init : Flags -> ( Model, Cmd Msg )
+
+
+init flags =
+    let
+        debug =
+            Debug.log "flags" flags
+    in
+        --create a function to make a model to reflect the authors and affiliations arrays
+        -- if the authors array does not exist pass through the initalModel
+        ( initialModel, Cmd.none )
 
 
 
@@ -456,9 +471,9 @@ subscriptions model =
 -- MAIN
 
 
-main : Program Never Model Msg
+main : Program Flags Model Msg
 main =
-    program
+    programWithFlags
         { init = init
         , view = view
         , update = update

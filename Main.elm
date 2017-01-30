@@ -203,10 +203,10 @@ affiliationsHeader =
         []
 
 
-renderAffiliation : Int -> Int -> Affiliation -> Html Msg
+renderAffiliation : Int -> Affiliation -> Html Msg
 renderAffiliation authorId affiliation =
     div [ class "affiliation form__question-sub-section" ]
-        [ div [ class "form__label" ] [ text ("Affiliation " ++ toString index) ]
+        [ div [ class "form__label" ] [ text ("Affiliation " ++ "index") ]
         , div
             [ class "form__question-sub-section--inline" ]
             [ input

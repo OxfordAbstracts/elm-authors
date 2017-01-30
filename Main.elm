@@ -182,18 +182,18 @@ renderAuthor ( author, index ) =
 renderAffiliations : List Affiliation -> Int -> Html Msg
 renderAffiliations affiliations authorId =
     let
-        authorsLength =
+        affiliationsLength =
             List.length affiliations
 
         indexList =
-            List.range 1 authorsLength
+            List.range 1 affiliationsLength
 
         affilIndexTuples =
             List.map2 (,) affiliations indexList
     in
         div []
             [ affiliationsHeader
-            , div [] (List.map (renderAffiliation authorId) affiliations)
+            , div [] (List.map (renderAffiliation authorId) affilIndexTuples)
             ]
 
 
@@ -203,39 +203,49 @@ affiliationsHeader =
         []
 
 
-renderAffiliation : Int -> Affiliation -> Html Msg
-renderAffiliation authorId affiliation =
+renderAffiliation : Int -> ( Affiliation, Int ) -> Html Msg
+renderAffiliation authorId ( affiliation, index ) =
     div [ class "affiliation form__question-sub-section" ]
-        [ div [ class "form__label" ] [ text ("Affiliation " ++ "index") ]
+        [ div [ class "form__label" ] [ text ("Affiliation " ++ toString index) ]
         , div
             [ class "form__question-sub-section--inline" ]
-            [ input
-                [ class "inline-element"
-                , list "institutions-list"
-                , placeholder "Institution"
-                , onInput (UpdateInstitution authorId affiliation.id)
-                , onFocus (SetFocusedIds authorId affiliation.id)
-                , onKeyDown (SetAffiliationKeyDown affiliation.id)
-                , value affiliation.institution
+            [ div [ class "inline-element" ]
+                [ label [ class "form__label" ] [ text "Institution" ]
+                , input
+                    [ class "form__input institution"
+                    , list "institutions-list"
+                    , name "institution"
+                    , onInput (UpdateInstitution authorId affiliation.id)
+                    , onFocus (SetFocusedIds authorId affiliation.id)
+                    , onKeyDown (SetAffiliationKeyDown affiliation.id)
+                    , value affiliation.institution
+                    ]
+                    []
                 ]
-                []
-            , input
-                [ class "inline-element"
-                , list "cities-list"
-                , placeholder "City"
-                , onInput (UpdateCity authorId affiliation.id)
-                , onFocus (SetFocusedIds authorId affiliation.id)
-                , value affiliation.city
+            , div [ class "inline-element" ]
+                [ label [ class "form__label" ] [ text "City" ]
+                , input
+                    [ class "city form__input"
+                    , list "cities-list"
+                    , name "city"
+                    , onInput (UpdateCity authorId affiliation.id)
+                    , onFocus (SetFocusedIds authorId affiliation.id)
+                    , value affiliation.city
+                    ]
+                    []
                 ]
-                []
-            , select
-                [ class "inline-element"
-                , list "countries-list"
-                , onInput (UpdateCountry authorId affiliation.id)
-                , onFocus (SetFocusedIds authorId affiliation.id)
-                , value affiliation.country
+            , div [ class "inline-element" ]
+                [ label [ class "form__label" ] [ text "Country" ]
+                , select
+                    [ class "inline-element"
+                    , list "countries-list"
+                    , name "country"
+                    , onInput (UpdateCountry authorId affiliation.id)
+                    , onFocus (SetFocusedIds authorId affiliation.id)
+                    , value affiliation.country
+                    ]
+                    (Countries.options affiliation.country)
                 ]
-                (Countries.options affiliation.country)
             , div
                 [ class "remove button button--secondary"
                 , onClick (DeleteAffiliation authorId affiliation.id)

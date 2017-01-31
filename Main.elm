@@ -2,9 +2,11 @@ module Main exposing (..)
 
 import Countries
 import Html exposing (..)
-import Html.Attributes exposing (..)
+import Html.Attributes exposing (class, value, id, list, name, checked, type_)
 import Html.Events exposing (onClick, onInput, onFocus)
 import Utils exposing (dropDuplicates, onKeyDown)
+import Json.Decode as Json
+import Json.Decode.Pipeline exposing (required, decode, hardcoded)
 
 
 -- MODEL
@@ -20,9 +22,7 @@ type alias Model =
 
 
 type alias Flags =
-    { authorsArray : String
-    , affiliationsArray : String
-    }
+    { authorsList : String }
 
 
 initialModel : Model
@@ -63,6 +63,46 @@ blankAffiliation id =
     Affiliation "" "" "" id
 
 
+authorDecoder : Json.Decoder Author
+authorDecoder =
+    decode Author
+        |> required "firstName" Json.string
+        |> required "lastName" Json.string
+        |> required "isPresenting" Json.bool
+        |> required "affiliations" (Json.list affiliationDecoder)
+        |> hardcoded 0
+        |> required "id" Json.int
+
+
+authorsDecoder : Json.Decoder (List Author)
+authorsDecoder =
+    Json.list authorDecoder
+
+
+affiliationDecoder : Json.Decoder Affiliation
+affiliationDecoder =
+    decode Affiliation
+        |> required "institution" Json.string
+        |> required "city" Json.string
+        |> required "country" Json.string
+        |> required "id" Json.int
+
+
+convertAuthorsListForModel : String -> Result String (List Author)
+convertAuthorsListForModel authorsString =
+    let
+        debug =
+            Debug.log "authorsList" authorsString
+
+        authorsListDecoded =
+            Json.decodeString authorsDecoder authorsString
+
+        debug2 =
+            Debug.log "authorsListDecoded" authorsListDecoded
+    in
+        authorsListDecoded
+
+
 
 --init : Flags -> ( Model, Cmd Msg )
 
@@ -71,10 +111,18 @@ init flags =
     let
         debug =
             Debug.log "flags" flags
+
+        model =
+            { initialModel
+                | authors = convertAuthorsListForModel flags.authorsList
+            }
+
+        debug2 =
+            Debug.log "model" model
     in
         --create a function to make a model to reflect the authors and affiliations arrays
         -- if the authors array does not exist pass through the initalModel
-        ( initialModel, Cmd.none )
+        ( model, Cmd.none )
 
 
 
@@ -469,9 +517,9 @@ subscriptions model =
 
 
 -- MAIN
+-- main : Program Flags Model Msg
 
 
-main : Program Flags Model Msg
 main =
     programWithFlags
         { init = init

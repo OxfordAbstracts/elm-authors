@@ -9834,118 +9834,262 @@ var _user$project$Main$UpdateInstitution = F3(
 		return {ctor: 'UpdateInstitution', _0: a, _1: b, _2: c};
 	});
 var _user$project$Main$renderAffiliation = F2(
-	function (authorId, affiliation) {
+	function (authorId, _p2) {
+		var _p3 = _p2;
+		var _p4 = _p3._0;
 		return A2(
 			_elm_lang$html$Html$div,
-			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('affiliation form__question-sub-section'),
+				_1: {ctor: '[]'}
+			},
 			{
 				ctor: '::',
 				_0: A2(
-					_elm_lang$html$Html$input,
+					_elm_lang$html$Html$div,
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$list('institutions-list'),
-						_1: {
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$placeholder('Institution'),
-							_1: {
-								ctor: '::',
-								_0: _elm_lang$html$Html_Events$onInput(
-									A2(_user$project$Main$UpdateInstitution, authorId, affiliation.id)),
-								_1: {
-									ctor: '::',
-									_0: _elm_lang$html$Html_Events$onFocus(
-										A2(_user$project$Main$SetFocusedIds, authorId, affiliation.id)),
-									_1: {
-										ctor: '::',
-										_0: _user$project$Utils$onKeyDown(
-											_user$project$Main$SetAffiliationKeyDown(affiliation.id)),
-										_1: {
-											ctor: '::',
-											_0: _elm_lang$html$Html_Attributes$value(affiliation.institution),
-											_1: {ctor: '[]'}
-										}
-									}
-								}
-							}
-						}
+						_0: _elm_lang$html$Html_Attributes$class('form__label'),
+						_1: {ctor: '[]'}
 					},
-					{ctor: '[]'}),
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text(
+							A2(
+								_elm_lang$core$Basics_ops['++'],
+								'Affiliation ',
+								_elm_lang$core$Basics$toString(_p3._1))),
+						_1: {ctor: '[]'}
+					}),
 				_1: {
 					ctor: '::',
 					_0: A2(
-						_elm_lang$html$Html$input,
+						_elm_lang$html$Html$div,
 						{
 							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$list('cities-list'),
-							_1: {
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$placeholder('City'),
-								_1: {
-									ctor: '::',
-									_0: _elm_lang$html$Html_Events$onInput(
-										A2(_user$project$Main$UpdateCity, authorId, affiliation.id)),
-									_1: {
-										ctor: '::',
-										_0: _elm_lang$html$Html_Events$onFocus(
-											A2(_user$project$Main$SetFocusedIds, authorId, affiliation.id)),
-										_1: {
-											ctor: '::',
-											_0: _elm_lang$html$Html_Attributes$value(affiliation.city),
-											_1: {ctor: '[]'}
-										}
-									}
-								}
-							}
+							_0: _elm_lang$html$Html_Attributes$class('form__question-sub-section--inline'),
+							_1: {ctor: '[]'}
 						},
-						{ctor: '[]'}),
-					_1: {
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$select,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$list('countries-list'),
-								_1: {
-									ctor: '::',
-									_0: _elm_lang$html$Html_Events$onInput(
-										A2(_user$project$Main$UpdateCountry, authorId, affiliation.id)),
-									_1: {
-										ctor: '::',
-										_0: _elm_lang$html$Html_Events$onFocus(
-											A2(_user$project$Main$SetFocusedIds, authorId, affiliation.id)),
-										_1: {
-											ctor: '::',
-											_0: _elm_lang$html$Html_Attributes$value(affiliation.country),
-											_1: {ctor: '[]'}
-										}
-									}
-								}
-							},
-							_user$project$Countries$options(affiliation.country)),
-						_1: {
+						{
 							ctor: '::',
 							_0: A2(
-								_elm_lang$html$Html$button,
+								_elm_lang$html$Html$div,
 								{
 									ctor: '::',
-									_0: _elm_lang$html$Html_Events$onClick(
-										A2(_user$project$Main$DeleteAffiliation, authorId, affiliation.id)),
+									_0: _elm_lang$html$Html_Attributes$class('inline-element'),
 									_1: {ctor: '[]'}
 								},
 								{
 									ctor: '::',
-									_0: _elm_lang$html$Html$text('x'),
-									_1: {ctor: '[]'}
+									_0: A2(
+										_elm_lang$html$Html$label,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$class('form__label'),
+											_1: {ctor: '[]'}
+										},
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html$text('Institution'),
+											_1: {ctor: '[]'}
+										}),
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$input,
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$class('form__input institution'),
+												_1: {
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$list('institutions-list'),
+													_1: {
+														ctor: '::',
+														_0: _elm_lang$html$Html_Attributes$name('institution'),
+														_1: {
+															ctor: '::',
+															_0: _elm_lang$html$Html_Events$onInput(
+																A2(_user$project$Main$UpdateInstitution, authorId, _p4.id)),
+															_1: {
+																ctor: '::',
+																_0: _elm_lang$html$Html_Events$onFocus(
+																	A2(_user$project$Main$SetFocusedIds, authorId, _p4.id)),
+																_1: {
+																	ctor: '::',
+																	_0: _user$project$Utils$onKeyDown(
+																		_user$project$Main$SetAffiliationKeyDown(_p4.id)),
+																	_1: {
+																		ctor: '::',
+																		_0: _elm_lang$html$Html_Attributes$value(_p4.institution),
+																		_1: {ctor: '[]'}
+																	}
+																}
+															}
+														}
+													}
+												}
+											},
+											{ctor: '[]'}),
+										_1: {ctor: '[]'}
+									}
 								}),
-							_1: {ctor: '[]'}
-						}
-					}
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$div,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('inline-element'),
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$label,
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$class('form__label'),
+												_1: {ctor: '[]'}
+											},
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html$text('City'),
+												_1: {ctor: '[]'}
+											}),
+										_1: {
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$input,
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$class('city form__input'),
+													_1: {
+														ctor: '::',
+														_0: _elm_lang$html$Html_Attributes$list('cities-list'),
+														_1: {
+															ctor: '::',
+															_0: _elm_lang$html$Html_Attributes$name('city'),
+															_1: {
+																ctor: '::',
+																_0: _elm_lang$html$Html_Events$onInput(
+																	A2(_user$project$Main$UpdateCity, authorId, _p4.id)),
+																_1: {
+																	ctor: '::',
+																	_0: _elm_lang$html$Html_Events$onFocus(
+																		A2(_user$project$Main$SetFocusedIds, authorId, _p4.id)),
+																	_1: {
+																		ctor: '::',
+																		_0: _elm_lang$html$Html_Attributes$value(_p4.city),
+																		_1: {ctor: '[]'}
+																	}
+																}
+															}
+														}
+													}
+												},
+												{ctor: '[]'}),
+											_1: {ctor: '[]'}
+										}
+									}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$div,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$class('inline-element'),
+											_1: {ctor: '[]'}
+										},
+										{
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$label,
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$class('form__label'),
+													_1: {ctor: '[]'}
+												},
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html$text('Country'),
+													_1: {ctor: '[]'}
+												}),
+											_1: {
+												ctor: '::',
+												_0: A2(
+													_elm_lang$html$Html$select,
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html_Attributes$class('inline-element'),
+														_1: {
+															ctor: '::',
+															_0: _elm_lang$html$Html_Attributes$list('countries-list'),
+															_1: {
+																ctor: '::',
+																_0: _elm_lang$html$Html_Attributes$name('country'),
+																_1: {
+																	ctor: '::',
+																	_0: _elm_lang$html$Html_Events$onInput(
+																		A2(_user$project$Main$UpdateCountry, authorId, _p4.id)),
+																	_1: {
+																		ctor: '::',
+																		_0: _elm_lang$html$Html_Events$onFocus(
+																			A2(_user$project$Main$SetFocusedIds, authorId, _p4.id)),
+																		_1: {
+																			ctor: '::',
+																			_0: _elm_lang$html$Html_Attributes$value(_p4.country),
+																			_1: {ctor: '[]'}
+																		}
+																	}
+																}
+															}
+														}
+													},
+													_user$project$Countries$options(_p4.country)),
+												_1: {ctor: '[]'}
+											}
+										}),
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$div,
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$class('remove button button--secondary'),
+												_1: {
+													ctor: '::',
+													_0: _elm_lang$html$Html_Events$onClick(
+														A2(_user$project$Main$DeleteAffiliation, authorId, _p4.id)),
+													_1: {ctor: '[]'}
+												}
+											},
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html$text('Remove Affiliation'),
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						}),
+					_1: {ctor: '[]'}
 				}
 			});
 	});
 var _user$project$Main$renderAffiliations = F2(
 	function (affiliations, authorId) {
+		var affiliationsLength = _elm_lang$core$List$length(affiliations);
+		var indexList = A2(_elm_lang$core$List$range, 1, affiliationsLength);
+		var affilIndexTuples = A3(
+			_elm_lang$core$List$map2,
+			F2(
+				function (v0, v1) {
+					return {ctor: '_Tuple2', _0: v0, _1: v1};
+				}),
+			affiliations,
+			indexList);
 		return A2(
 			_elm_lang$html$Html$div,
 			{ctor: '[]'},
@@ -9960,7 +10104,7 @@ var _user$project$Main$renderAffiliations = F2(
 						A2(
 							_elm_lang$core$List$map,
 							_user$project$Main$renderAffiliation(authorId),
-							affiliations)),
+							affilIndexTuples)),
 					_1: {ctor: '[]'}
 				}
 			});
@@ -9982,9 +10126,9 @@ var _user$project$Main$UpdateFirstName = F2(
 var _user$project$Main$DeleteAuthor = function (a) {
 	return {ctor: 'DeleteAuthor', _0: a};
 };
-var _user$project$Main$renderAuthor = function (_p2) {
-	var _p3 = _p2;
-	var _p4 = _p3._0;
+var _user$project$Main$renderAuthor = function (_p5) {
+	var _p6 = _p5;
+	var _p7 = _p6._0;
 	return A2(
 		_elm_lang$html$Html$div,
 		{
@@ -10007,7 +10151,7 @@ var _user$project$Main$renderAuthor = function (_p2) {
 						A2(
 							_elm_lang$core$Basics_ops['++'],
 							'Author ',
-							_elm_lang$core$Basics$toString(_p3._1))),
+							_elm_lang$core$Basics$toString(_p6._1))),
 					_1: {ctor: '[]'}
 				}),
 			_1: {
@@ -10052,10 +10196,10 @@ var _user$project$Main$renderAuthor = function (_p2) {
 											_1: {
 												ctor: '::',
 												_0: _elm_lang$html$Html_Events$onInput(
-													_user$project$Main$UpdateFirstName(_p4.id)),
+													_user$project$Main$UpdateFirstName(_p7.id)),
 												_1: {
 													ctor: '::',
-													_0: _elm_lang$html$Html_Attributes$value(_p4.firstName),
+													_0: _elm_lang$html$Html_Attributes$value(_p7.firstName),
 													_1: {ctor: '[]'}
 												}
 											}
@@ -10097,10 +10241,10 @@ var _user$project$Main$renderAuthor = function (_p2) {
 												_1: {
 													ctor: '::',
 													_0: _elm_lang$html$Html_Events$onInput(
-														_user$project$Main$UpdateLastName(_p4.id)),
+														_user$project$Main$UpdateLastName(_p7.id)),
 													_1: {
 														ctor: '::',
-														_0: _elm_lang$html$Html_Attributes$value(_p4.lastName),
+														_0: _elm_lang$html$Html_Attributes$value(_p7.lastName),
 														_1: {ctor: '[]'}
 													}
 												}
@@ -10142,13 +10286,13 @@ var _user$project$Main$renderAuthor = function (_p2) {
 													_1: {
 														ctor: '::',
 														_0: _elm_lang$html$Html_Events$onClick(
-															_user$project$Main$TogglePresenting(_p4.id)),
+															_user$project$Main$TogglePresenting(_p7.id)),
 														_1: {
 															ctor: '::',
 															_0: _elm_lang$html$Html_Attributes$type_('checkbox'),
 															_1: {
 																ctor: '::',
-																_0: _elm_lang$html$Html_Attributes$checked(_p4.presenting),
+																_0: _elm_lang$html$Html_Attributes$checked(_p7.presenting),
 																_1: {ctor: '[]'}
 															}
 														}
@@ -10174,11 +10318,11 @@ var _user$project$Main$renderAuthor = function (_p2) {
 						{
 							ctor: '::',
 							_0: A2(
-								_elm_lang$html$Html$button,
+								_elm_lang$html$Html$div,
 								{
 									ctor: '::',
 									_0: _elm_lang$html$Html_Events$onClick(
-										_user$project$Main$DeleteAuthor(_p4.id)),
+										_user$project$Main$DeleteAuthor(_p7.id)),
 									_1: {ctor: '[]'}
 								},
 								{
@@ -10199,7 +10343,7 @@ var _user$project$Main$renderAuthor = function (_p2) {
 							},
 							{
 								ctor: '::',
-								_0: A2(_user$project$Main$renderAffiliations, _p4.affiliations, _p4.id),
+								_0: A2(_user$project$Main$renderAffiliations, _p7.affiliations, _p7.id),
 								_1: {ctor: '[]'}
 							}),
 						_1: {
@@ -10214,11 +10358,11 @@ var _user$project$Main$renderAuthor = function (_p2) {
 								{
 									ctor: '::',
 									_0: A2(
-										_elm_lang$html$Html$button,
+										_elm_lang$html$Html$div,
 										{
 											ctor: '::',
 											_0: _elm_lang$html$Html_Events$onClick(
-												_user$project$Main$AddAffiliation(_p4.id)),
+												_user$project$Main$AddAffiliation(_p7.id)),
 											_1: {ctor: '[]'}
 										},
 										{
@@ -10267,11 +10411,15 @@ var _user$project$Main$renderAuthors = function (authors) {
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_elm_lang$html$Html$button,
+					_elm_lang$html$Html$div,
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html_Events$onClick(_user$project$Main$AddAuthor),
-						_1: {ctor: '[]'}
+						_0: _elm_lang$html$Html_Attributes$class('button button--tertiary'),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Events$onClick(_user$project$Main$AddAuthor),
+							_1: {ctor: '[]'}
+						}
 					},
 					{
 						ctor: '::',

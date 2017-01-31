@@ -88,40 +88,55 @@ affiliationDecoder =
         |> required "id" Json.int
 
 
-convertAuthorsListForModel : String -> Result String (List Author)
-convertAuthorsListForModel authorsString =
+convertAuthorsListForModel : List Author -> List Author
+convertAuthorsListForModel authors =
+    List.map assignMaxAffiliationId authors
+
+
+assignMaxAffiliationId : Author -> Author
+assignMaxAffiliationId author =
     let
-        debug =
-            Debug.log "authorsList" authorsString
-
-        authorsListDecoded =
-            Json.decodeString authorsDecoder authorsString
-
-        debug2 =
-            Debug.log "authorsListDecoded" authorsListDecoded
+        maxAffiliationId =
+            author
+                |> .affiliations
+                |> List.map .id
+                |> List.maximum
+                |> Maybe.withDefault -1
     in
-        authorsListDecoded
+        { author
+            | maxAffiliationId = maxAffiliationId
+        }
 
 
+getMaxAuthorId : List Author -> Int
+getMaxAuthorId authors =
+    authors
+        |> List.map .id
+        |> List.maximum
+        |> Maybe.withDefault -1
 
---init : Flags -> ( Model, Cmd Msg )
 
-
+init : Flags -> ( Model, Cmd Msg )
 init flags =
     let
         debug =
             Debug.log "flags" flags
 
+        authors =
+            Json.decodeString authorsDecoder flags.authorsList
+                |> Result.withDefault [ blankAuthor 0 ]
+
         model =
             { initialModel
-                | authors = convertAuthorsListForModel flags.authorsList
+                | authors =
+                    convertAuthorsListForModel authors
+                , authorMaxId =
+                    getMaxAuthorId authors
             }
 
         debug2 =
             Debug.log "model" model
     in
-        --create a function to make a model to reflect the authors and affiliations arrays
-        -- if the authors array does not exist pass through the initalModel
         ( model, Cmd.none )
 
 
@@ -517,9 +532,9 @@ subscriptions model =
 
 
 -- MAIN
--- main : Program Flags Model Msg
 
 
+main : Program Flags Model Msg
 main =
     programWithFlags
         { init = init

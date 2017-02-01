@@ -5,8 +5,9 @@ import Html exposing (..)
 import Html.Attributes exposing (class, value, id, list, name, checked, type_)
 import Html.Events exposing (onClick, onInput, onFocus)
 import Utils exposing (dropDuplicates, onKeyDown)
-import Json.Decode as Json
+import Json.Decode as JsonDecode
 import Json.Decode.Pipeline exposing (required, decode, hardcoded)
+import Json.Encode as JsonEncode
 
 
 -- MODEL
@@ -63,29 +64,34 @@ blankAffiliation id =
     Affiliation "" "" "" id
 
 
-authorDecoder : Json.Decoder Author
+authorDecoder : JsonDecode.Decoder Author
 authorDecoder =
     decode Author
-        |> required "firstName" Json.string
-        |> required "lastName" Json.string
-        |> required "isPresenting" Json.bool
-        |> required "affiliations" (Json.list affiliationDecoder)
+        |> required "firstName" JsonDecode.string
+        |> required "lastName" JsonDecode.string
+        |> required "isPresenting" JsonDecode.bool
+        |> required "affiliations" (JsonDecode.list affiliationDecoder)
         |> hardcoded 0
-        |> required "id" Json.int
+        |> required "id" JsonDecode.int
 
 
-authorsDecoder : Json.Decoder (List Author)
+authorsDecoder : JsonDecode.Decoder (List Author)
 authorsDecoder =
-    Json.list authorDecoder
+    JsonDecode.list authorDecoder
 
 
-affiliationDecoder : Json.Decoder Affiliation
+affiliationDecoder : JsonDecode.Decoder Affiliation
 affiliationDecoder =
     decode Affiliation
-        |> required "institution" Json.string
-        |> required "city" Json.string
-        |> required "country" Json.string
-        |> required "id" Json.int
+        |> required "institution" JsonDecode.string
+        |> required "city" JsonDecode.string
+        |> required "country" JsonDecode.string
+        |> required "id" JsonDecode.int
+
+
+
+--modelEncoder =
+--    JsonEncode.encode Model
 
 
 convertAuthorsListForModel : List Author -> List Author
@@ -123,7 +129,7 @@ init flags =
             Debug.log "flags" flags
 
         authors =
-            Json.decodeString authorsDecoder flags.authorsList
+            JsonDecode.decodeString authorsDecoder flags.authorsList
                 |> Result.withDefault [ blankAuthor 0 ]
 
         model =
@@ -184,14 +190,63 @@ stylesheet =
         node tag attrs children
 
 
+
+--[ {
+--  "id": 1,
+--  "firstName": "Conor",
+--  "lastName": "C",
+--  "affiliations": [ {"id": 1, "institution": "Test inst", "city": "city 1", "country": "Albania"} ],
+--  "isPresenting": true
+--}, {
+--  "id": 2,
+--  "firstName": "Rory",
+--  "lastName": "C",
+--  "affiliations": [ {"id": 1, "institution": "Test inst", "city": "city 1", "country": "Albania"} ],
+--  "isPresenting": true
+--}, {
+--  "id": 2,
+--  "firstName": "Naaz",
+--  "lastName": "A",
+--  "affiliations": [ {"id": 1, "institution": "Test inst", "city": "city 1", "country": "Albania"} ],
+--  "isPresenting": true
+--} ]
+
+
+getAffilitionValue affiliation =
+    JsonEncode.object
+        [ ( "id", JsonEncode.int affiliation.id )
+        , ( "institution", JsonEncode.string affiliation.institution )
+        , ( "city", JsonEncode.string affiliation.city )
+        , ( "country", JsonEncode.string affiliation.country )
+        ]
+
+
 view : Model -> Html Msg
 view model =
-    div []
-        [ stylesheet
-          -- , nav model.authors
-        , renderAuthors model.authors
-        , div [] (renderDataLists (getBlurredAuthorAffiliations model))
-        ]
+    let
+        getAuthorsValue authors =
+            JsonEncode.list (List.map getAuthorValue authors)
+
+        getAuthorValue author =
+            JsonEncode.object
+                [ ( "id", JsonEncode.int author.id )
+                , ( "firstName", JsonEncode.string author.firstName )
+                , ( "lastName", JsonEncode.string author.lastName )
+                , ( "affiliations", JsonEncode.list (List.map getAffilitionValue author.affiliations) )
+                , ( "isPresenting", JsonEncode.bool author.presenting )
+                , ( "maxAffiliationId", JsonEncode.int author.maxAffiliationId )
+                ]
+
+        authors =
+            JsonEncode.encode 0 (getAuthorsValue model.authors)
+    in
+        div []
+            [ stylesheet
+              -- , nav model.authors
+            , renderAuthors model.authors
+            , input [ class "hidden", id "authorsArray", name "authorsArray", value authors ] [ text authors ]
+            , div [] (renderDataLists (getBlurredAuthorAffiliations model))
+            ]
 
 
 getBlurredAuthorAffiliations : Model -> List Affiliation

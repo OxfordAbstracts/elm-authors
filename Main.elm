@@ -286,6 +286,11 @@ renderAffiliation authorId ( affiliation, index ) =
     div [ class "affiliation form__question-sub-section" ]
         [ div [ class "form__label" ] [ text ("Affiliation " ++ toString index) ]
         , div
+            [ class "remove button button--secondary"
+            , onClick (DeleteAffiliation authorId affiliation.id)
+            ]
+            [ text "Remove Affiliation" ]
+        , div
             [ class "form__question-sub-section--inline" ]
             [ div [ class "inline-element" ]
                 [ label [ class "form__label" ] [ text "Institution" ]
@@ -315,7 +320,7 @@ renderAffiliation authorId ( affiliation, index ) =
             , div [ class "inline-element" ]
                 [ label [ class "form__label" ] [ text "Country" ]
                 , select
-                    [ class "inline-element"
+                    [ class "country form__input form__input--dropdown"
                     , list "countries-list"
                     , name "country"
                     , onInput (UpdateCountry authorId affiliation.id)
@@ -324,11 +329,6 @@ renderAffiliation authorId ( affiliation, index ) =
                     ]
                     (Countries.options affiliation.country)
                 ]
-            , div
-                [ class "remove button button--secondary"
-                , onClick (DeleteAffiliation authorId affiliation.id)
-                ]
-                [ text "Remove Affiliation" ]
             ]
         ]
 

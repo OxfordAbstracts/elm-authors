@@ -190,28 +190,6 @@ stylesheet =
         node tag attrs children
 
 
-
---[ {
---  "id": 1,
---  "firstName": "Conor",
---  "lastName": "C",
---  "affiliations": [ {"id": 1, "institution": "Test inst", "city": "city 1", "country": "Albania"} ],
---  "isPresenting": true
---}, {
---  "id": 2,
---  "firstName": "Rory",
---  "lastName": "C",
---  "affiliations": [ {"id": 1, "institution": "Test inst", "city": "city 1", "country": "Albania"} ],
---  "isPresenting": true
---}, {
---  "id": 2,
---  "firstName": "Naaz",
---  "lastName": "A",
---  "affiliations": [ {"id": 1, "institution": "Test inst", "city": "city 1", "country": "Albania"} ],
---  "isPresenting": true
---} ]
-
-
 getAffilitionValue affiliation =
     JsonEncode.object
         [ ( "id", JsonEncode.int affiliation.id )

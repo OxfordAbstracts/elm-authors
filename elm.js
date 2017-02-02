@@ -8471,6 +8471,37 @@ var _elm_lang$html$Html_Events$Options = F2(
 		return {stopPropagation: a, preventDefault: b};
 	});
 
+var _user$project$Utils$onKeyDown = function (tagger) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'keydown',
+		A2(_elm_lang$core$Json_Decode$map, tagger, _elm_lang$html$Html_Events$keyCode));
+};
+var _user$project$Utils$dropDuplicates = function (list) {
+	var step = F2(
+		function (next, _p0) {
+			var _p1 = _p0;
+			var _p3 = _p1._0;
+			var _p2 = _p1._1;
+			return A2(_elm_lang$core$Set$member, next, _p3) ? {ctor: '_Tuple2', _0: _p3, _1: _p2} : {
+				ctor: '_Tuple2',
+				_0: A2(_elm_lang$core$Set$insert, next, _p3),
+				_1: {ctor: '::', _0: next, _1: _p2}
+			};
+		});
+	return _elm_lang$core$List$reverse(
+		_elm_lang$core$Tuple$second(
+			A3(
+				_elm_lang$core$List$foldl,
+				step,
+				{
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Set$empty,
+					_1: {ctor: '[]'}
+				},
+				list)));
+};
+
 var _user$project$Countries$list = {
 	ctor: '::',
 	_0: 'Afghanistan',
@@ -9516,86 +9547,447 @@ var _user$project$Countries$options = function (selectedValue) {
 			_user$project$Countries$list));
 };
 
-var _user$project$Utils$onKeyDown = function (tagger) {
-	return A2(
-		_elm_lang$html$Html_Events$on,
-		'keydown',
-		A2(_elm_lang$core$Json_Decode$map, tagger, _elm_lang$html$Html_Events$keyCode));
+var _user$project$MainMessages$SetAffiliationKeyDown = F2(
+	function (a, b) {
+		return {ctor: 'SetAffiliationKeyDown', _0: a, _1: b};
+	});
+var _user$project$MainMessages$SetFocusedIds = F2(
+	function (a, b) {
+		return {ctor: 'SetFocusedIds', _0: a, _1: b};
+	});
+var _user$project$MainMessages$DeleteAffiliation = F2(
+	function (a, b) {
+		return {ctor: 'DeleteAffiliation', _0: a, _1: b};
+	});
+var _user$project$MainMessages$UpdateCity = F3(
+	function (a, b, c) {
+		return {ctor: 'UpdateCity', _0: a, _1: b, _2: c};
+	});
+var _user$project$MainMessages$UpdateCountry = F3(
+	function (a, b, c) {
+		return {ctor: 'UpdateCountry', _0: a, _1: b, _2: c};
+	});
+var _user$project$MainMessages$UpdateInstitution = F3(
+	function (a, b, c) {
+		return {ctor: 'UpdateInstitution', _0: a, _1: b, _2: c};
+	});
+var _user$project$MainMessages$AddAffiliation = function (a) {
+	return {ctor: 'AddAffiliation', _0: a};
 };
-var _user$project$Utils$dropDuplicates = function (list) {
-	var step = F2(
-		function (next, _p0) {
-			var _p1 = _p0;
-			var _p3 = _p1._0;
-			var _p2 = _p1._1;
-			return A2(_elm_lang$core$Set$member, next, _p3) ? {ctor: '_Tuple2', _0: _p3, _1: _p2} : {
-				ctor: '_Tuple2',
-				_0: A2(_elm_lang$core$Set$insert, next, _p3),
-				_1: {ctor: '::', _0: next, _1: _p2}
-			};
-		});
-	return _elm_lang$core$List$reverse(
-		_elm_lang$core$Tuple$second(
-			A3(
-				_elm_lang$core$List$foldl,
-				step,
-				{
-					ctor: '_Tuple2',
-					_0: _elm_lang$core$Set$empty,
-					_1: {ctor: '[]'}
+var _user$project$MainMessages$TogglePresenting = function (a) {
+	return {ctor: 'TogglePresenting', _0: a};
+};
+var _user$project$MainMessages$UpdateLastName = F2(
+	function (a, b) {
+		return {ctor: 'UpdateLastName', _0: a, _1: b};
+	});
+var _user$project$MainMessages$UpdateFirstName = F2(
+	function (a, b) {
+		return {ctor: 'UpdateFirstName', _0: a, _1: b};
+	});
+var _user$project$MainMessages$DeleteAuthor = function (a) {
+	return {ctor: 'DeleteAuthor', _0: a};
+};
+var _user$project$MainMessages$AddAuthor = {ctor: 'AddAuthor'};
+
+var _user$project$MainModel$getMaxAuthorId = function (authors) {
+	return A2(
+		_elm_lang$core$Maybe$withDefault,
+		-1,
+		_elm_lang$core$List$maximum(
+			A2(
+				_elm_lang$core$List$map,
+				function (_) {
+					return _.id;
 				},
-				list)));
+				authors)));
+};
+var _user$project$MainModel$assignMaxAffiliationId = function (author) {
+	var maxAffiliationId = A2(
+		_elm_lang$core$Maybe$withDefault,
+		-1,
+		_elm_lang$core$List$maximum(
+			A2(
+				_elm_lang$core$List$map,
+				function (_) {
+					return _.id;
+				},
+				function (_) {
+					return _.affiliations;
+				}(author))));
+	return _elm_lang$core$Native_Utils.update(
+		author,
+		{maxAffiliationId: maxAffiliationId});
+};
+var _user$project$MainModel$convertAuthorsListForModel = function (authors) {
+	return A2(_elm_lang$core$List$map, _user$project$MainModel$assignMaxAffiliationId, authors);
+};
+var _user$project$MainModel$Model = F5(
+	function (a, b, c, d, e) {
+		return {authorMaxId: a, authors: b, focusedAuthorId: c, focusedAffiliationId: d, lastAffiliationKey: e};
+	});
+var _user$project$MainModel$Flags = function (a) {
+	return {authorsList: a};
+};
+var _user$project$MainModel$Author = F6(
+	function (a, b, c, d, e, f) {
+		return {firstName: a, lastName: b, presenting: c, affiliations: d, maxAffiliationId: e, id: f};
+	});
+var _user$project$MainModel$Affiliation = F4(
+	function (a, b, c, d) {
+		return {institution: a, city: b, country: c, id: d};
+	});
+var _user$project$MainModel$blankAffiliation = function (id) {
+	return A4(_user$project$MainModel$Affiliation, '', '', '', id);
+};
+var _user$project$MainModel$blankAuthor = function (id) {
+	return A6(
+		_user$project$MainModel$Author,
+		'',
+		'',
+		false,
+		{
+			ctor: '::',
+			_0: _user$project$MainModel$blankAffiliation(0),
+			_1: {ctor: '[]'}
+		},
+		1,
+		id);
+};
+var _user$project$MainModel$initialModel = {
+	authorMaxId: 0,
+	authors: {
+		ctor: '::',
+		_0: _user$project$MainModel$blankAuthor(0),
+		_1: {ctor: '[]'}
+	},
+	focusedAuthorId: 0,
+	focusedAffiliationId: 0,
+	lastAffiliationKey: -1
 };
 
-var _user$project$Main$subscriptions = function (model) {
-	return _elm_lang$core$Platform_Sub$none;
-};
-var _user$project$Main$updateIfHasId = F3(
+var _user$project$MainUpdate$updateIfHasId = F3(
 	function (list, id, change) {
 		var changeIfHasId = function (a) {
 			return _elm_lang$core$Native_Utils.eq(a.id, id) ? change(a) : a;
 		};
 		return A2(_elm_lang$core$List$map, changeIfHasId, list);
 	});
-var _user$project$Main$getAuthorUpdate = F3(
+var _user$project$MainUpdate$getAuthorUpdate = F3(
 	function (model, id, change) {
-		return A3(_user$project$Main$updateIfHasId, model.authors, id, change);
+		return A3(_user$project$MainUpdate$updateIfHasId, model.authors, id, change);
 	});
-var _user$project$Main$getAffiliationUpdate = F4(
+var _user$project$MainUpdate$getAffiliationUpdate = F4(
 	function (model, authorId, affiliationId, change) {
 		var updateAffiliation = function (author) {
 			return _elm_lang$core$Native_Utils.update(
 				author,
 				{
-					affiliations: A3(_user$project$Main$updateIfHasId, author.affiliations, affiliationId, change)
+					affiliations: A3(_user$project$MainUpdate$updateIfHasId, author.affiliations, affiliationId, change)
 				});
 		};
-		return A3(_user$project$Main$getAuthorUpdate, model, authorId, updateAffiliation);
+		return A3(_user$project$MainUpdate$getAuthorUpdate, model, authorId, updateAffiliation);
 	});
-var _user$project$Main$updateAuthor = F3(
+var _user$project$MainUpdate$updateAuthor = F3(
 	function (model, id, change) {
 		return {
 			ctor: '_Tuple2',
 			_0: _elm_lang$core$Native_Utils.update(
 				model,
 				{
-					authors: A3(_user$project$Main$updateIfHasId, model.authors, id, change)
+					authors: A3(_user$project$MainUpdate$updateIfHasId, model.authors, id, change)
 				}),
 			_1: _elm_lang$core$Platform_Cmd$none
 		};
 	});
-var _user$project$Main$updateAffiliation = F4(
+var _user$project$MainUpdate$updateAffiliation = F4(
 	function (model, authorId, affiliationId, change) {
 		var updateAffiliation = function (author) {
 			return _elm_lang$core$Native_Utils.update(
 				author,
 				{
-					affiliations: A3(_user$project$Main$updateIfHasId, author.affiliations, affiliationId, change)
+					affiliations: A3(_user$project$MainUpdate$updateIfHasId, author.affiliations, affiliationId, change)
 				});
 		};
-		return A3(_user$project$Main$updateAuthor, model, authorId, updateAffiliation);
+		return A3(_user$project$MainUpdate$updateAuthor, model, authorId, updateAffiliation);
 	});
-var _user$project$Main$renderOption = function (x) {
+var _user$project$MainUpdate$getBlurredAuthorAffiliations = function (model) {
+	return _elm_lang$core$List$concat(
+		A2(
+			_elm_lang$core$List$map,
+			function (_) {
+				return _.affiliations;
+			},
+			A2(
+				_elm_lang$core$List$filter,
+				function (a) {
+					return !_elm_lang$core$Native_Utils.eq(a.id, model.focusedAuthorId);
+				},
+				model.authors)));
+};
+var _user$project$MainUpdate$update = F2(
+	function (msg, model) {
+		var _p0 = msg;
+		switch (_p0.ctor) {
+			case 'AddAuthor':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{
+							authorMaxId: model.authorMaxId + 1,
+							authors: A2(
+								_elm_lang$core$Basics_ops['++'],
+								model.authors,
+								{
+									ctor: '::',
+									_0: _user$project$MainModel$blankAuthor(model.authorMaxId + 1),
+									_1: {ctor: '[]'}
+								})
+						}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'DeleteAuthor':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{
+							authors: A2(
+								_elm_lang$core$List$filter,
+								function (a) {
+									return !_elm_lang$core$Native_Utils.eq(a.id, _p0._0);
+								},
+								model.authors)
+						}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'UpdateFirstName':
+				var updateFirstName = function (author) {
+					return _elm_lang$core$Native_Utils.update(
+						author,
+						{firstName: _p0._1});
+				};
+				return A3(_user$project$MainUpdate$updateAuthor, model, _p0._0, updateFirstName);
+			case 'UpdateLastName':
+				var updateLastName = function (author) {
+					return _elm_lang$core$Native_Utils.update(
+						author,
+						{lastName: _p0._1});
+				};
+				return A3(_user$project$MainUpdate$updateAuthor, model, _p0._0, updateLastName);
+			case 'TogglePresenting':
+				var togglePresenting = function (author) {
+					return _elm_lang$core$Native_Utils.update(
+						author,
+						{presenting: !author.presenting});
+				};
+				return A3(_user$project$MainUpdate$updateAuthor, model, _p0._0, togglePresenting);
+			case 'AddAffiliation':
+				var addAffiliation = function (author) {
+					return _elm_lang$core$Native_Utils.update(
+						author,
+						{
+							maxAffiliationId: author.maxAffiliationId + 1,
+							affiliations: A2(
+								_elm_lang$core$Basics_ops['++'],
+								author.affiliations,
+								{
+									ctor: '::',
+									_0: _user$project$MainModel$blankAffiliation(author.maxAffiliationId + 1),
+									_1: {ctor: '[]'}
+								})
+						});
+				};
+				return A3(_user$project$MainUpdate$updateAuthor, model, _p0._0, addAffiliation);
+			case 'UpdateInstitution':
+				var _p1 = _p0._2;
+				var updateInstitution = function (affiliation) {
+					if ((_elm_lang$core$Native_Utils.eq(model.lastAffiliationKey, -1) && (!_elm_lang$core$Native_Utils.eq(_p1, ''))) || (_elm_lang$core$Native_Utils.eq(_p1, '') && _elm_lang$core$Native_Utils.eq(model.lastAffiliationKey, 8))) {
+						var matchingAffiliation = A2(
+							_elm_lang$core$Maybe$withDefault,
+							A4(_user$project$MainModel$Affiliation, _p1, affiliation.city, affiliation.country, affiliation.id),
+							_elm_lang$core$List$head(
+								A2(
+									_elm_lang$core$List$filter,
+									function (a) {
+										return _elm_lang$core$Native_Utils.eq(a.institution, _p1);
+									},
+									_user$project$MainUpdate$getBlurredAuthorAffiliations(model))));
+						return _elm_lang$core$Native_Utils.update(
+							affiliation,
+							{institution: matchingAffiliation.institution, city: matchingAffiliation.city, country: matchingAffiliation.country});
+					} else {
+						return _elm_lang$core$Native_Utils.update(
+							affiliation,
+							{institution: _p1});
+					}
+				};
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{
+							authors: A4(_user$project$MainUpdate$getAffiliationUpdate, model, _p0._0, _p0._1, updateInstitution),
+							lastAffiliationKey: -1
+						}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'UpdateCountry':
+				var updateInstitution = function (affiliation) {
+					return _elm_lang$core$Native_Utils.update(
+						affiliation,
+						{country: _p0._2});
+				};
+				return A4(_user$project$MainUpdate$updateAffiliation, model, _p0._0, _p0._1, updateInstitution);
+			case 'UpdateCity':
+				var updateInstitution = function (affiliation) {
+					return _elm_lang$core$Native_Utils.update(
+						affiliation,
+						{city: _p0._2});
+				};
+				return A4(_user$project$MainUpdate$updateAffiliation, model, _p0._0, _p0._1, updateInstitution);
+			case 'DeleteAffiliation':
+				var deleteAffiliation = function (author) {
+					return _elm_lang$core$Native_Utils.update(
+						author,
+						{
+							affiliations: A2(
+								_elm_lang$core$List$filter,
+								function (a) {
+									return !_elm_lang$core$Native_Utils.eq(a.id, _p0._1);
+								},
+								author.affiliations)
+						});
+				};
+				return A3(_user$project$MainUpdate$updateAuthor, model, _p0._0, deleteAffiliation);
+			case 'SetFocusedIds':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{focusedAuthorId: _p0._0, focusedAffiliationId: _p0._1}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			default:
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{lastAffiliationKey: _p0._1}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+		}
+	});
+
+var _user$project$Stylesheet$view = function () {
+	var children = {ctor: '[]'};
+	var attrs = {ctor: '[]'};
+	var tag = 'link';
+	return A3(_elm_lang$html$Html$node, tag, attrs, children);
+}();
+
+var _user$project$Encode$getAffilitionValue = function (affiliation) {
+	return _elm_lang$core$Json_Encode$object(
+		{
+			ctor: '::',
+			_0: {
+				ctor: '_Tuple2',
+				_0: 'id',
+				_1: _elm_lang$core$Json_Encode$int(affiliation.id)
+			},
+			_1: {
+				ctor: '::',
+				_0: {
+					ctor: '_Tuple2',
+					_0: 'institution',
+					_1: _elm_lang$core$Json_Encode$string(affiliation.institution)
+				},
+				_1: {
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: 'city',
+						_1: _elm_lang$core$Json_Encode$string(affiliation.city)
+					},
+					_1: {
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: 'country',
+							_1: _elm_lang$core$Json_Encode$string(affiliation.country)
+						},
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		});
+};
+var _user$project$Encode$getAuthorValue = function (author) {
+	return _elm_lang$core$Json_Encode$object(
+		{
+			ctor: '::',
+			_0: {
+				ctor: '_Tuple2',
+				_0: 'id',
+				_1: _elm_lang$core$Json_Encode$int(author.id)
+			},
+			_1: {
+				ctor: '::',
+				_0: {
+					ctor: '_Tuple2',
+					_0: 'firstName',
+					_1: _elm_lang$core$Json_Encode$string(author.firstName)
+				},
+				_1: {
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: 'lastName',
+						_1: _elm_lang$core$Json_Encode$string(author.lastName)
+					},
+					_1: {
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: 'affiliations',
+							_1: _elm_lang$core$Json_Encode$list(
+								A2(_elm_lang$core$List$map, _user$project$Encode$getAffilitionValue, author.affiliations))
+						},
+						_1: {
+							ctor: '::',
+							_0: {
+								ctor: '_Tuple2',
+								_0: 'isPresenting',
+								_1: _elm_lang$core$Json_Encode$bool(author.presenting)
+							},
+							_1: {
+								ctor: '::',
+								_0: {
+									ctor: '_Tuple2',
+									_0: 'maxAffiliationId',
+									_1: _elm_lang$core$Json_Encode$int(author.maxAffiliationId)
+								},
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				}
+			}
+		});
+};
+var _user$project$Encode$getAuthorsValue = function (authors) {
+	return _elm_lang$core$Json_Encode$list(
+		A2(_elm_lang$core$List$map, _user$project$Encode$getAuthorValue, authors));
+};
+var _user$project$Encode$authors = function (authors) {
+	return A2(
+		_elm_lang$core$Json_Encode$encode,
+		0,
+		_user$project$Encode$getAuthorsValue(authors));
+};
+
+var _user$project$AuthorsView$renderOption = function (x) {
 	return A2(
 		_elm_lang$html$Html$option,
 		{
@@ -9605,11 +9997,11 @@ var _user$project$Main$renderOption = function (x) {
 		},
 		{ctor: '[]'});
 };
-var _user$project$Main$renderDataLists = function (affiliations) {
+var _user$project$AuthorsView$renderDataLists = function (affiliations) {
 	var renderOptions = function (list) {
 		return A2(
 			_elm_lang$core$List$map,
-			_user$project$Main$renderOption,
+			_user$project$AuthorsView$renderOption,
 			_user$project$Utils$dropDuplicates(list));
 	};
 	return {
@@ -9665,353 +10057,10 @@ var _user$project$Main$renderDataLists = function (affiliations) {
 		}
 	};
 };
-var _user$project$Main$affiliationsHeader = A2(
-	_elm_lang$html$Html$div,
-	{
-		ctor: '::',
-		_0: _elm_lang$html$Html_Attributes$class('clearfix'),
-		_1: {ctor: '[]'}
-	},
-	{ctor: '[]'});
-var _user$project$Main$authorDataClass = 'ma2';
-var _user$project$Main$getBlurredAuthorAffiliations = function (model) {
-	return _elm_lang$core$List$concat(
-		A2(
-			_elm_lang$core$List$map,
-			function (_) {
-				return _.affiliations;
-			},
-			A2(
-				_elm_lang$core$List$filter,
-				function (a) {
-					return !_elm_lang$core$Native_Utils.eq(a.id, model.focusedAuthorId);
-				},
-				model.authors)));
-};
-var _user$project$Main$stylesheet = function () {
-	var children = {ctor: '[]'};
-	var attrs = {ctor: '[]'};
-	var tag = 'link';
-	return A3(_elm_lang$html$Html$node, tag, attrs, children);
-}();
-var _user$project$Main$getMaxAuthorId = function (authors) {
-	return A2(
-		_elm_lang$core$Maybe$withDefault,
-		-1,
-		_elm_lang$core$List$maximum(
-			A2(
-				_elm_lang$core$List$map,
-				function (_) {
-					return _.id;
-				},
-				authors)));
-};
-var _user$project$Main$assignMaxAffiliationId = function (author) {
-	var maxAffiliationId = A2(
-		_elm_lang$core$Maybe$withDefault,
-		-1,
-		_elm_lang$core$List$maximum(
-			A2(
-				_elm_lang$core$List$map,
-				function (_) {
-					return _.id;
-				},
-				function (_) {
-					return _.affiliations;
-				}(author))));
-	return _elm_lang$core$Native_Utils.update(
-		author,
-		{maxAffiliationId: maxAffiliationId});
-};
-var _user$project$Main$convertAuthorsListForModel = function (authors) {
-	return A2(_elm_lang$core$List$map, _user$project$Main$assignMaxAffiliationId, authors);
-};
-var _user$project$Main$Model = F5(
-	function (a, b, c, d, e) {
-		return {authorMaxId: a, authors: b, focusedAuthorId: c, focusedAffiliationId: d, lastAffiliationKey: e};
-	});
-var _user$project$Main$Flags = function (a) {
-	return {authorsList: a};
-};
-var _user$project$Main$Author = F6(
-	function (a, b, c, d, e, f) {
-		return {firstName: a, lastName: b, presenting: c, affiliations: d, maxAffiliationId: e, id: f};
-	});
-var _user$project$Main$Affiliation = F4(
-	function (a, b, c, d) {
-		return {institution: a, city: b, country: c, id: d};
-	});
-var _user$project$Main$blankAffiliation = function (id) {
-	return A4(_user$project$Main$Affiliation, '', '', '', id);
-};
-var _user$project$Main$blankAuthor = function (id) {
-	return A6(
-		_user$project$Main$Author,
-		'',
-		'',
-		false,
-		{
-			ctor: '::',
-			_0: _user$project$Main$blankAffiliation(0),
-			_1: {ctor: '[]'}
-		},
-		1,
-		id);
-};
-var _user$project$Main$initialModel = {
-	authorMaxId: 0,
-	authors: {
-		ctor: '::',
-		_0: _user$project$Main$blankAuthor(0),
-		_1: {ctor: '[]'}
-	},
-	focusedAuthorId: 0,
-	focusedAffiliationId: 0,
-	lastAffiliationKey: -1
-};
-var _user$project$Main$affiliationDecoder = A3(
-	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-	'id',
-	_elm_lang$core$Json_Decode$int,
-	A3(
-		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-		'country',
-		_elm_lang$core$Json_Decode$string,
-		A3(
-			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-			'city',
-			_elm_lang$core$Json_Decode$string,
-			A3(
-				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-				'institution',
-				_elm_lang$core$Json_Decode$string,
-				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_user$project$Main$Affiliation)))));
-var _user$project$Main$authorDecoder = A3(
-	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-	'id',
-	_elm_lang$core$Json_Decode$int,
-	A2(
-		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$hardcoded,
-		0,
-		A3(
-			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-			'affiliations',
-			_elm_lang$core$Json_Decode$list(_user$project$Main$affiliationDecoder),
-			A3(
-				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-				'isPresenting',
-				_elm_lang$core$Json_Decode$bool,
-				A3(
-					_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-					'lastName',
-					_elm_lang$core$Json_Decode$string,
-					A3(
-						_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-						'firstName',
-						_elm_lang$core$Json_Decode$string,
-						_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_user$project$Main$Author)))))));
-var _user$project$Main$authorsDecoder = _elm_lang$core$Json_Decode$list(_user$project$Main$authorDecoder);
-var _user$project$Main$init = function (flags) {
-	var authors = A2(
-		_elm_lang$core$Result$withDefault,
-		{
-			ctor: '::',
-			_0: _user$project$Main$blankAuthor(0),
-			_1: {ctor: '[]'}
-		},
-		A2(_elm_lang$core$Json_Decode$decodeString, _user$project$Main$authorsDecoder, flags.authorsList));
-	var model = _elm_lang$core$Native_Utils.update(
-		_user$project$Main$initialModel,
-		{
-			authors: _user$project$Main$convertAuthorsListForModel(authors),
-			authorMaxId: _user$project$Main$getMaxAuthorId(authors)
-		});
-	var debug2 = A2(_elm_lang$core$Debug$log, 'model', model);
-	var debug = A2(_elm_lang$core$Debug$log, 'flags', flags);
-	return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
-};
-var _user$project$Main$update = F2(
-	function (msg, model) {
-		var _p0 = msg;
-		switch (_p0.ctor) {
-			case 'AddAuthor':
-				return {
-					ctor: '_Tuple2',
-					_0: _elm_lang$core$Native_Utils.update(
-						model,
-						{
-							authorMaxId: model.authorMaxId + 1,
-							authors: A2(
-								_elm_lang$core$Basics_ops['++'],
-								model.authors,
-								{
-									ctor: '::',
-									_0: _user$project$Main$blankAuthor(model.authorMaxId + 1),
-									_1: {ctor: '[]'}
-								})
-						}),
-					_1: _elm_lang$core$Platform_Cmd$none
-				};
-			case 'DeleteAuthor':
-				return {
-					ctor: '_Tuple2',
-					_0: _elm_lang$core$Native_Utils.update(
-						model,
-						{
-							authors: A2(
-								_elm_lang$core$List$filter,
-								function (a) {
-									return !_elm_lang$core$Native_Utils.eq(a.id, _p0._0);
-								},
-								model.authors)
-						}),
-					_1: _elm_lang$core$Platform_Cmd$none
-				};
-			case 'UpdateFirstName':
-				var updateFirstName = function (author) {
-					return _elm_lang$core$Native_Utils.update(
-						author,
-						{firstName: _p0._1});
-				};
-				return A3(_user$project$Main$updateAuthor, model, _p0._0, updateFirstName);
-			case 'UpdateLastName':
-				var updateLastName = function (author) {
-					return _elm_lang$core$Native_Utils.update(
-						author,
-						{lastName: _p0._1});
-				};
-				return A3(_user$project$Main$updateAuthor, model, _p0._0, updateLastName);
-			case 'TogglePresenting':
-				var togglePresenting = function (author) {
-					return _elm_lang$core$Native_Utils.update(
-						author,
-						{presenting: !author.presenting});
-				};
-				return A3(_user$project$Main$updateAuthor, model, _p0._0, togglePresenting);
-			case 'AddAffiliation':
-				var addAffiliation = function (author) {
-					return _elm_lang$core$Native_Utils.update(
-						author,
-						{
-							maxAffiliationId: author.maxAffiliationId + 1,
-							affiliations: A2(
-								_elm_lang$core$Basics_ops['++'],
-								author.affiliations,
-								{
-									ctor: '::',
-									_0: _user$project$Main$blankAffiliation(author.maxAffiliationId + 1),
-									_1: {ctor: '[]'}
-								})
-						});
-				};
-				return A3(_user$project$Main$updateAuthor, model, _p0._0, addAffiliation);
-			case 'UpdateInstitution':
-				var _p1 = _p0._2;
-				var updateInstitution = function (affiliation) {
-					if ((_elm_lang$core$Native_Utils.eq(model.lastAffiliationKey, -1) && (!_elm_lang$core$Native_Utils.eq(_p1, ''))) || (_elm_lang$core$Native_Utils.eq(_p1, '') && _elm_lang$core$Native_Utils.eq(model.lastAffiliationKey, 8))) {
-						var matchingAffiliation = A2(
-							_elm_lang$core$Maybe$withDefault,
-							A4(_user$project$Main$Affiliation, _p1, affiliation.city, affiliation.country, affiliation.id),
-							_elm_lang$core$List$head(
-								A2(
-									_elm_lang$core$List$filter,
-									function (a) {
-										return _elm_lang$core$Native_Utils.eq(a.institution, _p1);
-									},
-									_user$project$Main$getBlurredAuthorAffiliations(model))));
-						return _elm_lang$core$Native_Utils.update(
-							affiliation,
-							{institution: matchingAffiliation.institution, city: matchingAffiliation.city, country: matchingAffiliation.country});
-					} else {
-						return _elm_lang$core$Native_Utils.update(
-							affiliation,
-							{institution: _p1});
-					}
-				};
-				return {
-					ctor: '_Tuple2',
-					_0: _elm_lang$core$Native_Utils.update(
-						model,
-						{
-							authors: A4(_user$project$Main$getAffiliationUpdate, model, _p0._0, _p0._1, updateInstitution),
-							lastAffiliationKey: -1
-						}),
-					_1: _elm_lang$core$Platform_Cmd$none
-				};
-			case 'UpdateCountry':
-				var updateInstitution = function (affiliation) {
-					return _elm_lang$core$Native_Utils.update(
-						affiliation,
-						{country: _p0._2});
-				};
-				return A4(_user$project$Main$updateAffiliation, model, _p0._0, _p0._1, updateInstitution);
-			case 'UpdateCity':
-				var updateInstitution = function (affiliation) {
-					return _elm_lang$core$Native_Utils.update(
-						affiliation,
-						{city: _p0._2});
-				};
-				return A4(_user$project$Main$updateAffiliation, model, _p0._0, _p0._1, updateInstitution);
-			case 'DeleteAffiliation':
-				var deleteAffiliation = function (author) {
-					return _elm_lang$core$Native_Utils.update(
-						author,
-						{
-							affiliations: A2(
-								_elm_lang$core$List$filter,
-								function (a) {
-									return !_elm_lang$core$Native_Utils.eq(a.id, _p0._1);
-								},
-								author.affiliations)
-						});
-				};
-				return A3(_user$project$Main$updateAuthor, model, _p0._0, deleteAffiliation);
-			case 'SetFocusedIds':
-				return {
-					ctor: '_Tuple2',
-					_0: _elm_lang$core$Native_Utils.update(
-						model,
-						{focusedAuthorId: _p0._0, focusedAffiliationId: _p0._1}),
-					_1: _elm_lang$core$Platform_Cmd$none
-				};
-			default:
-				return {
-					ctor: '_Tuple2',
-					_0: _elm_lang$core$Native_Utils.update(
-						model,
-						{lastAffiliationKey: _p0._1}),
-					_1: _elm_lang$core$Platform_Cmd$none
-				};
-		}
-	});
-var _user$project$Main$SetAffiliationKeyDown = F2(
-	function (a, b) {
-		return {ctor: 'SetAffiliationKeyDown', _0: a, _1: b};
-	});
-var _user$project$Main$SetFocusedIds = F2(
-	function (a, b) {
-		return {ctor: 'SetFocusedIds', _0: a, _1: b};
-	});
-var _user$project$Main$DeleteAffiliation = F2(
-	function (a, b) {
-		return {ctor: 'DeleteAffiliation', _0: a, _1: b};
-	});
-var _user$project$Main$UpdateCity = F3(
-	function (a, b, c) {
-		return {ctor: 'UpdateCity', _0: a, _1: b, _2: c};
-	});
-var _user$project$Main$UpdateCountry = F3(
-	function (a, b, c) {
-		return {ctor: 'UpdateCountry', _0: a, _1: b, _2: c};
-	});
-var _user$project$Main$UpdateInstitution = F3(
-	function (a, b, c) {
-		return {ctor: 'UpdateInstitution', _0: a, _1: b, _2: c};
-	});
-var _user$project$Main$renderAffiliation = F2(
-	function (authorId, _p2) {
-		var _p3 = _p2;
-		var _p4 = _p3._0;
+var _user$project$AuthorsView$renderAffiliation = F2(
+	function (authorId, _p0) {
+		var _p1 = _p0;
+		var _p2 = _p1._0;
 		return A2(
 			_elm_lang$html$Html$div,
 			{
@@ -10034,7 +10083,7 @@ var _user$project$Main$renderAffiliation = F2(
 							A2(
 								_elm_lang$core$Basics_ops['++'],
 								'Affiliation ',
-								_elm_lang$core$Basics$toString(_p3._1))),
+								_elm_lang$core$Basics$toString(_p1._1))),
 						_1: {ctor: '[]'}
 					}),
 				_1: {
@@ -10043,73 +10092,29 @@ var _user$project$Main$renderAffiliation = F2(
 						_elm_lang$html$Html$div,
 						{
 							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('form__question-sub-section--inline'),
-							_1: {ctor: '[]'}
+							_0: _elm_lang$html$Html_Attributes$class('remove button button--secondary'),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html_Events$onClick(
+									A2(_user$project$MainMessages$DeleteAffiliation, authorId, _p2.id)),
+								_1: {ctor: '[]'}
+							}
 						},
 						{
 							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$div,
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$class('inline-element'),
-									_1: {ctor: '[]'}
-								},
-								{
-									ctor: '::',
-									_0: A2(
-										_elm_lang$html$Html$label,
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html_Attributes$class('form__label'),
-											_1: {ctor: '[]'}
-										},
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html$text('Institution'),
-											_1: {ctor: '[]'}
-										}),
-									_1: {
-										ctor: '::',
-										_0: A2(
-											_elm_lang$html$Html$input,
-											{
-												ctor: '::',
-												_0: _elm_lang$html$Html_Attributes$class('form__input institution'),
-												_1: {
-													ctor: '::',
-													_0: _elm_lang$html$Html_Attributes$list('institutions-list'),
-													_1: {
-														ctor: '::',
-														_0: _elm_lang$html$Html_Attributes$name('institution'),
-														_1: {
-															ctor: '::',
-															_0: _elm_lang$html$Html_Events$onInput(
-																A2(_user$project$Main$UpdateInstitution, authorId, _p4.id)),
-															_1: {
-																ctor: '::',
-																_0: _elm_lang$html$Html_Events$onFocus(
-																	A2(_user$project$Main$SetFocusedIds, authorId, _p4.id)),
-																_1: {
-																	ctor: '::',
-																	_0: _user$project$Utils$onKeyDown(
-																		_user$project$Main$SetAffiliationKeyDown(_p4.id)),
-																	_1: {
-																		ctor: '::',
-																		_0: _elm_lang$html$Html_Attributes$value(_p4.institution),
-																		_1: {ctor: '[]'}
-																	}
-																}
-															}
-														}
-													}
-												}
-											},
-											{ctor: '[]'}),
-										_1: {ctor: '[]'}
-									}
-								}),
-							_1: {
+							_0: _elm_lang$html$Html$text('Remove Affiliation'),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$div,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('form__question-sub-section--inline'),
+								_1: {ctor: '[]'}
+							},
+							{
 								ctor: '::',
 								_0: A2(
 									_elm_lang$html$Html$div,
@@ -10129,7 +10134,7 @@ var _user$project$Main$renderAffiliation = F2(
 											},
 											{
 												ctor: '::',
-												_0: _elm_lang$html$Html$text('City'),
+												_0: _elm_lang$html$Html$text('Institution'),
 												_1: {ctor: '[]'}
 											}),
 										_1: {
@@ -10138,25 +10143,30 @@ var _user$project$Main$renderAffiliation = F2(
 												_elm_lang$html$Html$input,
 												{
 													ctor: '::',
-													_0: _elm_lang$html$Html_Attributes$class('city form__input'),
+													_0: _elm_lang$html$Html_Attributes$class('form__input institution'),
 													_1: {
 														ctor: '::',
-														_0: _elm_lang$html$Html_Attributes$list('cities-list'),
+														_0: _elm_lang$html$Html_Attributes$list('institutions-list'),
 														_1: {
 															ctor: '::',
-															_0: _elm_lang$html$Html_Attributes$name('city'),
+															_0: _elm_lang$html$Html_Attributes$name('institution'),
 															_1: {
 																ctor: '::',
 																_0: _elm_lang$html$Html_Events$onInput(
-																	A2(_user$project$Main$UpdateCity, authorId, _p4.id)),
+																	A2(_user$project$MainMessages$UpdateInstitution, authorId, _p2.id)),
 																_1: {
 																	ctor: '::',
 																	_0: _elm_lang$html$Html_Events$onFocus(
-																		A2(_user$project$Main$SetFocusedIds, authorId, _p4.id)),
+																		A2(_user$project$MainMessages$SetFocusedIds, authorId, _p2.id)),
 																	_1: {
 																		ctor: '::',
-																		_0: _elm_lang$html$Html_Attributes$value(_p4.city),
-																		_1: {ctor: '[]'}
+																		_0: _user$project$Utils$onKeyDown(
+																			_user$project$MainMessages$SetAffiliationKeyDown(_p2.id)),
+																		_1: {
+																			ctor: '::',
+																			_0: _elm_lang$html$Html_Attributes$value(_p2.institution),
+																			_1: {ctor: '[]'}
+																		}
 																	}
 																}
 															}
@@ -10187,33 +10197,33 @@ var _user$project$Main$renderAffiliation = F2(
 												},
 												{
 													ctor: '::',
-													_0: _elm_lang$html$Html$text('Country'),
+													_0: _elm_lang$html$Html$text('City'),
 													_1: {ctor: '[]'}
 												}),
 											_1: {
 												ctor: '::',
 												_0: A2(
-													_elm_lang$html$Html$select,
+													_elm_lang$html$Html$input,
 													{
 														ctor: '::',
-														_0: _elm_lang$html$Html_Attributes$class('inline-element'),
+														_0: _elm_lang$html$Html_Attributes$class('city form__input'),
 														_1: {
 															ctor: '::',
-															_0: _elm_lang$html$Html_Attributes$list('countries-list'),
+															_0: _elm_lang$html$Html_Attributes$list('cities-list'),
 															_1: {
 																ctor: '::',
-																_0: _elm_lang$html$Html_Attributes$name('country'),
+																_0: _elm_lang$html$Html_Attributes$name('city'),
 																_1: {
 																	ctor: '::',
 																	_0: _elm_lang$html$Html_Events$onInput(
-																		A2(_user$project$Main$UpdateCountry, authorId, _p4.id)),
+																		A2(_user$project$MainMessages$UpdateCity, authorId, _p2.id)),
 																	_1: {
 																		ctor: '::',
 																		_0: _elm_lang$html$Html_Events$onFocus(
-																			A2(_user$project$Main$SetFocusedIds, authorId, _p4.id)),
+																			A2(_user$project$MainMessages$SetFocusedIds, authorId, _p2.id)),
 																		_1: {
 																			ctor: '::',
-																			_0: _elm_lang$html$Html_Attributes$value(_p4.country),
+																			_0: _elm_lang$html$Html_Attributes$value(_p2.city),
 																			_1: {ctor: '[]'}
 																		}
 																	}
@@ -10221,7 +10231,7 @@ var _user$project$Main$renderAffiliation = F2(
 															}
 														}
 													},
-													_user$project$Countries$options(_p4.country)),
+													{ctor: '[]'}),
 												_1: {ctor: '[]'}
 											}
 										}),
@@ -10231,29 +10241,76 @@ var _user$project$Main$renderAffiliation = F2(
 											_elm_lang$html$Html$div,
 											{
 												ctor: '::',
-												_0: _elm_lang$html$Html_Attributes$class('remove button button--secondary'),
-												_1: {
-													ctor: '::',
-													_0: _elm_lang$html$Html_Events$onClick(
-														A2(_user$project$Main$DeleteAffiliation, authorId, _p4.id)),
-													_1: {ctor: '[]'}
-												}
+												_0: _elm_lang$html$Html_Attributes$class('inline-element'),
+												_1: {ctor: '[]'}
 											},
 											{
 												ctor: '::',
-												_0: _elm_lang$html$Html$text('Remove Affiliation'),
-												_1: {ctor: '[]'}
+												_0: A2(
+													_elm_lang$html$Html$label,
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html_Attributes$class('form__label'),
+														_1: {ctor: '[]'}
+													},
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html$text('Country'),
+														_1: {ctor: '[]'}
+													}),
+												_1: {
+													ctor: '::',
+													_0: A2(
+														_elm_lang$html$Html$select,
+														{
+															ctor: '::',
+															_0: _elm_lang$html$Html_Attributes$class('country form__input form__input--dropdown'),
+															_1: {
+																ctor: '::',
+																_0: _elm_lang$html$Html_Attributes$list('countries-list'),
+																_1: {
+																	ctor: '::',
+																	_0: _elm_lang$html$Html_Attributes$name('country'),
+																	_1: {
+																		ctor: '::',
+																		_0: _elm_lang$html$Html_Events$onInput(
+																			A2(_user$project$MainMessages$UpdateCountry, authorId, _p2.id)),
+																		_1: {
+																			ctor: '::',
+																			_0: _elm_lang$html$Html_Events$onFocus(
+																				A2(_user$project$MainMessages$SetFocusedIds, authorId, _p2.id)),
+																			_1: {
+																				ctor: '::',
+																				_0: _elm_lang$html$Html_Attributes$value(_p2.country),
+																				_1: {ctor: '[]'}
+																			}
+																		}
+																	}
+																}
+															}
+														},
+														_user$project$Countries$options(_p2.country)),
+													_1: {ctor: '[]'}
+												}
 											}),
 										_1: {ctor: '[]'}
 									}
 								}
-							}
-						}),
-					_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					}
 				}
 			});
 	});
-var _user$project$Main$renderAffiliations = F2(
+var _user$project$AuthorsView$affiliationsHeader = A2(
+	_elm_lang$html$Html$div,
+	{
+		ctor: '::',
+		_0: _elm_lang$html$Html_Attributes$class('clearfix'),
+		_1: {ctor: '[]'}
+	},
+	{ctor: '[]'});
+var _user$project$AuthorsView$renderAffiliations = F2(
 	function (affiliations, authorId) {
 		var affiliationsLength = _elm_lang$core$List$length(affiliations);
 		var indexList = A2(_elm_lang$core$List$range, 1, affiliationsLength);
@@ -10270,7 +10327,7 @@ var _user$project$Main$renderAffiliations = F2(
 			{ctor: '[]'},
 			{
 				ctor: '::',
-				_0: _user$project$Main$affiliationsHeader,
+				_0: _user$project$AuthorsView$affiliationsHeader,
 				_1: {
 					ctor: '::',
 					_0: A2(
@@ -10278,32 +10335,15 @@ var _user$project$Main$renderAffiliations = F2(
 						{ctor: '[]'},
 						A2(
 							_elm_lang$core$List$map,
-							_user$project$Main$renderAffiliation(authorId),
+							_user$project$AuthorsView$renderAffiliation(authorId),
 							affilIndexTuples)),
 					_1: {ctor: '[]'}
 				}
 			});
 	});
-var _user$project$Main$AddAffiliation = function (a) {
-	return {ctor: 'AddAffiliation', _0: a};
-};
-var _user$project$Main$TogglePresenting = function (a) {
-	return {ctor: 'TogglePresenting', _0: a};
-};
-var _user$project$Main$UpdateLastName = F2(
-	function (a, b) {
-		return {ctor: 'UpdateLastName', _0: a, _1: b};
-	});
-var _user$project$Main$UpdateFirstName = F2(
-	function (a, b) {
-		return {ctor: 'UpdateFirstName', _0: a, _1: b};
-	});
-var _user$project$Main$DeleteAuthor = function (a) {
-	return {ctor: 'DeleteAuthor', _0: a};
-};
-var _user$project$Main$renderAuthor = function (_p5) {
-	var _p6 = _p5;
-	var _p7 = _p6._0;
+var _user$project$AuthorsView$renderAuthor = function (_p3) {
+	var _p4 = _p3;
+	var _p5 = _p4._0;
 	return A2(
 		_elm_lang$html$Html$div,
 		{
@@ -10326,7 +10366,7 @@ var _user$project$Main$renderAuthor = function (_p5) {
 						A2(
 							_elm_lang$core$Basics_ops['++'],
 							'Author ',
-							_elm_lang$core$Basics$toString(_p6._1))),
+							_elm_lang$core$Basics$toString(_p4._1))),
 					_1: {ctor: '[]'}
 				}),
 			_1: {
@@ -10371,10 +10411,10 @@ var _user$project$Main$renderAuthor = function (_p5) {
 											_1: {
 												ctor: '::',
 												_0: _elm_lang$html$Html_Events$onInput(
-													_user$project$Main$UpdateFirstName(_p7.id)),
+													_user$project$MainMessages$UpdateFirstName(_p5.id)),
 												_1: {
 													ctor: '::',
-													_0: _elm_lang$html$Html_Attributes$value(_p7.firstName),
+													_0: _elm_lang$html$Html_Attributes$value(_p5.firstName),
 													_1: {ctor: '[]'}
 												}
 											}
@@ -10416,10 +10456,10 @@ var _user$project$Main$renderAuthor = function (_p5) {
 												_1: {
 													ctor: '::',
 													_0: _elm_lang$html$Html_Events$onInput(
-														_user$project$Main$UpdateLastName(_p7.id)),
+														_user$project$MainMessages$UpdateLastName(_p5.id)),
 													_1: {
 														ctor: '::',
-														_0: _elm_lang$html$Html_Attributes$value(_p7.lastName),
+														_0: _elm_lang$html$Html_Attributes$value(_p5.lastName),
 														_1: {ctor: '[]'}
 													}
 												}
@@ -10461,13 +10501,13 @@ var _user$project$Main$renderAuthor = function (_p5) {
 													_1: {
 														ctor: '::',
 														_0: _elm_lang$html$Html_Events$onClick(
-															_user$project$Main$TogglePresenting(_p7.id)),
+															_user$project$MainMessages$TogglePresenting(_p5.id)),
 														_1: {
 															ctor: '::',
 															_0: _elm_lang$html$Html_Attributes$type_('checkbox'),
 															_1: {
 																ctor: '::',
-																_0: _elm_lang$html$Html_Attributes$checked(_p7.presenting),
+																_0: _elm_lang$html$Html_Attributes$checked(_p5.presenting),
 																_1: {ctor: '[]'}
 															}
 														}
@@ -10497,7 +10537,7 @@ var _user$project$Main$renderAuthor = function (_p5) {
 								{
 									ctor: '::',
 									_0: _elm_lang$html$Html_Events$onClick(
-										_user$project$Main$DeleteAuthor(_p7.id)),
+										_user$project$MainMessages$DeleteAuthor(_p5.id)),
 									_1: {ctor: '[]'}
 								},
 								{
@@ -10518,7 +10558,7 @@ var _user$project$Main$renderAuthor = function (_p5) {
 							},
 							{
 								ctor: '::',
-								_0: A2(_user$project$Main$renderAffiliations, _p7.affiliations, _p7.id),
+								_0: A2(_user$project$AuthorsView$renderAffiliations, _p5.affiliations, _p5.id),
 								_1: {ctor: '[]'}
 							}),
 						_1: {
@@ -10537,7 +10577,7 @@ var _user$project$Main$renderAuthor = function (_p5) {
 										{
 											ctor: '::',
 											_0: _elm_lang$html$Html_Events$onClick(
-												_user$project$Main$AddAffiliation(_p7.id)),
+												_user$project$MainMessages$AddAffiliation(_p5.id)),
 											_1: {ctor: '[]'}
 										},
 										{
@@ -10554,8 +10594,8 @@ var _user$project$Main$renderAuthor = function (_p5) {
 			}
 		});
 };
-var _user$project$Main$AddAuthor = {ctor: 'AddAuthor'};
-var _user$project$Main$renderAuthors = function (authors) {
+var _user$project$AuthorsView$authorDataClass = 'ma2';
+var _user$project$AuthorsView$renderAuthors = function (authors) {
 	var authorsLength = _elm_lang$core$List$length(authors);
 	var indexList = A2(_elm_lang$core$List$range, 1, authorsLength);
 	var authorIndexTuples = A3(
@@ -10582,7 +10622,7 @@ var _user$project$Main$renderAuthors = function (authors) {
 					_0: _elm_lang$html$Html_Attributes$class(''),
 					_1: {ctor: '[]'}
 				},
-				A2(_elm_lang$core$List$map, _user$project$Main$renderAuthor, authorIndexTuples)),
+				A2(_elm_lang$core$List$map, _user$project$AuthorsView$renderAuthor, authorIndexTuples)),
 			_1: {
 				ctor: '::',
 				_0: A2(
@@ -10592,7 +10632,7 @@ var _user$project$Main$renderAuthors = function (authors) {
 						_0: _elm_lang$html$Html_Attributes$class('button button--tertiary'),
 						_1: {
 							ctor: '::',
-							_0: _elm_lang$html$Html_Events$onClick(_user$project$Main$AddAuthor),
+							_0: _elm_lang$html$Html_Events$onClick(_user$project$MainMessages$AddAuthor),
 							_1: {ctor: '[]'}
 						}
 					},
@@ -10605,30 +10645,135 @@ var _user$project$Main$renderAuthors = function (authors) {
 			}
 		});
 };
+var _user$project$AuthorsView$view = function (model) {
+	var authors = _user$project$Encode$authors(model.authors);
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: _user$project$Stylesheet$view,
+			_1: {
+				ctor: '::',
+				_0: _user$project$AuthorsView$renderAuthors(model.authors),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$input,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('hidden'),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$id('authorsArray'),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$name('authorsArray'),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$value(authors),
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text(authors),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$div,
+							{ctor: '[]'},
+							_user$project$AuthorsView$renderDataLists(
+								_user$project$MainUpdate$getBlurredAuthorAffiliations(model))),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		});
+};
+
+var _user$project$Decode$affiliationDecoder = A3(
+	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+	'id',
+	_elm_lang$core$Json_Decode$int,
+	A3(
+		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+		'country',
+		_elm_lang$core$Json_Decode$string,
+		A3(
+			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+			'city',
+			_elm_lang$core$Json_Decode$string,
+			A3(
+				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+				'institution',
+				_elm_lang$core$Json_Decode$string,
+				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_user$project$MainModel$Affiliation)))));
+var _user$project$Decode$authorDecoder = A3(
+	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+	'id',
+	_elm_lang$core$Json_Decode$int,
+	A2(
+		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$hardcoded,
+		0,
+		A3(
+			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+			'affiliations',
+			_elm_lang$core$Json_Decode$list(_user$project$Decode$affiliationDecoder),
+			A3(
+				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+				'isPresenting',
+				_elm_lang$core$Json_Decode$bool,
+				A3(
+					_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+					'lastName',
+					_elm_lang$core$Json_Decode$string,
+					A3(
+						_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+						'firstName',
+						_elm_lang$core$Json_Decode$string,
+						_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_user$project$MainModel$Author)))))));
+var _user$project$Decode$authorsDecoder = _elm_lang$core$Json_Decode$list(_user$project$Decode$authorDecoder);
+var _user$project$Decode$authors = function (authorsList) {
+	return A2(
+		_elm_lang$core$Result$withDefault,
+		{
+			ctor: '::',
+			_0: _user$project$MainModel$blankAuthor(0),
+			_1: {ctor: '[]'}
+		},
+		A2(_elm_lang$core$Json_Decode$decodeString, _user$project$Decode$authorsDecoder, authorsList));
+};
+
+var _user$project$Main$subscriptions = function (model) {
+	return _elm_lang$core$Platform_Sub$none;
+};
 var _user$project$Main$view = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{ctor: '[]'},
 		{
 			ctor: '::',
-			_0: _user$project$Main$stylesheet,
-			_1: {
-				ctor: '::',
-				_0: _user$project$Main$renderAuthors(model.authors),
-				_1: {
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$div,
-						{ctor: '[]'},
-						_user$project$Main$renderDataLists(
-							_user$project$Main$getBlurredAuthorAffiliations(model))),
-					_1: {ctor: '[]'}
-				}
-			}
+			_0: _user$project$AuthorsView$view(model),
+			_1: {ctor: '[]'}
 		});
 };
+var _user$project$Main$init = function (flags) {
+	var authors = _user$project$Decode$authors(flags.authorsList);
+	var model = _elm_lang$core$Native_Utils.update(
+		_user$project$MainModel$initialModel,
+		{
+			authors: _user$project$MainModel$convertAuthorsListForModel(authors),
+			authorMaxId: _user$project$MainModel$getMaxAuthorId(authors)
+		});
+	return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+};
 var _user$project$Main$main = _elm_lang$html$Html$programWithFlags(
-	{init: _user$project$Main$init, view: _user$project$Main$view, update: _user$project$Main$update, subscriptions: _user$project$Main$subscriptions})(
+	{init: _user$project$Main$init, view: _user$project$Main$view, update: _user$project$MainUpdate$update, subscriptions: _user$project$Main$subscriptions})(
 	A2(
 		_elm_lang$core$Json_Decode$andThen,
 		function (authorsList) {

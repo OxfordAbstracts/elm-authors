@@ -51,16 +51,22 @@ update msg model =
             in
                 updateAuthor model id addAffiliation
 
-        UpdateInstitution authorId affiliationId new ->
+        UpdateInstitution authorId affiliationId input ->
             let
+                log =
+                    Debug.log "input" input
+
+                log2 =
+                    Debug.log "lastAffiliationKey" model.lastAffiliationKey
+
                 updateInstitution affiliation =
-                    if (model.lastAffiliationKey == -1 && new /= "") || (new == "" && model.lastAffiliationKey == 8) then
+                    if (model.lastAffiliationKey == -1 && input /= "") then
                         let
                             matchingAffiliation =
                                 getBlurredAuthorAffiliations model
-                                    |> List.filter (\a -> a.institution == new)
+                                    |> List.filter (\a -> a.institution == input)
                                     |> List.head
-                                    |> Maybe.withDefault (Affiliation new affiliation.city affiliation.country affiliation.id)
+                                    |> Maybe.withDefault (Affiliation input affiliation.city affiliation.country affiliation.id)
                         in
                             { affiliation
                                 | institution = matchingAffiliation.institution
@@ -68,7 +74,7 @@ update msg model =
                                 , country = matchingAffiliation.country
                             }
                     else
-                        { affiliation | institution = new }
+                        { affiliation | institution = input }
             in
                 ( { model
                     | authors = getAffiliationUpdate model authorId affiliationId updateInstitution

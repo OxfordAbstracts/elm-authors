@@ -15,7 +15,7 @@ dummyModel =
     { dummyIniatialModel
         | authors = dummyAuthors
         , authorMaxId = getMaxAuthorId dummyAuthors
-        , focusedAffiliationId = 0
+        , focusedAffiliationId = 1
         , focusedAuthorId = 1
     }
 
@@ -51,13 +51,22 @@ dummyAuthor2 =
 
 dummyAffiliations : List Affiliation
 dummyAffiliations =
-    List.singleton dummyAffiliation
+    List.append (List.singleton dummyAffiliation1) (List.singleton dummyAffiliation2)
 
 
-dummyAffiliation : Affiliation
-dummyAffiliation =
+dummyAffiliation1 : Affiliation
+dummyAffiliation1 =
     { institution = "Leeds University"
     , city = "Leeds"
     , country = "United Kingdom"
     , id = 1
+    }
+
+
+dummyAffiliation2 : Affiliation
+dummyAffiliation2 =
+    { institution = "UCL"
+    , city = "London"
+    , country = "United Kingdom"
+    , id = 2
     }

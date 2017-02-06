@@ -22,12 +22,16 @@ init flags =
         authors =
             Decode.authors flags.authorsList
 
+        affiliationLimit =
+            flags.affiliationLimit
+
         model =
             { initialModel
                 | authors =
                     convertAuthorsListForModel authors
                 , authorMaxId =
                     getMaxAuthorId authors
+                , affiliationLimit = affiliationLimit
             }
     in
         ( model, Cmd.none )

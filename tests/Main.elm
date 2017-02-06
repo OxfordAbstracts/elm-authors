@@ -4,12 +4,15 @@ import Test exposing (..)
 import Test.Runner.Node exposing (run, TestProgram)
 import Json.Encode exposing (Value)
 import MainUpdateTests
+import MainModelTests
 
 
 allTests : Test
 allTests =
     describe "all Tests"
-        [ MainUpdateTests.all ]
+        [ MainUpdateTests.all
+        , MainModelTests.all
+        ]
 
 
 main : TestProgram

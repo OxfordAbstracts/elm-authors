@@ -17,18 +17,21 @@ view model =
     let
         authors =
             Encode.authors (model.authors)
+
+        affiliationLimit =
+            model.affiliationLimit
     in
         div []
             [ Stylesheet.view
               -- , nav model.authors
-            , renderAuthors model.authors
+            , renderAuthors model.authors affiliationLimit
             , input [ class "hidden", id "authorsArray", name "authorsArray", value authors ] [ text authors ]
             , div [] (renderDataLists (getBlurredAuthorAffiliations model))
             ]
 
 
-renderAuthors : List Author -> Html Msg
-renderAuthors authors =
+renderAuthors : List Author -> Int -> Html Msg
+renderAuthors authors affiliationLimit =
     let
         authorsLength =
             List.length authors
@@ -40,7 +43,7 @@ renderAuthors authors =
             List.map2 (,) authors indexList
     in
         div [ class "" ]
-            [ div [ class "" ] (List.map renderAuthor authorIndexTuples)
+            [ div [ class "" ] (List.map (renderAuthor affiliationLimit) authorIndexTuples)
             , div [ class "button button--tertiary", onClick AddAuthor ] [ text "Add Author" ]
             ]
 
@@ -50,36 +53,53 @@ authorDataClass =
     "ma2"
 
 
-renderAuthor : ( Author, Int ) -> Html Msg
-renderAuthor ( author, index ) =
-    div [ class "author form__question-sub-section" ]
-        [ div [ class "form__label" ] [ text ("Author " ++ toString index) ]
-        , div [ class "form__question-sub-section--inline" ]
-            [ div [ class "inline-element" ]
-                [ label [ class "form__label" ] [ text "First Name" ]
-                , input [ class "form__input first-name", onInput (UpdateFirstName author.id), value author.firstName ] []
+renderAuthor : Int -> ( Author, Int ) -> Html Msg
+renderAuthor affiliationLimit ( author, index ) =
+    let
+        debug =
+            Debug.log "affiliationLimit->" affiliationLimit
+
+        debug2 =
+            Debug.log "List.length author.affiliations->" (List.length author.affiliations)
+
+        addAffiliationButton =
+            if affiliationLimit > (List.length author.affiliations) then
+                div [ class "add-affiliation-to-author button button--tertiary" ]
+                    [ div [ onClick (AddAffiliation author.id) ]
+                        [ text "Add Affiliation to Author" ]
+                    ]
+            else
+                div []
+                    []
+
+        debug3 =
+            Debug.log "addAffiliationButton" addAffiliationButton
+    in
+        div [ class "author form__question-sub-section" ]
+            [ div [ class "form__label" ] [ text ("Author " ++ toString index) ]
+            , div [ class "form__question-sub-section--inline" ]
+                [ div [ class "inline-element" ]
+                    [ label [ class "form__label" ] [ text "First Name" ]
+                    , input [ class "form__input first-name", onInput (UpdateFirstName author.id), value author.firstName ] []
+                    ]
+                , div [ class "inline-element" ]
+                    [ label [ class "form__label" ] [ text "Last Name" ]
+                    , input [ class "form__input last-name", onInput (UpdateLastName author.id), value author.lastName ] []
+                    ]
+                , div [ class "inline-element" ]
+                    [ label [ class "form__label" ] [ text "Presenting Author" ]
+                    , input [ class "form__checkbox is-presenting question-checkbox", onClick (TogglePresenting author.id), type_ "checkbox", checked (author.presenting) ] []
+                    ]
                 ]
-            , div [ class "inline-element" ]
-                [ label [ class "form__label" ] [ text "Last Name" ]
-                , input [ class "form__input last-name", onInput (UpdateLastName author.id), value author.lastName ] []
+            , span [ class "remove button button--secondary" ]
+                [ div
+                    [ onClick (DeleteAuthor author.id) ]
+                    [ text "Remove Author" ]
                 ]
-            , div [ class "inline-element" ]
-                [ label [ class "form__label" ] [ text "Presenting Author" ]
-                , input [ class "form__checkbox is-presenting question-checkbox", onClick (TogglePresenting author.id), type_ "checkbox", checked (author.presenting) ] []
-                ]
+            , div [ class "affiliates-dropdowns" ]
+                [ (renderAffiliations author.affiliations author.id) ]
+            , addAffiliationButton
             ]
-        , span [ class "remove button button--secondary" ]
-            [ div
-                [ onClick (DeleteAuthor author.id) ]
-                [ text "Remove Author" ]
-            ]
-        , div [ class "affiliates-dropdowns" ]
-            [ (renderAffiliations author.affiliations author.id) ]
-        , div [ class "add-affiliation-to-author button button--tertiary" ]
-            [ div [ onClick (AddAffiliation author.id) ]
-                [ text "Add Affiliation to Author" ]
-            ]
-        ]
 
 
 renderAffiliations : List Affiliation -> Int -> Html Msg

@@ -26,7 +26,6 @@ initialModel =
     , lastAffiliationKey = -1
     , affiliationLimit =
         5
-        --infinity
     }
 
 

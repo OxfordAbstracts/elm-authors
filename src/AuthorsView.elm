@@ -56,12 +56,6 @@ authorDataClass =
 renderAuthor : Int -> ( Author, Int ) -> Html Msg
 renderAuthor affiliationLimit ( author, index ) =
     let
-        debug =
-            Debug.log "affiliationLimit->" affiliationLimit
-
-        debug2 =
-            Debug.log "List.length author.affiliations->" (List.length author.affiliations)
-
         addAffiliationButton =
             if affiliationLimit > (List.length author.affiliations) then
                 div [ class "add-affiliation-to-author button button--tertiary" ]
@@ -71,24 +65,43 @@ renderAuthor affiliationLimit ( author, index ) =
             else
                 div []
                     []
-
-        debug3 =
-            Debug.log "addAffiliationButton" addAffiliationButton
     in
         div [ class "author form__question-sub-section" ]
             [ div [ class "form__label" ] [ text ("Author " ++ toString index) ]
             , div [ class "form__question-sub-section--inline" ]
                 [ div [ class "inline-element" ]
                     [ label [ class "form__label" ] [ text "First Name" ]
-                    , input [ class "form__input first-name", onInput (UpdateFirstName author.id), value author.firstName ] []
+                    , input
+                        [ class "form__input first-name"
+                        , onInput (UpdateFirstName author.id)
+                        , value author.firstName
+                        ]
+                        []
                     ]
                 , div [ class "inline-element" ]
                     [ label [ class "form__label" ] [ text "Last Name" ]
-                    , input [ class "form__input last-name", onInput (UpdateLastName author.id), value author.lastName ] []
+                    , input
+                        [ class "form__input last-name"
+                        , onInput (UpdateLastName author.id)
+                        , value author.lastName
+                        ]
+                        []
                     ]
                 , div [ class "inline-element" ]
-                    [ label [ class "form__label" ] [ text "Presenting Author" ]
-                    , input [ class "form__checkbox is-presenting question-checkbox", onClick (TogglePresenting author.id), type_ "checkbox", checked (author.presenting) ] []
+                    [ label
+                        [ class "form__label"
+                        , for ("isPresentingAuthor-" ++ toString index)
+                        ]
+                        [ text "Presenting Author"
+                        ]
+                    , input
+                        [ class "form__checkbox is-presenting question-checkbox"
+                        , id ("isPresentingAuthor-" ++ toString index)
+                        , onClick (TogglePresenting author.id)
+                        , type_ "checkbox"
+                        , checked (author.presenting)
+                        ]
+                        []
                     ]
                 ]
             , span [ class "remove button button--secondary" ]
@@ -138,9 +151,14 @@ renderAffiliation authorId ( affiliation, index ) =
         , div
             [ class "form__question-sub-section--inline" ]
             [ div [ class "inline-element" ]
-                [ label [ class "form__label" ] [ text "Institution" ]
+                [ label
+                    [ class "form__label"
+                    , for ("affiliationInstitution-" ++ toString index)
+                    ]
+                    [ text "Institution" ]
                 , input
                     [ class "form__input institution"
+                    , id ("affiliationInstitution-" ++ toString index)
                     , list "institutions-list"
                     , name "institution"
                     , onInput (UpdateInstitution authorId affiliation.id)
@@ -151,9 +169,14 @@ renderAffiliation authorId ( affiliation, index ) =
                     []
                 ]
             , div [ class "inline-element" ]
-                [ label [ class "form__label" ] [ text "City" ]
+                [ label
+                    [ class "form__label"
+                    , for ("affiliationCity-" ++ toString index)
+                    ]
+                    [ text "City" ]
                 , input
                     [ class "city form__input"
+                    , id ("affiliationCity-" ++ toString index)
                     , list "cities-list"
                     , name "city"
                     , onInput (UpdateCity authorId affiliation.id)

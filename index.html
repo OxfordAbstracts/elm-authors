@@ -1,21 +1,66 @@
 <!doctype html>
+
 <head>
 
-  <script src="./elm.js" ></script>
-  <link rel="stylesheet" href="./app.css" ></link>
+    <script src="./elm.js"></script>
+    <link rel="stylesheet" href="./app.css"></link>
 </head>
+
 <body>
-  <div> ELM AUTHORS</div>
-  <div id="elm-authors"></div>
+    <div> ELM AUTHORS</div>
+    <div id="elm-authors"></div>
 
-  <script>
-    var oxabsState = {authors: []}
+    <script>
+        var oxabsState = {
+            authors: []
+        }
 
-    var node = document.getElementById('elm-authors');
-    var authorsArray = oxabsState.authors ? JSON.stringify(oxabsState.authors) : JSON.stringify([]);
-    var app = Elm.Main.embed(node, {
-        authorsList: authorsArray,
-        affiliationLimit: 3
-    });
-  </script>
+        var node = document.getElementById('elm-authors');
+        var authorsArray = oxabsState.authors ? JSON.stringify(oxabsState.authors) : JSON.stringify([]);
+        var
+         = Elm.Main.embed(node, {
+            authorsList: authorsArray,
+            affiliationLimit: 3
+        });
+
+        var authors = JSON.stringify([{
+                        "id": 1,
+                        "firstName": "Conor",
+                        "lastName": "C",
+                        "affiliations": [{
+                            "id": 1,
+                            "institution": "Test inst",
+                            "city": "city 1",
+                            "country": "Albania"
+                        }],
+                        "isPresenting": true
+                    },
+                    {
+                        "id": 2,
+                        "firstName": "Rory",
+                        "lastName": "C",
+                        "affiliations": [{
+                            "id": 1,
+                            "institution": "Test inst",
+                            "city": "city 1",
+                            "country": "Albania"
+                        }],
+                        "isPresenting": true
+                    },
+                    {
+                        "id": 2,
+                        "firstName": "Naaz",
+                        "lastName": "A",
+                        "affiliations": [{
+                            "id": 1,
+                            "institution": "Test inst",
+                            "city": "city 1",
+                            "country": "Albania"
+                        }],
+                        "isPresenting": true
+                    }
+                ])
+
+                app.ports.authors.send(authors)
+    </script>
 </body>

@@ -1,15 +1,10 @@
-module Main exposing (..)
+port module Main exposing (..)
 
-import Countries
 import Html exposing (..)
-import Html.Attributes exposing (class, value, id, list, name, checked, type_)
-import Html.Events exposing (onClick, onInput, onFocus)
-import Utils exposing (dropDuplicates, onKeyDown)
 import MainModel exposing (..)
 import MainUpdate exposing (..)
 import MainMessages exposing (..)
 import AuthorsView exposing (view)
-import Encode exposing (..)
 import Decode exposing (..)
 
 
@@ -58,9 +53,12 @@ view model =
 -- SUBSCRIPTIONS
 
 
+port authors : (String -> msg) -> Sub msg
+
+
 subscriptions : Model -> Sub Msg
 subscriptions model =
-    Sub.none
+    authors SetAuthors
 
 
 

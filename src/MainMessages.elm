@@ -14,3 +14,4 @@ type Msg
     | DeleteAffiliation Int Int
     | SetFocusedIds Int Int
     | SetAffiliationKeyDown Int Int
+    | SetAuthors String

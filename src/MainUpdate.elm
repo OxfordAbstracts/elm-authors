@@ -2,6 +2,8 @@ module MainUpdate exposing (..)
 
 import MainMessages exposing (..)
 import MainModel exposing (..)
+import Decode
+import Json.Decode as Json
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -120,6 +122,19 @@ update msg model =
               }
             , Cmd.none
             )
+
+        SetAuthors encodedAuthors ->
+            let
+                authors =
+                    encodedAuthors
+                        |> Json.decodeString Decode.authorsDecoder
+                        |> Result.withDefault model.authors
+            in
+                ( { model
+                    | authors = authors
+                  }
+                , Cmd.none
+                )
 
 
 getBlurredAuthorAffiliations : Model -> List Affiliation

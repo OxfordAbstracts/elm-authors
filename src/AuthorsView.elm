@@ -158,7 +158,6 @@ renderAffiliation authorId ( affiliation, index ) =
                     [ text "Institution" ]
                 , input
                     [ class "form__input institution"
-                    , id ("affiliationInstitution-" ++ toString index)
                     , list "institutions-list"
                     , name "institution"
                     , onInput (UpdateInstitution authorId affiliation.id)
@@ -176,7 +175,6 @@ renderAffiliation authorId ( affiliation, index ) =
                     [ text "City" ]
                 , input
                     [ class "city form__input"
-                    , id ("affiliationCity-" ++ toString index)
                     , list "cities-list"
                     , name "city"
                     , onInput (UpdateCity authorId affiliation.id)

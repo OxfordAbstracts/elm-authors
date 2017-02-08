@@ -8,7 +8,6 @@ import Countries
 import MainMessages exposing (..)
 import MainModel exposing (..)
 import MainUpdate exposing (..)
-import Stylesheet exposing (view)
 import Encode exposing (..)
 
 
@@ -19,8 +18,7 @@ view model =
             Encode.authors (model.authors)
     in
         div []
-            [ Stylesheet.view
-            , renderAuthors model.authors
+            [ renderAuthors model.authors
             , input [ class "hidden", id "authorsArray", name "authorsArray", value authors ] [ text authors ]
             , div [] (renderDataLists (getBlurredAuthorAffiliations model))
             ]
@@ -29,12 +27,11 @@ view model =
 renderAuthors : List Author -> Html Msg
 renderAuthors authors =
     let
-
         authorIndexTuples =
             authors
-            |> List.length
-            |> List.range 1
-            |> List.map2 (,) authors
+                |> List.length
+                |> List.range 1
+                |> List.map2 (,) authors
     in
         div [ class "" ]
             [ div [ class "" ] (List.map renderAuthor authorIndexTuples)

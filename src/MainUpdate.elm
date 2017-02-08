@@ -53,11 +53,6 @@ update msg model =
 
         UpdateInstitution authorId affiliationId input ->
             let
-                log =
-                    Debug.log "input" input
-
-                log2 =
-                    Debug.log "lastAffiliationKey" model.lastAffiliationKey
 
                 updateInstitution affiliation =
                     if (model.lastAffiliationKey == -1 && input /= "") then

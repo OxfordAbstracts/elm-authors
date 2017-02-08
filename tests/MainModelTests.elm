@@ -17,9 +17,6 @@ all =
                             | affiliations = List.singleton dummyAffiliation1
                         }
 
-                    debug =
-                        Debug.log "testAuthor" testAuthor
-
                     author =
                         MainModel.assignMaxAffiliationId testAuthor
                 in

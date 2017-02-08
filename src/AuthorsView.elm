@@ -23,7 +23,6 @@ view model =
     in
         div []
             [ Stylesheet.view
-              -- , nav model.authors
             , renderAuthors model.authors affiliationLimit
             , input [ class "hidden", id "authorsArray", name "authorsArray", value authors ] [ text authors ]
             , div [] (renderDataLists (getBlurredAuthorAffiliations model))
@@ -33,14 +32,11 @@ view model =
 renderAuthors : List Author -> Int -> Html Msg
 renderAuthors authors affiliationLimit =
     let
-        authorsLength =
-            List.length authors
-
-        indexList =
-            List.range 1 authorsLength
-
         authorIndexTuples =
-            List.map2 (,) authors indexList
+            authors
+                |> List.length
+                |> List.range 1
+                |> List.map2 (,) authors
     in
         div [ class "" ]
             [ div [ class "" ] (List.map (renderAuthor affiliationLimit) authorIndexTuples)

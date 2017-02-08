@@ -29,14 +29,12 @@ view model =
 renderAuthors : List Author -> Html Msg
 renderAuthors authors =
     let
-        authorsLength =
-            List.length authors
-
-        indexList =
-            List.range 1 authorsLength
 
         authorIndexTuples =
-            List.map2 (,) authors indexList
+            authors
+            |> List.length
+            |> List.range 1
+            |> List.map2 (,) authors
     in
         div [ class "" ]
             [ div [ class "" ] (List.map renderAuthor authorIndexTuples)

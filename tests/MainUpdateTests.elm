@@ -37,7 +37,8 @@ all =
                         }
                 in
                     Expect.equal tuple ( expectedDummyModel, Cmd.none )
-        , test """The updateInstitution case. The Institution, City and Country have all been updated as the lastAffiliationKey was a (-1)""" <|
+        , test """The updateInstitution case. The Institution, City and Country have all been updated as the
+        lastAffiliationKey was a (-1)""" <|
             \() ->
                 let
                     tuple =

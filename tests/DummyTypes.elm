@@ -22,7 +22,7 @@ dummyModel =
 
 dummyAuthors : List Author
 dummyAuthors =
-    List.append (List.singleton dummyAuthor1) (List.singleton dummyAuthor2)
+     [dummyAuthor1, dummyAuthor2]
 
 
 dummyAuthor1 : Author
@@ -51,7 +51,7 @@ dummyAuthor2 =
 
 dummyAffiliations : List Affiliation
 dummyAffiliations =
-    List.append (List.singleton dummyAffiliation1) (List.singleton dummyAffiliation2)
+    [dummyAffiliation1, dummyAffiliation2]
 
 
 dummyAffiliation1 : Affiliation

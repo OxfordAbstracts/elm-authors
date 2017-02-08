@@ -20,7 +20,6 @@ view model =
     in
         div []
             [ Stylesheet.view
-              -- , nav model.authors
             , renderAuthors model.authors
             , input [ class "hidden", id "authorsArray", name "authorsArray", value authors ] [ text authors ]
             , div [] (renderDataLists (getBlurredAuthorAffiliations model))

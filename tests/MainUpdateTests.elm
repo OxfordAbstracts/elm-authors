@@ -13,10 +13,10 @@ all =
         [ test "getBlurredAuthorAffiliations get a list of all the affiliations which are not focused on" <|
             \() ->
                 let
-                    updatedModel =
+                    blurredAuthorAffiliations =
                         MainUpdate.getBlurredAuthorAffiliations dummyModel
                 in
-                    Expect.equal updatedModel (dummyAffiliations)
+                    Expect.equal blurredAuthorAffiliations dummyAffiliations
         , test "The updateInstitution case of the update function returns the model and Cmd tuple with the updated institution" <|
             \() ->
                 let
@@ -25,11 +25,11 @@ all =
 
                     expectedDummyAuthor1 =
                         { dummyAuthor1
-                            | affiliations = List.append (List.singleton { dummyAffiliation1 | institution = "New Institution" }) (List.singleton dummyAffiliation2)
+                            | affiliations = [{ dummyAffiliation1 | institution = "New Institution" }, dummyAffiliation2 ]
                         }
 
                     expectedDummyAuthors =
-                        List.append (List.singleton expectedDummyAuthor1) (List.singleton dummyAuthor2)
+                        [expectedDummyAuthor1, dummyAuthor2]
 
                     expectedDummyModel =
                         { dummyModel
@@ -45,11 +45,11 @@ all =
 
                     expectedDummyAuthor1 =
                         { dummyAuthor1
-                            | affiliations = List.append (List.singleton { dummyAffiliation2 | id = 1 }) (List.singleton dummyAffiliation2)
+                            | affiliations = [{ dummyAffiliation2 | id = 1 }, dummyAffiliation2]
                         }
 
                     expectedDummyAuthors =
-                        List.append (List.singleton expectedDummyAuthor1) (List.singleton dummyAuthor2)
+                        [expectedDummyAuthor1, dummyAuthor2]
 
                     expectedDummyModel =
                         { dummyModel

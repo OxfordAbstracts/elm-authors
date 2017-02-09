@@ -56,6 +56,12 @@ view model =
 port authors : (String -> msg) -> Sub msg
 
 
+port checkAuthorsComplete : (Model -> msg) -> Sub msg
+
+
+port suggestions : (List String -> msg) -> Sub msg
+
+
 subscriptions : Model -> Sub Msg
 subscriptions model =
     authors SetAuthors

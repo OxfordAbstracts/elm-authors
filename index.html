@@ -17,50 +17,19 @@
 
         var node = document.getElementById('elm-authors');
         var authorsArray = oxabsState.authors ? JSON.stringify(oxabsState.authors) : JSON.stringify([]);
-        var
-         = Elm.Main.embed(node, {
+        var app = Elm.Main.embed(node, {
             authorsList: authorsArray,
             affiliationLimit: 3
         });
 
-        var authors = JSON.stringify([{
-                        "id": 1,
-                        "firstName": "Conor",
-                        "lastName": "C",
-                        "affiliations": [{
-                            "id": 1,
-                            "institution": "Test inst",
-                            "city": "city 1",
-                            "country": "Albania"
-                        }],
-                        "isPresenting": true
-                    },
-                    {
-                        "id": 2,
-                        "firstName": "Rory",
-                        "lastName": "C",
-                        "affiliations": [{
-                            "id": 1,
-                            "institution": "Test inst",
-                            "city": "city 1",
-                            "country": "Albania"
-                        }],
-                        "isPresenting": true
-                    },
-                    {
-                        "id": 2,
-                        "firstName": "Naaz",
-                        "lastName": "A",
-                        "affiliations": [{
-                            "id": 1,
-                            "institution": "Test inst",
-                            "city": "city 1",
-                            "country": "Albania"
-                        }],
-                        "isPresenting": true
-                    }
-                ])
+        app.ports.checkAuthorsComplete.subscribe(function(model) {
+          var isComplete = 
+        })
 
-                app.ports.authors.send(authors)
+        var authorsPort = function (authors) {
+          jsonAuthors = JSON.stringify(authors)
+          app.ports.authors.send(jsonAuthors)
+        }
+
     </script>
 </body>

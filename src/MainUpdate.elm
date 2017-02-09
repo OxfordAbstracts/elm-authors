@@ -4,17 +4,22 @@ import MainMessages exposing (..)
 import MainModel exposing (..)
 import Decode
 import Json.Decode as Json
+import Main
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
+        -- ChangeClass ->
         AddAuthor ->
             ( { model
                 | authorMaxId = model.authorMaxId + 1
                 , authors = model.authors ++ [ blankAuthor (model.authorMaxId + 1) ]
               }
-            , Cmd.none
+            , checkAuthorsComplete model
+              --perform PublishModel, sends to JS
+              --JS works out if complete
+              --sends newClass back to elm via port
             )
 
         DeleteAuthor id ->
@@ -55,7 +60,6 @@ update msg model =
 
         UpdateInstitution authorId affiliationId input ->
             let
-
                 updateInstitution affiliation =
                     if (model.lastAffiliationKey == -1 && input /= "") then
                         let

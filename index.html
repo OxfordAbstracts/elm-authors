@@ -23,7 +23,12 @@
         });
 
         app.ports.checkAuthorsComplete.subscribe(function(model) {
-          var isComplete = 
+          console.log('inCheckAuthorsComplete: ',inCheckAuthorsComplete);
+
+          var isComplete = checkAuhtorsComplete(model.authors);
+          var newAuthorsClass = isComplete ? 'complete' : 'incomplete';
+ 
+          app.port.authorsClass.send(newAuthorsClass)
         })
 
         var authorsPort = function (authors) {

@@ -8,7 +8,6 @@ import Countries
 import MainMessages exposing (..)
 import MainModel exposing (..)
 import MainUpdate exposing (..)
-import Stylesheet exposing (view)
 import Encode exposing (..)
 
 
@@ -22,23 +21,25 @@ view model =
             model.affiliationLimit
     in
         div []
-            [ Stylesheet.view
-            , renderAuthors model.authors affiliationLimit
+            [ renderAuthors model.authors model.class affiliationLimit
             , input [ class "hidden", id "authorsArray", name "authorsArray", value authors ] [ text authors ]
             , div [] (renderDataLists (getBlurredAuthorAffiliations model))
             ]
 
 
-renderAuthors : List Author -> Int -> Html Msg
-renderAuthors authors affiliationLimit =
+renderAuthors : List Author -> String -> Int -> Html Msg
+renderAuthors authors authorsClass affiliationLimit =
     let
+        authorsLength =
+            List.length authors
+
+        indexList =
+            List.range 1 authorsLength
+
         authorIndexTuples =
-            authors
-                |> List.length
-                |> List.range 1
-                |> List.map2 (,) authors
+            List.map2 (,) authors indexList
     in
-        div [ class "" ]
+        div [ class authorsClass ]
             [ div [ class "" ] (List.map (renderAuthor affiliationLimit) authorIndexTuples)
             , div [ class "button button--tertiary", onClick AddAuthor ] [ text "Add Author" ]
             ]

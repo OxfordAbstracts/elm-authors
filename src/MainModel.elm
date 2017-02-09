@@ -8,6 +8,7 @@ type alias Model =
     , focusedAffiliationId : Int
     , lastAffiliationKey : Int
     , affiliationLimit : Int
+    , class : String
     }
 
 
@@ -24,8 +25,8 @@ initialModel =
     , focusedAuthorId = 0
     , focusedAffiliationId = 0
     , lastAffiliationKey = -1
-    , affiliationLimit =
-        5
+    , affiliationLimit = 5
+    , class = "complete"
     }
 
 

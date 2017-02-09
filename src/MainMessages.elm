@@ -15,3 +15,4 @@ type Msg
     | SetFocusedIds Int Int
     | SetAffiliationKeyDown Int Int
     | SetAuthors String
+    | NewClass String

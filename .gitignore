@@ -1,2 +1,6 @@
 elm-stuff
-main.js
+.git
+node_modules
+npm-debug.log
+elm.js
+.idea

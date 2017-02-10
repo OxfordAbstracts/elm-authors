@@ -8,14 +8,14 @@ import Countries
 import MainMessages exposing (..)
 import MainModel exposing (..)
 import MainUpdate exposing (..)
-import Encode exposing (..)
+import Encoders exposing (..)
 
 
 view : Model -> Html Msg
 view model =
     let
         authors =
-            Encode.authors (model.authors)
+            Encoders.authors (model.authors)
 
         affiliationLimit =
             model.affiliationLimit
@@ -30,7 +30,6 @@ view model =
 renderAuthors : List Author -> String -> Int -> Html Msg
 renderAuthors authors authorsClass affiliationLimit =
     let
-
         authorIndexTuples =
             authors
                 |> List.length

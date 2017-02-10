@@ -11,25 +11,13 @@
     <div id="elm-authors"></div>
 
     <script>
-        var oxabsState = {
-            authors: []
-        }
-
+      
         var node = document.getElementById('elm-authors');
-        var authorsArray = oxabsState.authors ? JSON.stringify(oxabsState.authors) : JSON.stringify([]);
+        var authorsArray = JSON.stringify([]);
         var app = Elm.Main.embed(node, {
             authorsList: authorsArray,
             affiliationLimit: 3
         });
-
-        app.ports.checkAuthorsComplete.subscribe(function(model) {
-          console.log('inCheckAuthorsComplete: ',inCheckAuthorsComplete);
-
-          var isComplete = checkAuhtorsComplete(model.authors);
-          var newAuthorsClass = isComplete ? 'complete' : 'incomplete';
- 
-          app.port.authorsClass.send(newAuthorsClass)
-        })
 
         var authorsPort = function (authors) {
           jsonAuthors = JSON.stringify(authors)

@@ -5,7 +5,7 @@ import MainModel exposing (..)
 import MainUpdate exposing (..)
 import MainMessages exposing (..)
 import AuthorsView exposing (view)
-import Decode exposing (..)
+import Decoders exposing (..)
 import Ports exposing (..)
 
 
@@ -16,7 +16,7 @@ init : Flags -> ( Model, Cmd Msg )
 init flags =
     let
         authors =
-            Decode.authors flags.authorsList
+            Decoders.authors flags.authorsList
 
         affiliationLimit =
             flags.affiliationLimit

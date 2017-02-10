@@ -2,8 +2,8 @@ module MainUpdate exposing (..)
 
 import MainMessages exposing (..)
 import MainModel exposing (..)
-import Encode
-import Decode
+import Encoders
+import Decoders
 import Json.Decode as Json
 import Ports exposing (..)
 
@@ -13,7 +13,7 @@ update msg model =
     let
         encodedAuthors =
             model.authors
-                |> Encode.authors
+                |> Encoders.authors
     in
         case msg of
             AddAuthor ->
@@ -93,7 +93,7 @@ update msg model =
 
                     encodedAuthors =
                         updatedAuthors
-                            |> Encode.authors
+                            |> Encoders.authors
                 in
                     ( { model
                         | authors = updatedAuthors
@@ -144,7 +144,7 @@ update msg model =
                 let
                     authors =
                         encodedAuthors
-                            |> Json.decodeString Decode.authorsDecoder
+                            |> Json.decodeString Decoders.authorsDecoder
                             |> Result.withDefault model.authors
                 in
                     ( { model
@@ -170,7 +170,7 @@ updateAuthor model id change =
 
         encodedAuthors =
             updatedAuthors
-                |> Encode.authors
+                |> Encoders.authors
     in
         ( { model
             | authors = updatedAuthors

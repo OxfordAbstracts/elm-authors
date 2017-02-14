@@ -56,7 +56,10 @@ view model =
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
-    Ports.authorsClass NewClass
+    Sub.batch
+        [ Ports.authorsClass NewClass
+        , Ports.authors SetAuthors
+        ]
 
 
 

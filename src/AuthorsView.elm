@@ -64,7 +64,7 @@ renderAuthor affiliationLimit authorFields ( author, index ) =
             [ div [ class "form__label" ] [ text ("Author " ++ toString index) ]
             , div [ class "form__question-sub-section--inline" ]
                 --for each of the authorFields we want to add a div like this
-                [ div [ class "form__question-sub-section--inline" ] (List.map (renderFieldResponses authorFields) author.fields)
+                [ div [ class "form__question-sub-section--inline" ] (List.map (renderFieldResponses authorFields author.id) author.fields)
                 ]
             , span [ class "remove button button--secondary" ]
                 [ div
@@ -77,7 +77,7 @@ renderAuthor affiliationLimit authorFields ( author, index ) =
             ]
 
 
-renderFieldResponses authorFields authorFieldResponse =
+renderFieldResponses authorFields authorId authorFieldResponse =
     let
         authorField =
             authorFields
@@ -89,7 +89,7 @@ renderFieldResponses authorFields authorFieldResponse =
             [ label [ class "form__label" ] [ text authorField.name ]
             , input
                 [ class "form__input last-name"
-                  --  , onInput (UpdateLastName author.id)
+                , onInput (UpdateAuthorFieldString authorId authorFieldResponse.id)
                 , value authorFieldResponse.value
                 ]
                 []

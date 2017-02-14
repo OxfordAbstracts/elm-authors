@@ -12,6 +12,13 @@ getAffilitionValue affiliation =
         ]
 
 
+getFieldValue field =
+    JsonEncode.object
+        [ ( "authorFieldId", JsonEncode.int field.authorFieldId )
+        , ( "value", JsonEncode.string field.value )
+        ]
+
+
 getAuthorsValue authors =
     JsonEncode.list (List.map getAuthorValue authors)
 
@@ -19,10 +26,8 @@ getAuthorsValue authors =
 getAuthorValue author =
     JsonEncode.object
         [ ( "id", JsonEncode.int author.id )
-        , ( "firstName", JsonEncode.string author.firstName )
-        , ( "lastName", JsonEncode.string author.lastName )
+        , ( "fields", JsonEncode.list (List.map getFieldValue author.fields) )
         , ( "affiliations", JsonEncode.list (List.map getAffilitionValue author.affiliations) )
-        , ( "isPresenting", JsonEncode.bool author.presenting )
         , ( "maxAffiliationId", JsonEncode.int author.maxAffiliationId )
         ]
 

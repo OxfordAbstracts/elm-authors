@@ -34,8 +34,8 @@ initialModel =
 
 
 type FieldType
-    = Bool
-    | Text String
+    = BoolType
+    | StringType
 
 
 type alias AuthorField =
@@ -46,8 +46,9 @@ type alias AuthorField =
 
 
 type alias AuthorFieldResponse =
-    { authorFieldId : Int
-    , value : FieldType
+    { id : Int
+    , authorFieldId : Int
+    , value : String
     }
 
 
@@ -69,12 +70,12 @@ type alias Affiliation =
 
 defaultAuthorFeild : AuthorField
 defaultAuthorFeild =
-    AuthorField 0 "default field" Bool
+    AuthorField 0 "default field" BoolType
 
 
 defaultAuthorFieldResponse : AuthorFieldResponse
 defaultAuthorFieldResponse =
-    AuthorFieldResponse 0 (Text "Answer")
+    AuthorFieldResponse 0 0 "Answer"
 
 
 blankAuthor : Int -> Author

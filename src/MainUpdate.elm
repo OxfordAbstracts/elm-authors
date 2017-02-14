@@ -43,14 +43,7 @@ update msg model =
                     change field =
                         { field | value = input }
                 in
-                    updateAuthorField model authorId fieldId change
-
-            UpdateAuthorField authorId inputId ->
-                let
-                    change field =
-                        { field | value = not field.value }
-                in
-                    updateAuthorField model authorId fieldId change
+                    updateAuthorFieldResponse model authorId fieldId change
 
             AddAffiliation id ->
                 let
@@ -183,15 +176,15 @@ updateAffiliation model authorId affiliationId change =
         updateAuthor model authorId updateAffiliation
 
 
-updateAuthorField : Model -> Int -> Int -> (AuthorField -> AuthorField) -> ( Model, Cmd Msg )
-updateAuthorField model authorId authorFieldId change =
+updateAuthorFieldResponse : Model -> Int -> Int -> (AuthorFieldResponse -> AuthorFieldResponse) -> ( Model, Cmd Msg )
+updateAuthorFieldResponse model authorId authorFieldId change =
     let
-        updateAuthorField author =
+        updateAuthorFieldResponse author =
             { author
                 | fields = (updateIfHasId author.fields authorFieldId change)
             }
     in
-        updateAuthor model authorId updateAuthorField
+        updateAuthor model authorId updateAuthorFieldResponse
 
 
 getAuthorUpdate model id change =

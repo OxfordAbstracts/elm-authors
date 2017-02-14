@@ -8,7 +8,7 @@ import Json.Decode.Pipeline exposing (required, decode, hardcoded)
 authorDecoder : Decoder Author
 authorDecoder =
     decode Author
-        |> required "fields" (list authorFieldDecoder)
+        |> required "fields" (list authorFieldResponseDecoder)
         |> required "affiliations" (list affiliationDecoder)
         |> hardcoded 0
         |> required "id" int
@@ -41,14 +41,22 @@ authorFieldDecoder =
         |> required "inputType" (map fieldTypeHelper string)
 
 
+authorFieldResponseDecoder : Decoder AuthorFieldResponse
+authorFieldResponseDecoder =
+    decode AuthorFieldResponse
+        |> required "id" int
+        |> required "authorFieldId" int
+        |> required "value" string
+
+
 fieldTypeHelper : String -> FieldType
 fieldTypeHelper inputType =
     case inputType of
         "bool" ->
-            Bool
+            BoolType
 
         _ ->
-            String
+            StringType
 
 
 authorFields : String -> List AuthorField

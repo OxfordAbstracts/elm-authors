@@ -5,7 +5,6 @@ type Msg
     = AddAuthor
     | DeleteAuthor Int
     | UpdateAuthorFieldString Int Int String
-    | UpdateAuthorField Int Int
     | AddAffiliation Int
     | UpdateInstitution Int Int String
     | UpdateCountry Int Int String

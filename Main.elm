@@ -15,8 +15,12 @@ import Ports exposing (..)
 init : Flags -> ( Model, Cmd Msg )
 init flags =
     let
+        --do we want to decode the authorFields first then pass them to the authors
+        authorFields =
+            Decoders.authorFields flags.authorFields
+
         authors =
-            Decoders.authors flags.authorsList
+            Decoders.authors flags.authorsList authorFields
 
         affiliationLimit =
             flags.affiliationLimit
@@ -28,6 +32,7 @@ init flags =
                 , authorMaxId =
                     getMaxAuthorId authors
                 , affiliationLimit = affiliationLimit
+                , authorFields = authorFields
             }
     in
         ( model, Cmd.none )

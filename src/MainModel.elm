@@ -9,12 +9,14 @@ type alias Model =
     , lastAffiliationKey : Int
     , affiliationLimit : Int
     , class : String
+    , authorFields : List AuthorField
     }
 
 
 type alias Flags =
     { authorsList : String
     , affiliationLimit : Int
+    , authorFields : String
     }
 
 
@@ -27,13 +29,30 @@ initialModel =
     , lastAffiliationKey = -1
     , affiliationLimit = 5
     , class = "complete"
+    , authorFields = [ defaultAuthorFeild ]
+    }
+
+
+type FieldType
+    = Bool
+    | Text String
+
+
+type alias AuthorField =
+    { id : Int
+    , name : String
+    , inputType : FieldType
+    }
+
+
+type alias AuthorFieldResponse =
+    { authorFieldId : Int
+    , value : FieldType
     }
 
 
 type alias Author =
-    { firstName : String
-    , lastName : String
-    , presenting : Bool
+    { fields : List AuthorFieldResponse
     , affiliations : List Affiliation
     , maxAffiliationId : Int
     , id : Int
@@ -48,9 +67,19 @@ type alias Affiliation =
     }
 
 
+defaultAuthorFeild : AuthorField
+defaultAuthorFeild =
+    AuthorField 0 "default field" Bool
+
+
+defaultAuthorFieldResponse : AuthorFieldResponse
+defaultAuthorFieldResponse =
+    AuthorFieldResponse 0 (Text "Answer")
+
+
 blankAuthor : Int -> Author
 blankAuthor id =
-    Author "" "" False [ blankAffiliation 0 ] 1 id
+    Author (List.repeat 3 defaultAuthorFieldResponse) [ blankAffiliation 0 ] 1 id
 
 
 blankAffiliation : Int -> Affiliation

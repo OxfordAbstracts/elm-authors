@@ -38,26 +38,19 @@ update msg model =
                 , checkAuthorsComplete encodedAuthors
                 )
 
-            UpdateFirstName id newName ->
+            UpdateAuthorFieldString authorId fieldId input ->
                 let
-                    updateFirstName author =
-                        { author | firstName = newName }
+                    change field =
+                        { field | value = input }
                 in
-                    updateAuthor model id updateFirstName
+                    updateAuthorField model authorId fieldId change
 
-            UpdateLastName id newName ->
+            UpdateAuthorField authorId inputId ->
                 let
-                    updateLastName author =
-                        { author | lastName = newName }
+                    change field =
+                        { field | value = not field.value }
                 in
-                    updateAuthor model id updateLastName
-
-            TogglePresenting id ->
-                let
-                    togglePresenting author =
-                        { author | presenting = not author.presenting }
-                in
-                    updateAuthor model id togglePresenting
+                    updateAuthorField model authorId fieldId change
 
             AddAffiliation id ->
                 let
@@ -188,6 +181,17 @@ updateAffiliation model authorId affiliationId change =
             }
     in
         updateAuthor model authorId updateAffiliation
+
+
+updateAuthorField : Model -> Int -> Int -> (AuthorField -> AuthorField) -> ( Model, Cmd Msg )
+updateAuthorField model authorId authorFieldId change =
+    let
+        updateAuthorField author =
+            { author
+                | fields = (updateIfHasId author.fields authorFieldId change)
+            }
+    in
+        updateAuthor model authorId updateAuthorField
 
 
 getAuthorUpdate model id change =

@@ -63,15 +63,17 @@ renderAuthor affiliationLimit ( author, index ) =
         div [ class "author form__question-sub-section" ]
             [ div [ class "form__label" ] [ text ("Author " ++ toString index) ]
             , div [ class "form__question-sub-section--inline" ]
+                --for each of the authorFields we want to add a div like this
                 [ div [ class "inline-element" ]
                     [ label [ class "form__label" ] [ text "First Name" ]
                     , input
-                        [ class "form__input first-name"
+                        [ class "form__input"
                         , onInput (UpdateFirstName author.id)
                         , value author.firstName
                         ]
                         []
                     ]
+                  ------------------
                 , div [ class "inline-element" ]
                     [ label [ class "form__label" ] [ text "Last Name" ]
                     , input

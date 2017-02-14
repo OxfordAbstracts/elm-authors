@@ -4,9 +4,8 @@ module MainMessages exposing (..)
 type Msg
     = AddAuthor
     | DeleteAuthor Int
-    | UpdateFirstName Int String
-    | UpdateLastName Int String
-    | TogglePresenting Int
+    | UpdateAuthorFieldString Int Int String
+    | UpdateAuthorField Int Int
     | AddAffiliation Int
     | UpdateInstitution Int Int String
     | UpdateCountry Int Int String

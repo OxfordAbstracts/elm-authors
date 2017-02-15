@@ -85,24 +85,32 @@ renderFieldResponses authorFields authorId authorFieldResponse =
         debug4 =
             Debug.log "authorField" authorField
 
-        inputType =
+        inputHtml =
             if authorField.inputType == StringType then
-                "text"
-            else if authorField.inputType == BoolType then
-                "checkbox"
-            else
-                "text"
+                div [ class "inline-element" ]
+                            [ label [ class "form__label" ] [ text authorField.name ]
+                            , input
+                                [ type_ "text"
+                                , class "form__input last-name"
+                                  --  , onInput (UpdateAuthorFieldString authorId authorFieldResponse.id)
+                                , value authorFieldResponse.value
+                                ]
+                                []
+                            ]
+            else -- checkbox
+                div [ class "inline-element" ]
+                            [ label [ class "form__label" ] [ text authorField.name ]
+                            , input
+                                [ type_ "checkbox"
+                                , class "form__input last-name", checked (authorFieldResponse.value == "true")
+                                  --  , onInput (UpdateAuthorFieldString authorId authorFieldResponse.id)
+
+                                ]
+                                []
+                            ]
+
     in
-        div [ class "inline-element" ]
-            [ label [ class "form__label" ] [ text authorField.name ]
-            , input
-                [ type_ inputType
-                , class "form__input last-name"
-                  --  , onInput (UpdateAuthorFieldString authorId authorFieldResponse.id)
-                , value authorFieldResponse.value
-                ]
-                []
-            ]
+        inputHtml
 
 
 renderAffiliations : List Affiliation -> Int -> Html Msg

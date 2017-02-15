@@ -23,7 +23,7 @@ type alias Flags =
 initialModel : Model
 initialModel =
     { authorMaxId = 0
-    , authors = [ blankAuthor 0 ]
+    , authors = [ blankAuthor 0 [0 , 1 , 2] ]
     , focusedAuthorId = 0
     , focusedAffiliationId = 0
     , lastAffiliationKey = -1
@@ -75,7 +75,7 @@ defaultAuthorField0 =
 
 defaultAuthorField1 : AuthorField
 defaultAuthorField1 =
-    AuthorField 0 "First Name" StringType
+    AuthorField 0 "First Name" BoolType
 
 
 defaultAuthorField2 : AuthorField
@@ -85,27 +85,37 @@ defaultAuthorField2 =
 
 defaultAuthorField3 : AuthorField
 defaultAuthorField3 =
-    AuthorField 2 "Email" StringType
+    AuthorField 2 "Presenting" BoolType
 
 
 defaultAuthorFieldResponse1 : AuthorFieldResponse
 defaultAuthorFieldResponse1 =
-    AuthorFieldResponse 0 0 "Answer1"
+    AuthorFieldResponse 0 2 ""
 
+--could give blankAuthor a list of the field (question) ids
+-- then we could make the author field responses out of those
 
-defaultAuthorFieldResponse2 : AuthorFieldResponse
-defaultAuthorFieldResponse2 =
-    AuthorFieldResponse 1 1 "Answer2"
+blankAuthor : Int -> List Int -> Author
+blankAuthor id authorFieldIds =
+    let
 
+        authorFieldIdIndexTuples =
+            authorFieldIds
+                |> List.length
+                |> List.range 1
+                |> List.map2 (,) authorFieldIds
 
-defaultAuthorFieldResponse3 : AuthorFieldResponse
-defaultAuthorFieldResponse3 =
-    AuthorFieldResponse 2 2 "Answer3"
+        debug =
+            Debug.log "authorFieldIdIndexTuples" authorFieldIdIndexTuples
 
+        blankAuthorFieldResponses =
+            List.map blankAuthorFieldResponse authorFieldIdIndexTuples
+    in
+        Author blankAuthorFieldResponses [ blankAffiliation 0 ] 1 id
 
-blankAuthor : Int -> Author
-blankAuthor id =
-    Author [ defaultAuthorFieldResponse1, defaultAuthorFieldResponse2, defaultAuthorFieldResponse3 ] [ blankAffiliation 0 ] 1 id
+blankAuthorFieldResponse : (Int, Int) -> AuthorFieldResponse
+blankAuthorFieldResponse (authorFieldId, index) =
+    AuthorFieldResponse index authorFieldId ""
 
 
 blankAffiliation : Int -> Affiliation

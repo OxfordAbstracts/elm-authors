@@ -19,7 +19,7 @@ update msg model =
             AddAuthor ->
                 ( { model
                     | authorMaxId = model.authorMaxId + 1
-                    , authors = model.authors ++ [ blankAuthor (model.authorMaxId + 1) ]
+                    , authors = model.authors ++ [ blankAuthor (model.authorMaxId + 1) (List.range 0 ((List.length model.authorFields)-1)) ]
                   }
                 , checkAuthorsComplete encodedAuthors
                 )

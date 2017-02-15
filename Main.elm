@@ -20,7 +20,7 @@ init flags =
             Decoders.authorFields flags.authorFields
 
         authors =
-            Decoders.authors flags.authorsList authorFields
+            Decoders.authors flags.authorsList
 
         affiliationLimit =
             flags.affiliationLimit

@@ -28,7 +28,7 @@ affiliationDecoder =
         |> required "id" int
 
 
-authors authorsList authorFields =
+authors authorsList =
     decodeString authorsDecoder authorsList
         |> Result.withDefault [ blankAuthor 0 ]
 
@@ -62,5 +62,4 @@ fieldTypeHelper inputType =
 authorFields : String -> List AuthorField
 authorFields authorFields =
     decodeString (list authorFieldDecoder) authorFields
-        |> Debug.log "result"
-        |> Result.withDefault [ defaultAuthorFeild ]
+        |> Result.withDefault [ defaultAuthorField1 ]

@@ -16,12 +16,9 @@ view model =
     let
         authors =
             Encoders.authors (model.authors)
-
-        affiliationLimit =
-            model.affiliationLimit
     in
         div []
-            [ renderAuthors model.authors model.class model.authorFields affiliationLimit
+            [ renderAuthors model.authors model.class model.authorFields model.affiliationLimit
             , input [ class "hidden", id "authorsArray", name "authorsArray", value authors ] [ text authors ]
             , div [] (renderDataLists (getBlurredAuthorAffiliations model))
             ]
@@ -71,7 +68,7 @@ renderAuthor affiliationLimit authorFields ( author, index ) =
                     [ onClick (DeleteAuthor author.id) ]
                     [ text "Remove Author" ]
                 ]
-            , div [ class "affiliates-dropdowns" ]
+            , div [ class "" ]
                 [ (renderAffiliations author.affiliations author.id) ]
             , addAffiliationButton
             ]
@@ -83,13 +80,25 @@ renderFieldResponses authorFields authorId authorFieldResponse =
             authorFields
                 |> List.filter (\a -> a.id == authorFieldResponse.authorFieldId)
                 |> List.head
-                |> Maybe.withDefault defaultAuthorFeild
+                |> Maybe.withDefault defaultAuthorField0
+
+        debug4 =
+            Debug.log "authorField" authorField
+
+        inputType =
+            if authorField.inputType == StringType then
+                "text"
+            else if authorField.inputType == BoolType then
+                "checkbox"
+            else
+                "text"
     in
         div [ class "inline-element" ]
             [ label [ class "form__label" ] [ text authorField.name ]
             , input
-                [ class "form__input last-name"
-                , onInput (UpdateAuthorFieldString authorId authorFieldResponse.id)
+                [ type_ inputType
+                , class "form__input last-name"
+                  --  , onInput (UpdateAuthorFieldString authorId authorFieldResponse.id)
                 , value authorFieldResponse.value
                 ]
                 []

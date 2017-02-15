@@ -11,39 +11,126 @@
     <div id="elm-authors"></div>
 
     <script>
-
         var authorFields =
 
-        JSON.stringify([
-          { name : "First Name edit", inputType : "string"}
-          , { name : "Last Name", inputType : "string"}
-          , { name : "Presenting", inputType : "bool"}
-          , { name : "new edit", inputType : "string"}
-        ])
+            JSON.stringify([{
+                id: 0,
+                name: "FLAG First Name edit",
+                inputType: "string"
+            }, {
+                id: 1,
+                name: "FLAG Last Name",
+                inputType: "string"
+            }, {
+                id: 2,
+                name: "FLAG Presenting",
+                inputType: "bool"
+            }, {
+                id: 3,
+                name: "FLAG new edit",
+                inputType: "string"
+            }])
 
-        // {
-	      //    "field1input": "First Name edit",
-	      //    "field1type": "input",
-	      //    "field2input": "Last Name",
-	      //    "field2type": "input",
-	      //    "field3input": "Presenting",
-	      //    "field3type": "checkbox",
-	      //    "field4input": "new edit",
-	      //    "field4type": "input"
-        // }
 
         var node = document.getElementById('elm-authors');
-        var authorsArray = JSON.stringify([]);
+        var authorsArray = JSON.stringify([{
+                id: 1,
+                fields: [{
+                        id: 0,
+                        authorFieldId: 0,
+                        value: "FLAG hello"
+                    },
+                    {
+                        id: 1,
+                        authorFieldId: 1,
+                        value: "FLAG hello2"
+                    },
+                    {
+                        id: 2,
+                        authorFieldId: 2,
+                        value: "FLAG hello3"
+                    },
+                    {
+                        id: 3,
+                        authorFieldId: 3,
+                        value: "FLAG hello4"
+                    }
+                ],
+                affiliations: [{
+                    id: 1,
+                    institution: "Test inst",
+                    city: "city 1",
+                    country: "Albania"
+                }]
+            }, {
+                id: 2,
+                fields: [{
+                        id: 0,
+                        authorFieldId: 0,
+                        value: "hello"
+                    },
+                    {
+                        id: 1,
+                        authorFieldId: 1,
+                        value: "hello2"
+                    },
+                    {
+                        id: 2,
+                        authorFieldId: 2,
+                        value: "hello3"
+                    },
+                    {
+                        id: 3,
+                        authorFieldId: 3,
+                        value: ""
+                    }
+                ],
+                affiliations: [{
+                    id: 1,
+                    institution: "Test inst",
+                    city: "city 1",
+                    country: "Albania"
+                }]
+            }, {
+                id: 2,
+                fields: [{
+                        id: 0,
+                        authorFieldId: 0,
+                        value: "hello"
+                    },
+                    {
+                        id: 1,
+                        authorFieldId: 1,
+                        value: "hello2"
+                    },
+                    {
+                        id: 2,
+                        authorFieldId: 2,
+                        value: "hello3"
+                    },
+                    {
+                        id: 3,
+                        authorFieldId: 3,
+                        value: ""
+                    }
+                ],
+                affiliations: [{
+                    id: 1,
+                    institution: "Test inst",
+                    city: "city 1",
+                    country: "Albania"
+                }]
+            }]);
+
         var app = Elm.Main.embed(node, {
             authorsList: authorsArray,
             affiliationLimit: 3,
             authorFields: authorFields
         });
 
-        var authorsPort = function (authors) {
-          jsonAuthors = JSON.stringify(authors)
-          app.ports.authors.send(jsonAuthors)
+        var authorsPort = function(authors) {
+            jsonAuthors = JSON.stringify(authors)
+            app.ports.authors.send(jsonAuthors)
         }
-
     </script>
 </body>

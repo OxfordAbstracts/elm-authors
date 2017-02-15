@@ -29,7 +29,7 @@ initialModel =
     , lastAffiliationKey = -1
     , affiliationLimit = 5
     , class = "complete"
-    , authorFields = [ defaultAuthorFeild ]
+    , authorFields = [ defaultAuthorField1, defaultAuthorField2, defaultAuthorField3 ]
     }
 
 
@@ -68,19 +68,44 @@ type alias Affiliation =
     }
 
 
-defaultAuthorFeild : AuthorField
-defaultAuthorFeild =
-    AuthorField 0 "default field" BoolType
+defaultAuthorField0 : AuthorField
+defaultAuthorField0 =
+    AuthorField 0 "Default" StringType
 
 
-defaultAuthorFieldResponse : AuthorFieldResponse
-defaultAuthorFieldResponse =
-    AuthorFieldResponse 0 0 "Answer"
+defaultAuthorField1 : AuthorField
+defaultAuthorField1 =
+    AuthorField 0 "First Name" StringType
+
+
+defaultAuthorField2 : AuthorField
+defaultAuthorField2 =
+    AuthorField 1 "Last Name" StringType
+
+
+defaultAuthorField3 : AuthorField
+defaultAuthorField3 =
+    AuthorField 2 "Email" StringType
+
+
+defaultAuthorFieldResponse1 : AuthorFieldResponse
+defaultAuthorFieldResponse1 =
+    AuthorFieldResponse 0 0 "Answer1"
+
+
+defaultAuthorFieldResponse2 : AuthorFieldResponse
+defaultAuthorFieldResponse2 =
+    AuthorFieldResponse 1 1 "Answer2"
+
+
+defaultAuthorFieldResponse3 : AuthorFieldResponse
+defaultAuthorFieldResponse3 =
+    AuthorFieldResponse 2 2 "Answer3"
 
 
 blankAuthor : Int -> Author
 blankAuthor id =
-    Author (List.repeat 3 defaultAuthorFieldResponse) [ blankAffiliation 0 ] 1 id
+    Author [ defaultAuthorFieldResponse1, defaultAuthorFieldResponse2, defaultAuthorFieldResponse3 ] [ blankAffiliation 0 ] 1 id
 
 
 blankAffiliation : Int -> Affiliation

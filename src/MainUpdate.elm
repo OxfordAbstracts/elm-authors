@@ -48,19 +48,14 @@ update msg model =
                 in
                     updateAuthorFieldResponse model authorId fieldId change
 
-            UpdateAuthorFieldBool authorId fieldId input ->
+            UpdateAuthorFieldBool authorId fieldId ->
                 let
-                    -- debug =
-                    --     Debug.log "oldValue" oldValue
-                    -- newValue =
-                    --     if oldValue == "true" then
-                    --         "false"
-                    --     else
-                    --         "true"
-                    -- change field =
-                    --     { field | value = newValue }
-                    debug2 =
-                        Debug.log "authorId" authorId
+
+                    change field =
+                        if field.value == "true" then
+                            { field | value = "false" }
+                        else
+                            { field | value = "true" }
                 in
                     updateAuthorFieldResponse model authorId fieldId change
 

@@ -102,7 +102,7 @@ renderFieldResponses authorFields authorId authorFieldResponse =
                         [ type_ "checkbox"
                         , class "form__input last-name"
                         , checked (authorFieldResponse.value == "true")
-                        , onInput (UpdateAuthorFieldBool authorId authorFieldResponse.id)
+                        , onClick (UpdateAuthorFieldBool authorId authorFieldResponse.id)
                         ]
                         []
                     ]

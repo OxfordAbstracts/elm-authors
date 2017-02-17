@@ -19,7 +19,7 @@ update msg model =
             AddAuthor ->
                 ( { model
                     | authorMaxId = model.authorMaxId + 1
-                    , authors = model.authors ++ [ blankAuthor (model.authorMaxId + 1) (List.range 0 ((List.length model.authorFields)-1)) ]
+                    , authors = model.authors ++ [ blankAuthor (model.authorMaxId + 1) (List.range 0 ((List.length model.authorFields) - 1)) ]
                   }
                 , checkAuthorsComplete encodedAuthors
                 )
@@ -42,6 +42,25 @@ update msg model =
                 let
                     change field =
                         { field | value = input }
+
+                    debug =
+                        Debug.log "input" input
+                in
+                    updateAuthorFieldResponse model authorId fieldId change
+
+            UpdateAuthorFieldBool authorId fieldId input ->
+                let
+                    -- debug =
+                    --     Debug.log "oldValue" oldValue
+                    -- newValue =
+                    --     if oldValue == "true" then
+                    --         "false"
+                    --     else
+                    --         "true"
+                    -- change field =
+                    --     { field | value = newValue }
+                    debug2 =
+                        Debug.log "authorId" authorId
                 in
                     updateAuthorFieldResponse model authorId fieldId change
 

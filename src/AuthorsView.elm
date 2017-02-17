@@ -82,33 +82,30 @@ renderFieldResponses authorFields authorId authorFieldResponse =
                 |> List.head
                 |> Maybe.withDefault defaultAuthorField0
 
-        debug4 =
-            Debug.log "authorField" authorField
-
         inputHtml =
             if authorField.inputType == StringType then
                 div [ class "inline-element" ]
-                            [ label [ class "form__label" ] [ text authorField.name ]
-                            , input
-                                [ type_ "text"
-                                , class "form__input last-name"
-                                  --  , onInput (UpdateAuthorFieldString authorId authorFieldResponse.id)
-                                , value authorFieldResponse.value
-                                ]
-                                []
-                            ]
-            else -- checkbox
+                    [ label [ class "form__label" ] [ text authorField.name ]
+                    , input
+                        [ type_ "text"
+                        , class "form__input last-name"
+                        , onInput (UpdateAuthorFieldString authorId authorFieldResponse.id)
+                        , value authorFieldResponse.value
+                        ]
+                        []
+                    ]
+            else
+                -- checkbox
                 div [ class "inline-element" ]
-                            [ label [ class "form__label" ] [ text authorField.name ]
-                            , input
-                                [ type_ "checkbox"
-                                , class "form__input last-name", checked (authorFieldResponse.value == "true")
-                                  --  , onInput (UpdateAuthorFieldString authorId authorFieldResponse.id)
-
-                                ]
-                                []
-                            ]
-
+                    [ label [ class "form__label" ] [ text authorField.name ]
+                    , input
+                        [ type_ "checkbox"
+                        , class "form__input last-name"
+                        , checked (authorFieldResponse.value == "true")
+                        , onInput (UpdateAuthorFieldBool authorId authorFieldResponse.id)
+                        ]
+                        []
+                    ]
     in
         inputHtml
 

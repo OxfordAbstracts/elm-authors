@@ -1,16 +1,12 @@
 module Main exposing (..)
 
-import Countries
 import Html exposing (..)
-import Html.Attributes exposing (class, value, id, list, name, checked, type_)
-import Html.Events exposing (onClick, onInput, onFocus)
-import Utils exposing (dropDuplicates, onKeyDown)
 import MainModel exposing (..)
 import MainUpdate exposing (..)
 import MainMessages exposing (..)
 import AuthorsView exposing (view)
-import Encode exposing (..)
-import Decode exposing (..)
+import Decoders exposing (..)
+import Ports exposing (..)
 
 
 -- MODEL
@@ -20,7 +16,10 @@ init : Flags -> ( Model, Cmd Msg )
 init flags =
     let
         authors =
-            Decode.authors flags.authorsList
+            Decoders.authors flags.authorsList
+
+        affiliationLimit =
+            flags.affiliationLimit
 
         model =
             { initialModel
@@ -28,6 +27,7 @@ init flags =
                     convertAuthorsListForModel authors
                 , authorMaxId =
                     getMaxAuthorId authors
+                , affiliationLimit = affiliationLimit
             }
     in
         ( model, Cmd.none )
@@ -56,7 +56,10 @@ view model =
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
-    Sub.none
+    Sub.batch
+        [ Ports.authorsClass NewClass
+        , Ports.authors SetAuthors
+        ]
 
 
 

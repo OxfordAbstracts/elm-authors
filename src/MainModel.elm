@@ -7,11 +7,15 @@ type alias Model =
     , focusedAuthorId : Int
     , focusedAffiliationId : Int
     , lastAffiliationKey : Int
+    , affiliationLimit : Int
+    , class : String
     }
 
 
 type alias Flags =
-    { authorsList : String }
+    { authorsList : String
+    , affiliationLimit : Int
+    }
 
 
 initialModel : Model
@@ -21,6 +25,8 @@ initialModel =
     , focusedAuthorId = 0
     , focusedAffiliationId = 0
     , lastAffiliationKey = -1
+    , affiliationLimit = 5
+    , class = "complete"
     }
 
 

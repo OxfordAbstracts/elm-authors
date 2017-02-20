@@ -1,4 +1,4 @@
-module Decode exposing (..)
+module Decoders exposing (..)
 
 import MainModel exposing (..)
 import Json.Decode as JsonDecode

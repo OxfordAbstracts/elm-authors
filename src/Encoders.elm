@@ -1,4 +1,4 @@
-module Encode exposing (..)
+module Encoders exposing (..)
 
 import Json.Encode as JsonEncode
 

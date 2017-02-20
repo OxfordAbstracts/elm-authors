@@ -1,20 +1,28 @@
 <!doctype html>
+
 <head>
 
-  <script src="./elm.js" ></script>
-  <link rel="stylesheet" href="./app.css" ></link>
+    <script src="./elm.js"></script>
+    <link rel="stylesheet" href="./app.css"></link>
 </head>
+
 <body>
-  <div> ELM AUTHORS</div>
-  <div id="elm-authors"></div>
+    <div> ELM AUTHORS</div>
+    <div id="elm-authors"></div>
 
-  <script>
-    var oxabsState = {authors: []}
+    <script>
+      
+        var node = document.getElementById('elm-authors');
+        var authorsArray = JSON.stringify([]);
+        var app = Elm.Main.embed(node, {
+            authorsList: authorsArray,
+            affiliationLimit: 3
+        });
 
-    var node = document.getElementById('elm-authors');
-    var authorsArray = oxabsState.authors ? JSON.stringify(oxabsState.authors) : JSON.stringify([]);
-    var app = Elm.Main.embed(node, {
-        authorsList: authorsArray
-    });
-  </script>
+        var authorsPort = function (authors) {
+          jsonAuthors = JSON.stringify(authors)
+          app.ports.authors.send(jsonAuthors)
+        }
+
+    </script>
 </body>

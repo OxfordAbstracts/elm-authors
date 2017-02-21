@@ -82,14 +82,22 @@ renderFieldResponses authorFields authorId authorFieldResponse =
                 |> List.head
                 |> Maybe.withDefault defaultAuthorField0
 
+        labelX =
+            if authorField.description /= "" then
+                label
+                    [ class "form__label tooltip tooltip--author" ]
+                    [ text authorField.title
+                    , span [ class "tooltip__box" ] [ text authorField.description ]
+                    ]
+            else
+                label
+                    [ class "form__label" ]
+                    [ text authorField.title ]
+
         inputHtml =
             if authorField.inputType == StringType then
                 div [ class "inline-element" ]
-                    [ label
-                        [ class "form__label tooltip tooltip--author" ]
-                        [ text authorField.title
-                        , span [ class "tooltip__box" ] [ text authorField.description ]
-                        ]
+                    [ labelX
                     , input
                         [ type_ "text"
                         , class "form__input"
@@ -101,11 +109,7 @@ renderFieldResponses authorFields authorId authorFieldResponse =
             else
                 -- checkbox
                 div [ class "inline-element" ]
-                    [ label
-                        [ class "form__label tooltip tooltip--author" ]
-                        [ text authorField.title
-                        , span [ class "tooltip__box" ] [ text authorField.description ]
-                        ]
+                    [ labelX
                     , input
                         [ type_ "checkbox"
                         , class "form__input"

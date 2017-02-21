@@ -62,7 +62,7 @@ dummyFieldResponses =
 dummyAuthorField1 : AuthorField
 dummyAuthorField1 =
     { id = 0
-    , name = "First Name"
+    , title = "First Name"
     , inputType = StringType
     }
 
@@ -70,7 +70,7 @@ dummyAuthorField1 =
 dummyAuthorField2 : AuthorField
 dummyAuthorField2 =
     { id = 1
-    , name = "Last Initial"
+    , title = "Last Initial"
     , inputType = StringType
     }
 
@@ -78,7 +78,7 @@ dummyAuthorField2 =
 dummyAuthorField3 : AuthorField
 dummyAuthorField3 =
     { id = 2
-    , name = "Presenting Paper"
+    , title = "Presenting Paper"
     , inputType = BoolType
     }
 

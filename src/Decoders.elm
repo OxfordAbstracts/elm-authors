@@ -30,14 +30,15 @@ affiliationDecoder =
 
 authors authorsList =
     decodeString authorsDecoder authorsList
-        |> Result.withDefault [ blankAuthor 0 [0,1,2]]
+        |> Result.withDefault [ blankAuthor 0 [ 0, 1, 2 ] ]
 
 
 authorFieldDecoder : Decoder AuthorField
 authorFieldDecoder =
     decode AuthorField
         |> required "id" int
-        |> required "name" string
+        |> required "title" string
+        |> required "description" string
         |> required "inputType" (map fieldTypeHelper string)
 
 

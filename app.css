@@ -2639,8 +2639,6 @@ font-family: 'Roboto', Helvetica, Ariel, sans-serif;
 
 .tooltip {
     outline: none;
-    font-size: 0.875rem;
-    color: #ffffff;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
@@ -2650,9 +2648,16 @@ font-family: 'Roboto', Helvetica, Ariel, sans-serif;
     text-decoration: none;
 }
 
+.tooltip--table {
+  font-size: 0.875rem;
+  color: #ffffff;
+}
+
 .tooltip:hover {
     color: #ffffff;
 }
+
+
 
 .tooltip__box {
     z-index: 10;

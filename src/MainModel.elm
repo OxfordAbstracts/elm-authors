@@ -40,7 +40,8 @@ type FieldType
 
 type alias AuthorField =
     { id : Int
-    , name : String
+    , title : String
+    , description : String
     , inputType : FieldType
     }
 
@@ -70,22 +71,22 @@ type alias Affiliation =
 
 defaultAuthorField0 : AuthorField
 defaultAuthorField0 =
-    AuthorField 0 "Default" StringType
+    AuthorField 0 "Default" "This is the default description" StringType
 
 
 defaultAuthorField1 : AuthorField
 defaultAuthorField1 =
-    AuthorField 0 "First Name" BoolType
+    AuthorField 0 "First Name" "This is the first name description" BoolType
 
 
 defaultAuthorField2 : AuthorField
 defaultAuthorField2 =
-    AuthorField 1 "Last Name" StringType
+    AuthorField 1 "Last Name" "This is the last name description" StringType
 
 
 defaultAuthorField3 : AuthorField
 defaultAuthorField3 =
-    AuthorField 2 "Presenting" BoolType
+    AuthorField 2 "Presenting" "This is the Presenting description" BoolType
 
 
 defaultAuthorFieldResponse1 : AuthorFieldResponse

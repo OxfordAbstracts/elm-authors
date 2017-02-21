@@ -85,10 +85,14 @@ renderFieldResponses authorFields authorId authorFieldResponse =
         inputHtml =
             if authorField.inputType == StringType then
                 div [ class "inline-element" ]
-                    [ label [ class "form__label" ] [ text authorField.name ]
+                    [ label
+                        [ class "form__label tooltip tooltip--author" ]
+                        [ text authorField.title
+                        , span [ class "tooltip__box" ] [ text authorField.description ]
+                        ]
                     , input
                         [ type_ "text"
-                        , class "form__input last-name"
+                        , class "form__input"
                         , onInput (UpdateAuthorFieldString authorId authorFieldResponse.id)
                         , value authorFieldResponse.value
                         ]
@@ -97,10 +101,14 @@ renderFieldResponses authorFields authorId authorFieldResponse =
             else
                 -- checkbox
                 div [ class "inline-element" ]
-                    [ label [ class "form__label" ] [ text authorField.name ]
+                    [ label
+                        [ class "form__label tooltip tooltip--author" ]
+                        [ text authorField.title
+                        , span [ class "tooltip__box" ] [ text authorField.description ]
+                        ]
                     , input
                         [ type_ "checkbox"
-                        , class "form__input last-name"
+                        , class "form__input"
                         , checked (authorFieldResponse.value == "true")
                         , onClick (UpdateAuthorFieldBool authorId authorFieldResponse.id)
                         ]

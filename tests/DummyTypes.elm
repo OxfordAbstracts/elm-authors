@@ -1,8 +1,6 @@
 module DummyTypes exposing (..)
 
 import MainModel exposing (..)
-import MainUpdate
-import List exposing (..)
 
 
 dummyIniatialModel : Model
@@ -63,6 +61,7 @@ dummyAuthorField1 : AuthorField
 dummyAuthorField1 =
     { id = 0
     , title = "First Name"
+    , description = "Please put your first name here"
     , inputType = StringType
     }
 
@@ -71,6 +70,7 @@ dummyAuthorField2 : AuthorField
 dummyAuthorField2 =
     { id = 1
     , title = "Last Initial"
+    , description = "Please put your last initial here"
     , inputType = StringType
     }
 
@@ -79,6 +79,7 @@ dummyAuthorField3 : AuthorField
 dummyAuthorField3 =
     { id = 2
     , title = "Presenting Paper"
+    , description = "are you presenting"
     , inputType = BoolType
     }
 

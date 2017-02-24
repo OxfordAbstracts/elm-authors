@@ -16,19 +16,16 @@ view model =
     let
         authors =
             Encoders.authors (model.authors)
-
-        affiliationLimit =
-            model.affiliationLimit
     in
         div []
-            [ renderAuthors model.authors model.class affiliationLimit
+            [ renderAuthors model.authors model.class model.authorFields model.affiliationLimit
             , input [ class "hidden", id "authorsArray", name "authorsArray", value authors ] [ text authors ]
             , div [] (renderDataLists (getBlurredAuthorAffiliations model))
             ]
 
 
-renderAuthors : List Author -> String -> Int -> Html Msg
-renderAuthors authors authorsClass affiliationLimit =
+renderAuthors : List Author -> String -> List AuthorField -> Int -> Html Msg
+renderAuthors authors authorsClass authorField affiliationLimit =
     let
         authorIndexTuples =
             authors
@@ -37,7 +34,7 @@ renderAuthors authors authorsClass affiliationLimit =
                 |> List.map2 (,) authors
     in
         div [ class authorsClass ]
-            [ div [ class "" ] (List.map (renderAuthor affiliationLimit) authorIndexTuples)
+            [ div [ class "" ] (List.map (renderAuthor affiliationLimit authorField) authorIndexTuples)
             , div [ class "button button--tertiary", onClick AddAuthor ] [ text "Add Author" ]
             ]
 
@@ -47,8 +44,8 @@ authorDataClass =
     "ma2"
 
 
-renderAuthor : Int -> ( Author, Int ) -> Html Msg
-renderAuthor affiliationLimit ( author, index ) =
+renderAuthor : Int -> List AuthorField -> ( Author, Int ) -> Html Msg
+renderAuthor affiliationLimit authorFields ( author, index ) =
     let
         addAffiliationButton =
             if affiliationLimit > (List.length author.affiliations) then
@@ -63,50 +60,66 @@ renderAuthor affiliationLimit ( author, index ) =
         div [ class "author form__question-sub-section" ]
             [ div [ class "form__label" ] [ text ("Author " ++ toString index) ]
             , div [ class "form__question-sub-section--inline" ]
-                [ div [ class "inline-element" ]
-                    [ label [ class "form__label" ] [ text "First Name" ]
-                    , input
-                        [ class "form__input first-name"
-                        , onInput (UpdateFirstName author.id)
-                        , value author.firstName
-                        ]
-                        []
-                    ]
-                , div [ class "inline-element" ]
-                    [ label [ class "form__label" ] [ text "Last Name" ]
-                    , input
-                        [ class "form__input last-name"
-                        , onInput (UpdateLastName author.id)
-                        , value author.lastName
-                        ]
-                        []
-                    ]
-                , div [ class "inline-element" ]
-                    [ label
-                        [ class "form__label"
-                        , for ("isPresentingAuthor-" ++ toString index)
-                        ]
-                        [ text "Presenting Author"
-                        ]
-                    , input
-                        [ class "form__checkbox is-presenting question-checkbox"
-                        , id ("isPresentingAuthor-" ++ toString index)
-                        , onClick (TogglePresenting author.id)
-                        , type_ "checkbox"
-                        , checked (author.presenting)
-                        ]
-                        []
-                    ]
+                --for each of the authorFields we want to add a div like this
+                [ div [ class "form__question-sub-section--inline" ] (List.map (renderFieldResponses authorFields author.id) author.fields)
                 ]
             , span [ class "remove button button--secondary" ]
                 [ div
                     [ onClick (DeleteAuthor author.id) ]
                     [ text "Remove Author" ]
                 ]
-            , div [ class "affiliates-dropdowns" ]
+            , div [ class "" ]
                 [ (renderAffiliations author.affiliations author.id) ]
             , addAffiliationButton
             ]
+
+
+renderFieldResponses authorFields authorId authorFieldResponse =
+    let
+        authorField =
+            authorFields
+                |> List.filter (\a -> a.id == authorFieldResponse.authorFieldId)
+                |> List.head
+                |> Maybe.withDefault defaultAuthorField0
+
+        labelX =
+            if authorField.description /= "" then
+                label
+                    [ class "form__label tooltip tooltip--author" ]
+                    [ text authorField.title
+                    , span [ class "tooltip__box" ] [ text authorField.description ]
+                    ]
+            else
+                label
+                    [ class "form__label" ]
+                    [ text authorField.title ]
+
+        inputHtml =
+            if authorField.inputType == StringType then
+                div [ class "inline-element" ]
+                    [ labelX
+                    , input
+                        [ type_ "text"
+                        , class "form__input"
+                        , onInput (UpdateAuthorFieldString authorId authorFieldResponse.id)
+                        , value authorFieldResponse.value
+                        ]
+                        []
+                    ]
+            else
+                -- checkbox
+                div [ class "inline-element" ]
+                    [ labelX
+                    , input
+                        [ type_ "checkbox"
+                        , class "form__input"
+                        , checked (authorFieldResponse.value == "true")
+                        , onClick (UpdateAuthorFieldBool authorId authorFieldResponse.id)
+                        ]
+                        []
+                    ]
+    in
+        inputHtml
 
 
 renderAffiliations : List Affiliation -> Int -> Html Msg

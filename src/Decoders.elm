@@ -1,35 +1,66 @@
 module Decoders exposing (..)
 
 import MainModel exposing (..)
-import Json.Decode as JsonDecode
+import Json.Decode exposing (..)
 import Json.Decode.Pipeline exposing (required, decode, hardcoded)
 
 
-authorDecoder : JsonDecode.Decoder Author
+authorDecoder : Decoder Author
 authorDecoder =
     decode Author
-        |> required "firstName" JsonDecode.string
-        |> required "lastName" JsonDecode.string
-        |> required "isPresenting" JsonDecode.bool
-        |> required "affiliations" (JsonDecode.list affiliationDecoder)
+        |> required "fields" (list authorFieldResponseDecoder)
+        |> required "affiliations" (list affiliationDecoder)
         |> hardcoded 0
-        |> required "id" JsonDecode.int
+        |> required "id" int
 
 
-authorsDecoder : JsonDecode.Decoder (List Author)
+authorsDecoder : Decoder (List Author)
 authorsDecoder =
-    JsonDecode.list authorDecoder
+    list authorDecoder
 
 
-affiliationDecoder : JsonDecode.Decoder Affiliation
+affiliationDecoder : Decoder Affiliation
 affiliationDecoder =
     decode Affiliation
-        |> required "institution" JsonDecode.string
-        |> required "city" JsonDecode.string
-        |> required "country" JsonDecode.string
-        |> required "id" JsonDecode.int
+        |> required "institution" string
+        |> required "city" string
+        |> required "country" string
+        |> required "id" int
 
 
 authors authorsList =
-    JsonDecode.decodeString authorsDecoder authorsList
-        |> Result.withDefault [ blankAuthor 0 ]
+    decodeString authorsDecoder authorsList
+        |> Result.withDefault [ blankAuthor 0 [ 0, 1, 2 ] ]
+
+
+authorFieldDecoder : Decoder AuthorField
+authorFieldDecoder =
+    decode AuthorField
+        |> required "id" int
+        |> required "title" string
+        |> required "description" string
+        |> required "inputType" (map fieldTypeHelper string)
+
+
+authorFieldResponseDecoder : Decoder AuthorFieldResponse
+authorFieldResponseDecoder =
+    decode AuthorFieldResponse
+        |> required "id" int
+        |> required "authorFieldId" int
+        |> required "value" string
+
+
+fieldTypeHelper : String -> FieldType
+fieldTypeHelper inputType =
+    case inputType of
+        "bool" ->
+            BoolType
+
+        _ ->
+            StringType
+
+
+authorFields : String -> List AuthorField
+authorFields authorFields =
+    decodeString (list authorFieldDecoder) authorFields
+        |> Result.withDefault [ defaultAuthorField0 ]

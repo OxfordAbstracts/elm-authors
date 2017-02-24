@@ -19,7 +19,7 @@ update msg model =
             AddAuthor ->
                 ( { model
                     | authorMaxId = model.authorMaxId + 1
-                    , authors = model.authors ++ [ blankAuthor (model.authorMaxId + 1) ]
+                    , authors = model.authors ++ [ blankAuthor (model.authorMaxId + 1) (List.range 0 ((List.length model.authorFields) - 1)) ]
                   }
                 , checkAuthorsComplete encodedAuthors
                 )
@@ -38,26 +38,26 @@ update msg model =
                 , checkAuthorsComplete encodedAuthors
                 )
 
-            UpdateFirstName id newName ->
+            UpdateAuthorFieldString authorId fieldId input ->
                 let
-                    updateFirstName author =
-                        { author | firstName = newName }
-                in
-                    updateAuthor model id updateFirstName
+                    change field =
+                        { field | value = input }
 
-            UpdateLastName id newName ->
-                let
-                    updateLastName author =
-                        { author | lastName = newName }
+                    debug =
+                        Debug.log "input" input
                 in
-                    updateAuthor model id updateLastName
+                    updateAuthorFieldResponse model authorId fieldId change
 
-            TogglePresenting id ->
+            UpdateAuthorFieldBool authorId fieldId ->
                 let
-                    togglePresenting author =
-                        { author | presenting = not author.presenting }
+
+                    change field =
+                        if field.value == "true" then
+                            { field | value = "false" }
+                        else
+                            { field | value = "true" }
                 in
-                    updateAuthor model id togglePresenting
+                    updateAuthorFieldResponse model authorId fieldId change
 
             AddAffiliation id ->
                 let
@@ -188,6 +188,17 @@ updateAffiliation model authorId affiliationId change =
             }
     in
         updateAuthor model authorId updateAffiliation
+
+
+updateAuthorFieldResponse : Model -> Int -> Int -> (AuthorFieldResponse -> AuthorFieldResponse) -> ( Model, Cmd Msg )
+updateAuthorFieldResponse model authorId authorFieldId change =
+    let
+        updateAuthorFieldResponse author =
+            { author
+                | fields = (updateIfHasId author.fields authorFieldId change)
+            }
+    in
+        updateAuthor model authorId updateAuthorFieldResponse
 
 
 getAuthorUpdate model id change =

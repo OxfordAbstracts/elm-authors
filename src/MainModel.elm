@@ -76,7 +76,7 @@ defaultAuthorField0 =
 
 defaultAuthorField1 : AuthorField
 defaultAuthorField1 =
-    AuthorField 0 "First Name" "This is the first name description" BoolType
+    AuthorField 0 "First Name" "This is the first name description" StringType
 
 
 defaultAuthorField2 : AuthorField

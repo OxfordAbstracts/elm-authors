@@ -13,27 +13,7 @@
     <script>
         var authorFields =
 
-            JSON.stringify([{
-                id: 0,
-                title: "FLAG First Name edit",
-                description: "",
-                inputType: "string"
-            }, {
-                id: 1,
-                title: "FLAG Last Name",
-                description: "",
-                inputType: "string"
-            }, {
-                id: 2,
-                title: "FLAG Presenting",
-                description: "Is this author going to present as the conference",
-                inputType: "bool"
-            }, {
-                id: 3,
-                title: "FLAG Email",
-                description: "Enter the email for correspondence",
-                inputType: "string"
-            }])
+            JSON.stringify([""])
 
 
         var node = document.getElementById('elm-authors');
@@ -53,69 +33,6 @@
                         id: 2,
                         authorFieldId: 2,
                         value: "true"
-                    },
-                    {
-                        id: 3,
-                        authorFieldId: 3,
-                        value: "FLAG hello4"
-                    }
-                ],
-                affiliations: [{
-                    id: 1,
-                    institution: "Test inst",
-                    city: "city 1",
-                    country: "Albania"
-                }]
-            }, {
-                id: 2,
-                fields: [{
-                        id: 0,
-                        authorFieldId: 0,
-                        value: "hello"
-                    },
-                    {
-                        id: 1,
-                        authorFieldId: 1,
-                        value: "hello2"
-                    },
-                    {
-                        id: 2,
-                        authorFieldId: 2,
-                        value: "false"
-                    },
-                    {
-                        id: 3,
-                        authorFieldId: 3,
-                        value: ""
-                    }
-                ],
-                affiliations: [{
-                    id: 1,
-                    institution: "Test inst",
-                    city: "city 1",
-                    country: "Albania"
-                }]
-            }, {
-                id: 3,
-                fields: [{
-                        id: 0,
-                        authorFieldId: 0,
-                        value: "hello"
-                    },
-                    {
-                        id: 1,
-                        authorFieldId: 1,
-                        value: "blah"
-                    },
-                    {
-                        id: 2,
-                        authorFieldId: 2,
-                        value: "true"
-                    },
-                    {
-                        id: 3,
-                        authorFieldId: 3,
-                        value: ""
                     }
                 ],
                 affiliations: [{
@@ -133,6 +50,8 @@
         });
 
         var authorsPort = function(authors) {
+
+            console.log("authors:------>>>",authors)
             jsonAuthors = JSON.stringify(authors)
             app.ports.authors.send(jsonAuthors)
         }

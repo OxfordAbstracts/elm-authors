@@ -85,7 +85,7 @@ renderFieldResponses authorFields authorId authorFieldResponse =
         labelX =
             if authorField.description /= "" then
                 label
-                    [ class "form__label tooltip tooltip--author" ]
+                    [ class "form__label tooltip" ]
                     [ text authorField.title
                     , span [ class "tooltip__box" ] [ text authorField.description ]
                     ]

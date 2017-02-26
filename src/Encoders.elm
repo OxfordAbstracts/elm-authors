@@ -14,7 +14,8 @@ getAffilitionValue affiliation =
 
 getFieldValue field =
     JsonEncode.object
-        [ ( "authorFieldId", JsonEncode.int field.authorFieldId )
+        [ ( "id", JsonEncode.int field.id )
+        , ( "authorFieldId", JsonEncode.int field.authorFieldId )
         , ( "value", JsonEncode.string field.value )
         ]
 
@@ -33,4 +34,8 @@ getAuthorValue author =
 
 
 authors authors =
-    JsonEncode.encode 0 (getAuthorsValue authors)
+    let
+        debug =
+            Debug.log "authors" authors
+    in
+        JsonEncode.encode 0 (getAuthorsValue authors)

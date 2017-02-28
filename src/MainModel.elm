@@ -8,6 +8,7 @@ type alias Model =
     , focusedAffiliationId : Int
     , lastAffiliationKey : Int
     , affiliationLimit : Int
+    , authorLimit : Int
     , class : String
     , authorFields : List AuthorField
     }
@@ -16,6 +17,7 @@ type alias Model =
 type alias Flags =
     { authorsList : String
     , affiliationLimit : Int
+    , authorLimit : Int
     , authorFields : String
     }
 
@@ -28,6 +30,7 @@ initialModel =
     , focusedAffiliationId = 0
     , lastAffiliationKey = -1
     , affiliationLimit = 5
+    , authorLimit = 5
     , class = "complete"
     , authorFields = [ defaultAuthorField1, defaultAuthorField2, defaultAuthorField3 ]
     }

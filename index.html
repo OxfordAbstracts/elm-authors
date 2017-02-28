@@ -2,7 +2,7 @@
 
 <head>
 
-    <script src="./elm.js"></script>
+    <script src="./index.js"></script>
     <link rel="stylesheet" href="./app.css"></link>
 </head>
 
@@ -15,19 +15,18 @@
 
             JSON.stringify([""])
 
-
         var node = document.getElementById('elm-authors');
         var authorsArray = JSON.stringify([{
                 id: 1,
                 fields: [{
                         id: 0,
                         authorFieldId: 0,
-                        value: "FLAG hello"
+                        value: "FL"
                     },
                     {
                         id: 1,
                         authorFieldId: 1,
-                        value: "FLAG hello2"
+                        value: "FLAG hel"
                     },
                     {
                         id: 2,
@@ -46,12 +45,11 @@
         var app = Elm.Main.embed(node, {
             authorsList: authorsArray,
             affiliationLimit: 3,
+            authorLimit: 2,
             authorFields: authorFields
         });
 
         var authorsPort = function(authors) {
-
-            console.log("authors:------>>>",authors)
             jsonAuthors = JSON.stringify(authors)
             app.ports.authors.send(jsonAuthors)
         }

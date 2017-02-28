@@ -35,6 +35,7 @@ init flags =
                 , authorMaxId =
                     getMaxAuthorId authors
                 , affiliationLimit = affiliationLimit
+                , authorLimit = authorLimit
                 , authorFields = authorFields
             }
     in

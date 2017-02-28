@@ -1,8 +1,8 @@
 {
   "name": "elm-authors",
-  "version": "1.0.12",
+  "version": "1.0.14",
   "description": "To open compiled code open index.html",
-  "main": "elm.js",
+  "main": "index.js",
   "scripts": {
     "prepublish" : "npm run build",
     "test": "elm-test",

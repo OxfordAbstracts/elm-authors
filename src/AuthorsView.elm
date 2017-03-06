@@ -176,7 +176,7 @@ renderAffiliation model authorId ( affiliation, index ) =
                         []
                     ]
             else
-                div [] []
+                text ""
 
         cityDiv =
             if model.showCity then
@@ -197,7 +197,7 @@ renderAffiliation model authorId ( affiliation, index ) =
                         []
                     ]
             else
-                div [] []
+                text ""
 
         countryDiv =
             if model.showCountry then
@@ -214,7 +214,7 @@ renderAffiliation model authorId ( affiliation, index ) =
                         (Countries.options affiliation.country)
                     ]
             else
-                div [] []
+                text ""
     in
         div [ class "affiliation form__question-sub-section" ]
             [ div [ class "form__label" ] [ text ("Affiliation " ++ toString index) ]

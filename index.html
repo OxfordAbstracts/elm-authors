@@ -50,8 +50,6 @@
         });
 
         var authorsPort = function(authors) {
-
-            console.log("authors:------>>>",authors)
             jsonAuthors = JSON.stringify(authors)
             app.ports.authors.send(jsonAuthors)
         }

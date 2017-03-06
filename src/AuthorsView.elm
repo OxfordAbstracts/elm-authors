@@ -35,7 +35,7 @@ renderAuthors authors authorsClass authorField affiliationLimit authorLimit =
 
         addAuthorButton =
             if authorLimit > (List.length authors) then
-                div [ class "button button--tertiary", onClick AddAuthor ] [ text "Add Author" ]
+                div [ class "button button--tertiary", onClick AddAuthor ] [ text "Add Another Author" ]
             else
                 div []
                     []
@@ -58,7 +58,7 @@ renderAuthor affiliationLimit authorFields ( author, index ) =
             if affiliationLimit > (List.length author.affiliations) then
                 div [ class "add-affiliation-to-author button button--tertiary" ]
                     [ div [ onClick (AddAffiliation author.id) ]
-                        [ text "Add Affiliation to Author" ]
+                        [ text "Add Another Affiliation to Author" ]
                     ]
             else
                 div []

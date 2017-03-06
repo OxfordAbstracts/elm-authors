@@ -7,27 +7,54 @@ type alias Model =
     , focusedAuthorId : Int
     , focusedAffiliationId : Int
     , lastAffiliationKey : Int
+    , affiliationLimit : Int
+    , class : String
+    , authorFields : List AuthorField
     }
 
 
 type alias Flags =
-    { authorsList : String }
+    { authorsList : String
+    , affiliationLimit : Int
+    , authorFields : String
+    }
 
 
 initialModel : Model
 initialModel =
     { authorMaxId = 0
-    , authors = [ blankAuthor 0 ]
+    , authors = [ blankAuthor 0 [ 0, 1, 2 ] ]
     , focusedAuthorId = 0
     , focusedAffiliationId = 0
     , lastAffiliationKey = -1
+    , affiliationLimit = 5
+    , class = "complete"
+    , authorFields = [ defaultAuthorField1, defaultAuthorField2, defaultAuthorField3 ]
+    }
+
+
+type FieldType
+    = BoolType
+    | StringType
+
+
+type alias AuthorField =
+    { id : Int
+    , title : String
+    , description : String
+    , inputType : FieldType
+    }
+
+
+type alias AuthorFieldResponse =
+    { id : Int
+    , authorFieldId : Int
+    , value : String
     }
 
 
 type alias Author =
-    { firstName : String
-    , lastName : String
-    , presenting : Bool
+    { fields : List AuthorFieldResponse
     , affiliations : List Affiliation
     , maxAffiliationId : Int
     , id : Int
@@ -42,9 +69,54 @@ type alias Affiliation =
     }
 
 
-blankAuthor : Int -> Author
-blankAuthor id =
-    Author "" "" False [ blankAffiliation 0 ] 1 id
+defaultAuthorField0 : AuthorField
+defaultAuthorField0 =
+    AuthorField 0 "Default" "This is the default description" StringType
+
+
+defaultAuthorField1 : AuthorField
+defaultAuthorField1 =
+    AuthorField 0 "First Name" "This is the first name description" BoolType
+
+
+defaultAuthorField2 : AuthorField
+defaultAuthorField2 =
+    AuthorField 1 "Last Name" "This is the last name description" StringType
+
+
+defaultAuthorField3 : AuthorField
+defaultAuthorField3 =
+    AuthorField 2 "Presenting" "This is the Presenting description" BoolType
+
+
+defaultAuthorFieldResponse1 : AuthorFieldResponse
+defaultAuthorFieldResponse1 =
+    AuthorFieldResponse 0 2 ""
+
+
+
+--could give blankAuthor a list of the field (question) ids
+-- then we could make the author field responses out of those
+
+
+blankAuthor : Int -> List Int -> Author
+blankAuthor id authorFieldIds =
+    let
+        authorFieldIdIndexTuples =
+            authorFieldIds
+                |> List.length
+                |> List.range 1
+                |> List.map2 (,) authorFieldIds
+
+        blankAuthorFieldResponses =
+            List.map blankAuthorFieldResponse authorFieldIdIndexTuples
+    in
+        Author blankAuthorFieldResponses [ blankAffiliation 0 ] 1 id
+
+
+blankAuthorFieldResponse : ( Int, Int ) -> AuthorFieldResponse
+blankAuthorFieldResponse ( authorFieldId, index ) =
+    AuthorFieldResponse index authorFieldId ""
 
 
 blankAffiliation : Int -> Affiliation

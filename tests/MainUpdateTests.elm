@@ -5,6 +5,8 @@ import Expect
 import DummyTypes exposing (..)
 import MainUpdate
 import MainMessages exposing (..)
+import Encoders
+import Ports exposing (..)
 
 
 all : Test
@@ -23,20 +25,24 @@ all =
                     tuple =
                         MainUpdate.update (UpdateInstitution 1 1 "New Institution") dummyModel
 
-                    expectedDummyAuthor1 =
+                    expectedAuthor1 =
                         { dummyAuthor1
-                            | affiliations = [{ dummyAffiliation1 | institution = "New Institution" }, dummyAffiliation2 ]
+                            | affiliations = [ { dummyAffiliation1 | institution = "New Institution" }, dummyAffiliation2 ]
                         }
 
-                    expectedDummyAuthors =
-                        [expectedDummyAuthor1, dummyAuthor2]
+                    expectedAuthors =
+                        [ expectedAuthor1, dummyAuthor2 ]
 
-                    expectedDummyModel =
+                    expectedModel =
                         { dummyModel
-                            | authors = expectedDummyAuthors
+                            | authors = expectedAuthors
                         }
+
+                    encodedAuthors =
+                        expectedModel.authors
+                            |> Encoders.authors
                 in
-                    Expect.equal tuple ( expectedDummyModel, Cmd.none )
+                    Expect.equal tuple ( expectedModel, checkAuthorsComplete encodedAuthors )
         , test """The updateInstitution case. The Institution, City and Country have all been updated as the
         lastAffiliationKey was a (-1)""" <|
             \() ->
@@ -44,18 +50,22 @@ all =
                     tuple =
                         MainUpdate.update (UpdateInstitution 1 1 "UCL") { dummyModel | lastAffiliationKey = -1 }
 
-                    expectedDummyAuthor1 =
+                    expectedAuthor1 =
                         { dummyAuthor1
-                            | affiliations = [{ dummyAffiliation2 | id = 1 }, dummyAffiliation2]
+                            | affiliations = [ { dummyAffiliation2 | id = 1 }, dummyAffiliation2 ]
                         }
 
-                    expectedDummyAuthors =
-                        [expectedDummyAuthor1, dummyAuthor2]
+                    expectedAuthors =
+                        [ expectedAuthor1, dummyAuthor2 ]
 
-                    expectedDummyModel =
+                    expectedModel =
                         { dummyModel
-                            | authors = expectedDummyAuthors
+                            | authors = expectedAuthors
                         }
+
+                    encodedAuthors =
+                        expectedModel.authors
+                            |> Encoders.authors
                 in
-                    Expect.equal tuple ( expectedDummyModel, Cmd.none )
+                    Expect.equal tuple ( expectedModel, checkAuthorsComplete encodedAuthors )
         ]

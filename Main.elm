@@ -37,9 +37,6 @@ init flags =
         showCountry =
             flags.showCountry
 
-        debug =
-            Debug.log "showCity" showCity
-
         model =
             { initialModel
                 | authors =

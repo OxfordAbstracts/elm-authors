@@ -63,4 +63,4 @@ fieldTypeHelper inputType =
 authorFields : String -> List AuthorField
 authorFields authorFields =
     decodeString (list authorFieldDecoder) authorFields
-        |> Result.withDefault [ defaultAuthorField0 ]
+        |> Result.withDefault [ defaultAuthorField1, defaultAuthorField2, defaultAuthorField3 ]

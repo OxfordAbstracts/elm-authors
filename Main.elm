@@ -28,6 +28,18 @@ init flags =
         authorLimit =
             flags.authorLimit
 
+        showInstitution =
+            flags.showInstitution
+
+        showCity =
+            flags.showCity
+
+        showCountry =
+            flags.showCountry
+
+        debug =
+            Debug.log "showCity" showCity
+
         model =
             { initialModel
                 | authors =
@@ -37,6 +49,9 @@ init flags =
                 , affiliationLimit = affiliationLimit
                 , authorLimit = authorLimit
                 , authorFields = authorFields
+                , showInstitution = showInstitution
+                , showCity = showCity
+                , showCountry = showCountry
             }
     in
         ( model, Cmd.none )

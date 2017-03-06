@@ -9,6 +9,9 @@ type alias Model =
     , lastAffiliationKey : Int
     , affiliationLimit : Int
     , authorLimit : Int
+    , showInstitution : Bool
+    , showCity : Bool
+    , showCountry : Bool
     , class : String
     , authorFields : List AuthorField
     }
@@ -19,6 +22,9 @@ type alias Flags =
     , affiliationLimit : Int
     , authorLimit : Int
     , authorFields : String
+    , showInstitution : Bool
+    , showCity : Bool
+    , showCountry : Bool
     }
 
 
@@ -31,6 +37,9 @@ initialModel =
     , lastAffiliationKey = -1
     , affiliationLimit = 5
     , authorLimit = 5
+    , showInstitution = True
+    , showCity = False
+    , showCountry = False
     , class = "complete"
     , authorFields = [ defaultAuthorField1, defaultAuthorField2, defaultAuthorField3 ]
     }

@@ -25,13 +25,9 @@ update msg model =
                 )
 
             NewClass class ->
-                let
-                    debug =
-                        Debug.log "class" class
-                in
-                    ( { model | class = class }
-                    , Cmd.none
-                    )
+                ( { model | class = class }
+                , Cmd.none
+                )
 
             DeleteAuthor id ->
                 ( { model | authors = List.filter (\a -> a.id /= id) model.authors }
@@ -42,15 +38,11 @@ update msg model =
                 let
                     change field =
                         { field | value = input }
-
-                    debug =
-                        Debug.log "input" input
                 in
                     updateAuthorFieldResponse model authorId fieldId change
 
             UpdateAuthorFieldBool authorId fieldId ->
                 let
-
                     change field =
                         if field.value == "true" then
                             { field | value = "false" }

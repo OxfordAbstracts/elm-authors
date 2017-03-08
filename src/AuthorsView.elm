@@ -18,24 +18,31 @@ view model =
             Encoders.authors (model.authors)
     in
         div []
-            [ renderAuthors model.authors model.class model.authorFields model.affiliationLimit
+            [ renderAuthors model.authors model.class model.authorFields model.affiliationLimit model.authorLimit
             , input [ class "hidden", id "authorsArray", name "authorsArray", value authors ] [ text authors ]
             , div [] (renderDataLists (getBlurredAuthorAffiliations model))
             ]
 
 
-renderAuthors : List Author -> String -> List AuthorField -> Int -> Html Msg
-renderAuthors authors authorsClass authorField affiliationLimit =
+renderAuthors : List Author -> String -> List AuthorField -> Int -> Int -> Html Msg
+renderAuthors authors authorsClass authorField affiliationLimit authorLimit =
     let
         authorIndexTuples =
             authors
                 |> List.length
                 |> List.range 1
                 |> List.map2 (,) authors
+
+        addAuthorButton =
+            if authorLimit > (List.length authors) then
+                div [ class "button button--tertiary", onClick AddAuthor ] [ text "Add Author" ]
+            else
+                div []
+                    []
     in
         div [ class authorsClass ]
             [ div [ class "" ] (List.map (renderAuthor affiliationLimit authorField) authorIndexTuples)
-            , div [ class "button button--tertiary", onClick AddAuthor ] [ text "Add Author" ]
+            , addAuthorButton
             ]
 
 

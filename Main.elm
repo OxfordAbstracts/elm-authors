@@ -25,6 +25,9 @@ init flags =
         affiliationLimit =
             flags.affiliationLimit
 
+        authorLimit =
+            flags.authorLimit
+
         model =
             { initialModel
                 | authors =
@@ -32,6 +35,7 @@ init flags =
                 , authorMaxId =
                     getMaxAuthorId authors
                 , affiliationLimit = affiliationLimit
+                , authorLimit = authorLimit
                 , authorFields = authorFields
             }
     in

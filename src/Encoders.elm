@@ -34,8 +34,4 @@ getAuthorValue author =
 
 
 authors authors =
-    let
-        debug =
-            Debug.log "authors" authors
-    in
-        JsonEncode.encode 0 (getAuthorsValue authors)
+    JsonEncode.encode 0 (getAuthorsValue authors)

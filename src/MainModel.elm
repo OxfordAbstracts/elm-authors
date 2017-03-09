@@ -55,6 +55,7 @@ type alias AuthorField =
     , title : String
     , description : String
     , inputType : FieldType
+    , questionType : String
     }
 
 
@@ -66,7 +67,7 @@ type alias AuthorFieldResponse =
 
 
 type alias Author =
-    { fields : List AuthorFieldResponse
+    { authorFieldResponses : List AuthorFieldResponse
     , affiliations : List Affiliation
     , maxAffiliationId : Int
     , id : Int
@@ -83,22 +84,22 @@ type alias Affiliation =
 
 defaultAuthorField0 : AuthorField
 defaultAuthorField0 =
-    AuthorField 0 "Default" "This is the default description" StringType
+    AuthorField 0 "Default" "This is the default description" StringType "default"
 
 
 defaultAuthorField1 : AuthorField
 defaultAuthorField1 =
-    AuthorField 0 "First Name" "This is the first name description" StringType
+    AuthorField 0 "First Name" "This is the first name description" StringType "default"
 
 
 defaultAuthorField2 : AuthorField
 defaultAuthorField2 =
-    AuthorField 1 "Last Name" "This is the last name description" StringType
+    AuthorField 1 "Last Name" "This is the last name description" StringType "default"
 
 
 defaultAuthorField3 : AuthorField
 defaultAuthorField3 =
-    AuthorField 2 "Presenting" "This is the Presenting description" BoolType
+    AuthorField 2 "Presenting" "This is the Presenting description" BoolType "default"
 
 
 defaultAuthorFieldResponse1 : AuthorFieldResponse

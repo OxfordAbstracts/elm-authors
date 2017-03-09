@@ -40,6 +40,7 @@ authorFieldDecoder =
         |> required "title" string
         |> required "description" string
         |> required "inputType" (map fieldTypeHelper string)
+        |> required "questionType" string
 
 
 authorFieldResponseDecoder : Decoder AuthorFieldResponse

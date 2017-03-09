@@ -68,7 +68,7 @@ renderAuthor model ( author, index ) =
             [ div [ class "form__label" ] [ text ("Author " ++ toString index) ]
             , div [ class "form__question-sub-section--inline" ]
                 --for each of the authorFields we want to add a div like this
-                [ div [ class "form__question-sub-section--inline" ] (List.map (renderFieldResponses model.authorFields author.id) author.fields)
+                [ div [ class "form__question-sub-section--inline" ] (List.map (renderFieldResponses author.authorFieldResponses author.id) model.authorFields)
                 ]
             , span [ class "remove button button--secondary" ]
                 [ div
@@ -81,13 +81,13 @@ renderAuthor model ( author, index ) =
             ]
 
 
-renderFieldResponses authorFields authorId authorFieldResponse =
+renderFieldResponses authorFieldResponses authorId authorField =
     let
-        authorField =
-            authorFields
-                |> List.filter (\a -> a.id == authorFieldResponse.authorFieldId)
+        authorFieldResponse =
+            authorFieldResponses
+                |> List.filter (\a -> a.authorFieldId == authorField.id)
                 |> List.head
-                |> Maybe.withDefault defaultAuthorField0
+                |> Maybe.withDefault defaultAuthorFieldResponse1
 
         labelX =
             if authorField.description /= "" then

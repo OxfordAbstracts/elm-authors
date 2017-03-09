@@ -187,7 +187,7 @@ updateAuthorFieldResponse model authorId authorFieldId change =
     let
         updateAuthorFieldResponse author =
             { author
-                | fields = (updateIfHasId author.fields authorFieldId change)
+                | authorFieldResponses = (updateIfHasId author.authorFieldResponses authorFieldId change)
             }
     in
         updateAuthor model authorId updateAuthorFieldResponse

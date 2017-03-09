@@ -108,7 +108,7 @@ renderFieldResponses authorFieldResponses authorId authorField =
                     , input
                         [ type_ "text"
                         , class "form__input"
-                        , onInput (UpdateAuthorFieldString authorId authorFieldResponse.id)
+                        , onInput (UpdateAuthorFieldString authorId authorField.id)
                         , value authorFieldResponse.value
                         ]
                         []
@@ -121,7 +121,7 @@ renderFieldResponses authorFieldResponses authorId authorField =
                         [ type_ "checkbox"
                         , class "form__input"
                         , checked (authorFieldResponse.value == "true")
-                        , onClick (UpdateAuthorFieldBool authorId authorFieldResponse.id)
+                        , onClick (UpdateAuthorFieldBool authorId authorField.id)
                         ]
                         []
                     ]

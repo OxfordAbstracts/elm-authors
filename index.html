@@ -21,17 +21,32 @@
                 fields: [{
                         id: 0,
                         authorFieldId: 0,
-                        value: "FL"
+                        value: "Mr"
                     },
                     {
                         id: 1,
                         authorFieldId: 1,
-                        value: "FLAG hel"
+                        value: "Conor"
                     },
                     {
                         id: 2,
                         authorFieldId: 2,
+                        value: "B"
+                    },
+                    {
+                        id: 3,
+                        authorFieldId: 3,
+                        value: "Campbell"
+                    },
+                    {
+                        id: 4,
+                        authorFieldId: 4,
                         value: "true"
+                    },
+                    {
+                        id: 5,
+                        authorFieldId: 5,
+                        value: "conorc1000@gmail.com"
                     }
                 ],
                 affiliations: [{
@@ -45,7 +60,7 @@
         var app = Elm.Main.embed(node, {
             authorsList: authorsArray,
             affiliationLimit: 3,
-            authorLimit: 2,
+            authorLimit: 5,
             authorFields: authorFields,
             showInstitution : true,
             showCity: false,

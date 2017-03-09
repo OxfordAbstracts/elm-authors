@@ -118,7 +118,7 @@ blankAuthor id authorFieldIds =
         authorFieldIdIndexTuples =
             authorFieldIds
                 |> List.length
-                |> List.range 1
+                |> List.range 0
                 |> List.map2 (,) authorFieldIds
 
         blankAuthorFieldResponses =

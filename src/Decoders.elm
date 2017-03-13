@@ -8,7 +8,7 @@ import Json.Decode.Pipeline exposing (required, decode, hardcoded)
 authorDecoder : Decoder Author
 authorDecoder =
     decode Author
-        |> required "fields" (list authorFieldResponseDecoder)
+        |> required "authorFieldResponses" (list authorFieldResponseDecoder)
         |> required "affiliations" (list affiliationDecoder)
         |> hardcoded 0
         |> required "id" int

@@ -68,7 +68,7 @@ renderAuthor model ( author, index ) =
             [ div [ class "form__label" ] [ text ("Author " ++ toString index) ]
             , div [ class "form__question-sub-section--inline" ]
                 --for each of the authorFields we want to add a div like this
-                [ div [ class "form__question-sub-section--inline" ] (List.map (renderFieldResponses author.authorFieldResponses author.id) model.authorFields)
+                [ div [ class "form__question-sub-section--inline" ] (List.map (renderFieldResponses model author.authorFieldResponses author.id) model.authorFields)
                 ]
             , span [ class "remove button button--secondary" ]
                 [ div
@@ -81,7 +81,7 @@ renderAuthor model ( author, index ) =
             ]
 
 
-renderFieldResponses authorFieldResponses authorId authorField =
+renderFieldResponses model authorFieldResponses authorId authorField =
     let
         authorFieldResponse =
             authorFieldResponses
@@ -102,18 +102,7 @@ renderFieldResponses authorFieldResponses authorId authorField =
                     [ text authorField.title ]
 
         inputHtml =
-            if authorField.inputType == StringType then
-                div [ class "inline-element" ]
-                    [ labelX
-                    , input
-                        [ type_ "text"
-                        , class "form__input"
-                        , onInput (UpdateAuthorFieldString authorId authorField.id)
-                        , value authorFieldResponse.value
-                        ]
-                        []
-                    ]
-            else
+            if authorField.inputType == BoolType then
                 -- checkbox
                 div [ class "inline-element" ]
                     [ labelX
@@ -125,8 +114,82 @@ renderFieldResponses authorFieldResponses authorId authorField =
                         ]
                         []
                     ]
+            else if authorField.inputType == SinglePresenterType then
+                -- checkbox only one can be checked across all the authors
+                div [ class "inline-element" ]
+                    [ labelX
+                    , input
+                        [ type_ "checkbox"
+                        , class "form__input"
+                        , checked (authorFieldResponse.value == "true")
+                          -- if one of the other(!) inputs with SinglePresenterType === checked then disable
+                        , disabled (disableThePresentingCheckbox model (authorFieldResponse.value == "true") authorField.id)
+                        , onClick (UpdateAuthorFieldBool authorId authorField.id)
+                        ]
+                        []
+                    ]
+            else
+                div [ class "inline-element" ]
+                    [ labelX
+                    , input
+                        [ type_ "text"
+                        , class "form__input"
+                        , onInput (UpdateAuthorFieldString authorId authorField.id)
+                        , value authorFieldResponse.value
+                        ]
+                        []
+                    ]
     in
         inputHtml
+
+
+disableThePresentingCheckbox : Model -> Bool -> Int -> Bool
+disableThePresentingCheckbox model checked presentingFieldId =
+    let
+        debug2 =
+            Debug.log "List.map (isAuthorPresenting presentingFieldId) model.authors" (List.map (isAuthorPresenting presentingFieldId) model.authors)
+
+        disabled =
+            if checked then
+                False
+            else
+                List.any isTrue (List.map (isAuthorPresenting presentingFieldId) model.authors)
+
+        debug =
+            Debug.log "disabled" disabled
+    in
+        disabled
+
+
+isTrue : Bool -> Bool
+isTrue presenting =
+    let
+        debug =
+            Debug.log "presenting" presenting
+    in
+        presenting == True
+
+
+isAuthorPresenting : Int -> Author -> Bool
+isAuthorPresenting presentingFieldId author =
+    let
+        defaultResponse =
+            { value = "false" }
+
+        presentingFieldResponse =
+            List.filter (isPresentingfield presentingFieldId) author.authorFieldResponses
+                |> List.head
+                |> Maybe.withDefault defaultAuthorFieldResponse1
+
+        isPresenting =
+            presentingFieldResponse.value == "true"
+    in
+        isPresenting
+
+
+isPresentingfield : Int -> AuthorFieldResponse -> Bool
+isPresentingfield presentingFieldId authorFieldResponse =
+    authorFieldResponse.id == presentingFieldId
 
 
 renderAffiliations : Model -> List Affiliation -> Int -> Html Msg

@@ -48,6 +48,7 @@ initialModel =
 type FieldType
     = BoolType
     | StringType
+    | SinglePresenterType
 
 
 type alias AuthorField =

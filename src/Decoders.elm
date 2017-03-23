@@ -57,6 +57,9 @@ fieldTypeHelper inputType =
         "bool" ->
             BoolType
 
+        "singlePresenter" ->
+            SinglePresenterType
+
         _ ->
             StringType
 

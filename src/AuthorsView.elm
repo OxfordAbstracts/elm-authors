@@ -146,28 +146,18 @@ renderFieldResponses model authorFieldResponses authorId authorField =
 disableThePresentingCheckbox : Model -> Bool -> Int -> Bool
 disableThePresentingCheckbox model checked presentingFieldId =
     let
-        debug2 =
-            Debug.log "List.map (isAuthorPresenting presentingFieldId) model.authors" (List.map (isAuthorPresenting presentingFieldId) model.authors)
-
         disabled =
             if checked then
                 False
             else
                 List.any isTrue (List.map (isAuthorPresenting presentingFieldId) model.authors)
-
-        debug =
-            Debug.log "disabled" disabled
     in
         disabled
 
 
 isTrue : Bool -> Bool
 isTrue presenting =
-    let
-        debug =
-            Debug.log "presenting" presenting
-    in
-        presenting == True
+    presenting == True
 
 
 isAuthorPresenting : Int -> Author -> Bool

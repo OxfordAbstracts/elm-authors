@@ -24,10 +24,28 @@ init flags =
 
         { affiliationLimit, authorLimit, showInstitution, showCity, showCountry} = flags
 
+        authorsWithBlankResponses =
+            List.map (addBlankResponsesToAuthor authorFields) authors
+
+        addBlankResponsesToAuthor authorFields author =
+            { author
+                | authorFieldResponses = List.map (addBlankResponseIfNoResponse author) authorFields
+            }
+
+        addBlankResponseIfNoResponse author authorField =
+            let
+                authorFieldResponse =
+                    author.authorFieldResponses
+                        |> List.filter (\a -> a.authorFieldId == authorField.id)
+                        |> List.head
+                        |> Maybe.withDefault (AuthorFieldResponse authorField.id authorField.id "")
+            in
+                authorFieldResponse
+
         model =
             { initialModel
                 | authors =
-                    convertAuthorsListForModel authors
+                    convertAuthorsListForModel authorsWithBlankResponses
                 , authorMaxId =
                     getMaxAuthorId authors
                 , affiliationLimit = affiliationLimit

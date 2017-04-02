@@ -27,7 +27,7 @@ getAuthorsValue authors =
 getAuthorValue author =
     JsonEncode.object
         [ ( "id", JsonEncode.int author.id )
-        , ( "fields", JsonEncode.list (List.map getFieldValue author.fields) )
+        , ( "authorFieldResponses", JsonEncode.list (List.map getFieldValue author.authorFieldResponses) )
         , ( "affiliations", JsonEncode.list (List.map getAffilitionValue author.affiliations) )
         , ( "maxAffiliationId", JsonEncode.int author.maxAffiliationId )
         ]

@@ -13,40 +13,78 @@
     <script>
         var authorFields =
 
-            JSON.stringify([""])
+            JSON.stringify([{
+                "id": 1,
+                "title": "First Name",
+                "description": "from flag",
+                "inputType": "string",
+                "questionType": "firstName"
+            }, {
+                "id": 3,
+                "title": "Last Name",
+                "description": "from flag",
+                "inputType": "string",
+                "questionType": "lastName"
+            }, {
+                "id": 4,
+                "title": "Presenting",
+                "description": "Only one author may present",
+                "inputType": "singlePresenter",
+                "questionType": "presenting"
+            }, {
+                "id": 5,
+                "title": "email",
+                "description": "add your email here",
+                "inputType": "string",
+                "questionType": "custom"
+            }, {
+                "id": 6,
+                "title": "Under 21",
+                "description": "are you under 21",
+                "inputType": "bool",
+                "questionType": "custom"
+            }])
 
         var node = document.getElementById('elm-authors');
         var authorsArray = JSON.stringify([{
-                id: 1,
-                fields: [{
-                        id: 0,
-                        authorFieldId: 0,
-                        value: "FL"
-                    },
-                    {
-                        id: 1,
-                        authorFieldId: 1,
-                        value: "FLAG hel"
-                    },
-                    {
-                        id: 2,
-                        authorFieldId: 2,
-                        value: "true"
-                    }
-                ],
-                affiliations: [{
+            id: 1,
+            authorFieldResponses: [{
                     id: 1,
-                    institution: "Test inst",
-                    city: "city 1",
-                    country: "Albania"
-                }]
-            }]);
+                    authorFieldId: 1,
+                    value: "Rory"
+                },
+                {
+                    id: 3,
+                    authorFieldId: 3,
+                    value: "C"
+                },
+                {
+                    id: 4,
+                    authorFieldId: 4,
+                    value: "true"
+                },
+                {
+                    id: 5,
+                    authorFieldId: 5,
+                    value: "email@email.com"
+                }
+            ],
+            affiliations: [{
+                id: 1,
+                institution: "Test inst",
+                city: "city 1",
+                country: "Albania"
+            }]
+        }]);
 
         var app = Elm.Main.embed(node, {
             authorsList: authorsArray,
             affiliationLimit: 3,
-            authorLimit: 2,
-            authorFields: authorFields
+            authorLimit: 5,
+            authorFields: authorFields,
+            showInstitution: true,
+            showCity: false,
+            showCountry: true
         });
 
         var authorsPort = function(authors) {

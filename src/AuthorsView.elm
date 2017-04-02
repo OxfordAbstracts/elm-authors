@@ -160,9 +160,7 @@ renderAffiliation model authorId ( affiliation, index ) =
             if model.showInstitution then
                 div [ class "inline-element" ]
                     [ label
-                        [ class "form__label"
-                        , for ("affiliationInstitution-" ++ toString index)
-                        ]
+                        [ class "form__label"]
                         [ text "Institution" ]
                     , input
                         [ class "form__input institution"
@@ -182,9 +180,7 @@ renderAffiliation model authorId ( affiliation, index ) =
             if model.showCity then
                 div [ class "inline-element" ]
                     [ label
-                        [ class "form__label"
-                        , for ("affiliationCity-" ++ toString index)
-                        ]
+                        [ class "form__label"]
                         [ text "City" ]
                     , input
                         [ class "city form__input"

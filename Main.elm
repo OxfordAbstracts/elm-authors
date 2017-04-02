@@ -22,20 +22,7 @@ init flags =
         authors =
             Decoders.authors flags.authorsList
 
-        affiliationLimit =
-            flags.affiliationLimit
-
-        authorLimit =
-            flags.authorLimit
-
-        showInstitution =
-            flags.showInstitution
-
-        showCity =
-            flags.showCity
-
-        showCountry =
-            flags.showCountry
+        { affiliationLimit, authorLimit, showInstitution, showCity, showCountry} = flags
 
         model =
             { initialModel

@@ -1,7 +1,0 @@
-var _user$project$Ports$authors = _elm_lang$core$Native_Platform.incomingPort('authors', _elm_lang$core$Json_Decode$string);
-var _user$project$Ports$authorsClass = _elm_lang$core$Native_Platform.incomingPort('authorsClass', _elm_lang$core$Json_Decode$string);
-var _user$project$Ports$checkAuthorsComplete = _elm_lang$core$Native_Platform.outgoingPort(
-	'checkAuthorsComplete',
-	function (v) {
-		return v;
-	});

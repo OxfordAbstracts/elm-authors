@@ -1,0 +1,112 @@
+var _user$project$Encoders$getFieldValue = function (field) {
+	return _elm_lang$core$Json_Encode$object(
+		{
+			ctor: '::',
+			_0: {
+				ctor: '_Tuple2',
+				_0: 'id',
+				_1: _elm_lang$core$Json_Encode$int(field.id)
+			},
+			_1: {
+				ctor: '::',
+				_0: {
+					ctor: '_Tuple2',
+					_0: 'authorFieldId',
+					_1: _elm_lang$core$Json_Encode$int(field.authorFieldId)
+				},
+				_1: {
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: 'value',
+						_1: _elm_lang$core$Json_Encode$string(field.value)
+					},
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+};
+var _user$project$Encoders$getAffilitionValue = function (affiliation) {
+	return _elm_lang$core$Json_Encode$object(
+		{
+			ctor: '::',
+			_0: {
+				ctor: '_Tuple2',
+				_0: 'id',
+				_1: _elm_lang$core$Json_Encode$int(affiliation.id)
+			},
+			_1: {
+				ctor: '::',
+				_0: {
+					ctor: '_Tuple2',
+					_0: 'institution',
+					_1: _elm_lang$core$Json_Encode$string(affiliation.institution)
+				},
+				_1: {
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: 'city',
+						_1: _elm_lang$core$Json_Encode$string(affiliation.city)
+					},
+					_1: {
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: 'country',
+							_1: _elm_lang$core$Json_Encode$string(affiliation.country)
+						},
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		});
+};
+var _user$project$Encoders$getAuthorValue = function (author) {
+	return _elm_lang$core$Json_Encode$object(
+		{
+			ctor: '::',
+			_0: {
+				ctor: '_Tuple2',
+				_0: 'id',
+				_1: _elm_lang$core$Json_Encode$int(author.id)
+			},
+			_1: {
+				ctor: '::',
+				_0: {
+					ctor: '_Tuple2',
+					_0: 'authorFieldResponses',
+					_1: _elm_lang$core$Json_Encode$list(
+						A2(_elm_lang$core$List$map, _user$project$Encoders$getFieldValue, author.authorFieldResponses))
+				},
+				_1: {
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: 'affiliations',
+						_1: _elm_lang$core$Json_Encode$list(
+							A2(_elm_lang$core$List$map, _user$project$Encoders$getAffilitionValue, author.affiliations))
+					},
+					_1: {
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: 'maxAffiliationId',
+							_1: _elm_lang$core$Json_Encode$int(author.maxAffiliationId)
+						},
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		});
+};
+var _user$project$Encoders$getAuthorsValue = function (authors) {
+	return _elm_lang$core$Json_Encode$list(
+		A2(_elm_lang$core$List$map, _user$project$Encoders$getAuthorValue, authors));
+};
+var _user$project$Encoders$authors = function (authors) {
+	return A2(
+		_elm_lang$core$Json_Encode$encode,
+		0,
+		_user$project$Encoders$getAuthorsValue(authors));
+};

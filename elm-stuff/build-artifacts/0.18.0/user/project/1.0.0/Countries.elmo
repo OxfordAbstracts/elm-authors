@@ -1,0 +1,1044 @@
+var _user$project$Countries$list = {
+	ctor: '::',
+	_0: 'Afghanistan',
+	_1: {
+		ctor: '::',
+		_0: 'Åland Islands',
+		_1: {
+			ctor: '::',
+			_0: 'Albania',
+			_1: {
+				ctor: '::',
+				_0: 'Algeria',
+				_1: {
+					ctor: '::',
+					_0: 'American Samoa',
+					_1: {
+						ctor: '::',
+						_0: 'Andorra',
+						_1: {
+							ctor: '::',
+							_0: 'Angola',
+							_1: {
+								ctor: '::',
+								_0: 'Anguilla',
+								_1: {
+									ctor: '::',
+									_0: 'Antarctica',
+									_1: {
+										ctor: '::',
+										_0: 'Antigua and Barbuda',
+										_1: {
+											ctor: '::',
+											_0: 'Argentina',
+											_1: {
+												ctor: '::',
+												_0: 'Armenia',
+												_1: {
+													ctor: '::',
+													_0: 'Aruba',
+													_1: {
+														ctor: '::',
+														_0: 'Australia',
+														_1: {
+															ctor: '::',
+															_0: 'Austria',
+															_1: {
+																ctor: '::',
+																_0: 'Azerbaijan',
+																_1: {
+																	ctor: '::',
+																	_0: 'Bahamas',
+																	_1: {
+																		ctor: '::',
+																		_0: 'Bahrain',
+																		_1: {
+																			ctor: '::',
+																			_0: 'Bangladesh',
+																			_1: {
+																				ctor: '::',
+																				_0: 'Barbados',
+																				_1: {
+																					ctor: '::',
+																					_0: 'Belarus',
+																					_1: {
+																						ctor: '::',
+																						_0: 'Belgium',
+																						_1: {
+																							ctor: '::',
+																							_0: 'Belize',
+																							_1: {
+																								ctor: '::',
+																								_0: 'Benin',
+																								_1: {
+																									ctor: '::',
+																									_0: 'Bermuda',
+																									_1: {
+																										ctor: '::',
+																										_0: 'Bhutan',
+																										_1: {
+																											ctor: '::',
+																											_0: 'Bolivia, Plurinational State of',
+																											_1: {
+																												ctor: '::',
+																												_0: 'Bonaire, Sint Eustatius and Saba',
+																												_1: {
+																													ctor: '::',
+																													_0: 'Bosnia and Herzegovina',
+																													_1: {
+																														ctor: '::',
+																														_0: 'Botswana',
+																														_1: {
+																															ctor: '::',
+																															_0: 'Bouvet Island',
+																															_1: {
+																																ctor: '::',
+																																_0: 'Brazil',
+																																_1: {
+																																	ctor: '::',
+																																	_0: 'British Indian Ocean Territory',
+																																	_1: {
+																																		ctor: '::',
+																																		_0: 'Brunei Darussalam',
+																																		_1: {
+																																			ctor: '::',
+																																			_0: 'Bulgaria',
+																																			_1: {
+																																				ctor: '::',
+																																				_0: 'Burkina Faso',
+																																				_1: {
+																																					ctor: '::',
+																																					_0: 'Burundi',
+																																					_1: {
+																																						ctor: '::',
+																																						_0: 'Cambodia',
+																																						_1: {
+																																							ctor: '::',
+																																							_0: 'Cameroon',
+																																							_1: {
+																																								ctor: '::',
+																																								_0: 'Canada',
+																																								_1: {
+																																									ctor: '::',
+																																									_0: 'Cape Verde',
+																																									_1: {
+																																										ctor: '::',
+																																										_0: 'Cayman Islands',
+																																										_1: {
+																																											ctor: '::',
+																																											_0: 'Central African Republic',
+																																											_1: {
+																																												ctor: '::',
+																																												_0: 'Chad',
+																																												_1: {
+																																													ctor: '::',
+																																													_0: 'Chile',
+																																													_1: {
+																																														ctor: '::',
+																																														_0: 'China',
+																																														_1: {
+																																															ctor: '::',
+																																															_0: 'Christmas Island',
+																																															_1: {
+																																																ctor: '::',
+																																																_0: 'Cocos (Keeling) Islands',
+																																																_1: {
+																																																	ctor: '::',
+																																																	_0: 'Colombia',
+																																																	_1: {
+																																																		ctor: '::',
+																																																		_0: 'Comoros',
+																																																		_1: {
+																																																			ctor: '::',
+																																																			_0: 'Congo',
+																																																			_1: {
+																																																				ctor: '::',
+																																																				_0: 'Congo, the Democratic Republic of the',
+																																																				_1: {
+																																																					ctor: '::',
+																																																					_0: 'Cook Islands',
+																																																					_1: {
+																																																						ctor: '::',
+																																																						_0: 'Costa Rica',
+																																																						_1: {
+																																																							ctor: '::',
+																																																							_0: 'Côte d\'Ivoire',
+																																																							_1: {
+																																																								ctor: '::',
+																																																								_0: 'Croatia',
+																																																								_1: {
+																																																									ctor: '::',
+																																																									_0: 'Cuba',
+																																																									_1: {
+																																																										ctor: '::',
+																																																										_0: 'Curaçao',
+																																																										_1: {
+																																																											ctor: '::',
+																																																											_0: 'Cyprus',
+																																																											_1: {
+																																																												ctor: '::',
+																																																												_0: 'Czech Republic',
+																																																												_1: {
+																																																													ctor: '::',
+																																																													_0: 'Denmark',
+																																																													_1: {
+																																																														ctor: '::',
+																																																														_0: 'Djibouti',
+																																																														_1: {
+																																																															ctor: '::',
+																																																															_0: 'Dominica',
+																																																															_1: {
+																																																																ctor: '::',
+																																																																_0: 'Dominican Republic',
+																																																																_1: {
+																																																																	ctor: '::',
+																																																																	_0: 'Ecuador',
+																																																																	_1: {
+																																																																		ctor: '::',
+																																																																		_0: 'Egypt',
+																																																																		_1: {
+																																																																			ctor: '::',
+																																																																			_0: 'El Salvador',
+																																																																			_1: {
+																																																																				ctor: '::',
+																																																																				_0: 'Equatorial Guinea',
+																																																																				_1: {
+																																																																					ctor: '::',
+																																																																					_0: 'Eritrea',
+																																																																					_1: {
+																																																																						ctor: '::',
+																																																																						_0: 'Estonia',
+																																																																						_1: {
+																																																																							ctor: '::',
+																																																																							_0: 'Ethiopia',
+																																																																							_1: {
+																																																																								ctor: '::',
+																																																																								_0: 'Falkland Islands (Malvinas)',
+																																																																								_1: {
+																																																																									ctor: '::',
+																																																																									_0: 'Faroe Islands',
+																																																																									_1: {
+																																																																										ctor: '::',
+																																																																										_0: 'Fiji',
+																																																																										_1: {
+																																																																											ctor: '::',
+																																																																											_0: 'Finland',
+																																																																											_1: {
+																																																																												ctor: '::',
+																																																																												_0: 'France',
+																																																																												_1: {
+																																																																													ctor: '::',
+																																																																													_0: 'French-Guiana',
+																																																																													_1: {
+																																																																														ctor: '::',
+																																																																														_0: 'French-Polynesia',
+																																																																														_1: {
+																																																																															ctor: '::',
+																																																																															_0: 'French Southern Territories',
+																																																																															_1: {
+																																																																																ctor: '::',
+																																																																																_0: 'Gabon',
+																																																																																_1: {
+																																																																																	ctor: '::',
+																																																																																	_0: 'Gambia',
+																																																																																	_1: {
+																																																																																		ctor: '::',
+																																																																																		_0: 'Georgia',
+																																																																																		_1: {
+																																																																																			ctor: '::',
+																																																																																			_0: 'Germany',
+																																																																																			_1: {
+																																																																																				ctor: '::',
+																																																																																				_0: 'Ghana',
+																																																																																				_1: {
+																																																																																					ctor: '::',
+																																																																																					_0: 'Gibraltar',
+																																																																																					_1: {
+																																																																																						ctor: '::',
+																																																																																						_0: 'Greece',
+																																																																																						_1: {
+																																																																																							ctor: '::',
+																																																																																							_0: 'Greenland',
+																																																																																							_1: {
+																																																																																								ctor: '::',
+																																																																																								_0: 'Grenada',
+																																																																																								_1: {
+																																																																																									ctor: '::',
+																																																																																									_0: 'Guadeloupe',
+																																																																																									_1: {
+																																																																																										ctor: '::',
+																																																																																										_0: 'Guam',
+																																																																																										_1: {
+																																																																																											ctor: '::',
+																																																																																											_0: 'Guatemala',
+																																																																																											_1: {
+																																																																																												ctor: '::',
+																																																																																												_0: 'Guernsey',
+																																																																																												_1: {
+																																																																																													ctor: '::',
+																																																																																													_0: 'Guinea',
+																																																																																													_1: {
+																																																																																														ctor: '::',
+																																																																																														_0: 'Guinea-Bissau',
+																																																																																														_1: {
+																																																																																															ctor: '::',
+																																																																																															_0: 'Guyana',
+																																																																																															_1: {
+																																																																																																ctor: '::',
+																																																																																																_0: 'Haiti',
+																																																																																																_1: {
+																																																																																																	ctor: '::',
+																																																																																																	_0: 'Heard Island and McDonald Islands',
+																																																																																																	_1: {
+																																																																																																		ctor: '::',
+																																																																																																		_0: 'Holy See (Vatican City State)',
+																																																																																																		_1: {
+																																																																																																			ctor: '::',
+																																																																																																			_0: 'Honduras',
+																																																																																																			_1: {
+																																																																																																				ctor: '::',
+																																																																																																				_0: 'Hong Kong',
+																																																																																																				_1: {
+																																																																																																					ctor: '::',
+																																																																																																					_0: 'Hungary',
+																																																																																																					_1: {
+																																																																																																						ctor: '::',
+																																																																																																						_0: 'Iceland',
+																																																																																																						_1: {
+																																																																																																							ctor: '::',
+																																																																																																							_0: 'India',
+																																																																																																							_1: {
+																																																																																																								ctor: '::',
+																																																																																																								_0: 'Indonesia',
+																																																																																																								_1: {
+																																																																																																									ctor: '::',
+																																																																																																									_0: 'Iran, Islamic Republic of',
+																																																																																																									_1: {
+																																																																																																										ctor: '::',
+																																																																																																										_0: 'Iraq',
+																																																																																																										_1: {
+																																																																																																											ctor: '::',
+																																																																																																											_0: 'Ireland',
+																																																																																																											_1: {
+																																																																																																												ctor: '::',
+																																																																																																												_0: 'Isle of Man',
+																																																																																																												_1: {
+																																																																																																													ctor: '::',
+																																																																																																													_0: 'Israel',
+																																																																																																													_1: {
+																																																																																																														ctor: '::',
+																																																																																																														_0: 'Italy',
+																																																																																																														_1: {
+																																																																																																															ctor: '::',
+																																																																																																															_0: 'Jamaica',
+																																																																																																															_1: {
+																																																																																																																ctor: '::',
+																																																																																																																_0: 'Japan',
+																																																																																																																_1: {
+																																																																																																																	ctor: '::',
+																																																																																																																	_0: 'Jersey',
+																																																																																																																	_1: {
+																																																																																																																		ctor: '::',
+																																																																																																																		_0: 'Jordan',
+																																																																																																																		_1: {
+																																																																																																																			ctor: '::',
+																																																																																																																			_0: 'Kazakhstan',
+																																																																																																																			_1: {
+																																																																																																																				ctor: '::',
+																																																																																																																				_0: 'Kenya',
+																																																																																																																				_1: {
+																																																																																																																					ctor: '::',
+																																																																																																																					_0: 'Kiribati',
+																																																																																																																					_1: {
+																																																																																																																						ctor: '::',
+																																																																																																																						_0: 'Korea, Democratic People\'s Republic of',
+																																																																																																																						_1: {
+																																																																																																																							ctor: '::',
+																																																																																																																							_0: 'Korea, Republic of',
+																																																																																																																							_1: {
+																																																																																																																								ctor: '::',
+																																																																																																																								_0: 'Kuwait',
+																																																																																																																								_1: {
+																																																																																																																									ctor: '::',
+																																																																																																																									_0: 'Kyrgyzstan',
+																																																																																																																									_1: {
+																																																																																																																										ctor: '::',
+																																																																																																																										_0: 'Lao, People\'s Democratic Republic',
+																																																																																																																										_1: {
+																																																																																																																											ctor: '::',
+																																																																																																																											_0: 'Latvia',
+																																																																																																																											_1: {
+																																																																																																																												ctor: '::',
+																																																																																																																												_0: 'Lebanon',
+																																																																																																																												_1: {
+																																																																																																																													ctor: '::',
+																																																																																																																													_0: 'Lesotho',
+																																																																																																																													_1: {
+																																																																																																																														ctor: '::',
+																																																																																																																														_0: 'Liberia',
+																																																																																																																														_1: {
+																																																																																																																															ctor: '::',
+																																																																																																																															_0: 'Libya',
+																																																																																																																															_1: {
+																																																																																																																																ctor: '::',
+																																																																																																																																_0: 'Liechtenstein',
+																																																																																																																																_1: {
+																																																																																																																																	ctor: '::',
+																																																																																																																																	_0: 'Lithuania',
+																																																																																																																																	_1: {
+																																																																																																																																		ctor: '::',
+																																																																																																																																		_0: 'Luxembourg',
+																																																																																																																																		_1: {
+																																																																																																																																			ctor: '::',
+																																																																																																																																			_0: 'Macao',
+																																																																																																																																			_1: {
+																																																																																																																																				ctor: '::',
+																																																																																																																																				_0: 'Macedonia, the former Yugoslav Republic of',
+																																																																																																																																				_1: {
+																																																																																																																																					ctor: '::',
+																																																																																																																																					_0: 'Madagascar',
+																																																																																																																																					_1: {
+																																																																																																																																						ctor: '::',
+																																																																																																																																						_0: 'Malawi',
+																																																																																																																																						_1: {
+																																																																																																																																							ctor: '::',
+																																																																																																																																							_0: 'Malaysia',
+																																																																																																																																							_1: {
+																																																																																																																																								ctor: '::',
+																																																																																																																																								_0: 'Maldives',
+																																																																																																																																								_1: {
+																																																																																																																																									ctor: '::',
+																																																																																																																																									_0: 'Mali',
+																																																																																																																																									_1: {
+																																																																																																																																										ctor: '::',
+																																																																																																																																										_0: 'Malta',
+																																																																																																																																										_1: {
+																																																																																																																																											ctor: '::',
+																																																																																																																																											_0: 'Marshall Islands',
+																																																																																																																																											_1: {
+																																																																																																																																												ctor: '::',
+																																																																																																																																												_0: 'Martinique',
+																																																																																																																																												_1: {
+																																																																																																																																													ctor: '::',
+																																																																																																																																													_0: 'Mauritania',
+																																																																																																																																													_1: {
+																																																																																																																																														ctor: '::',
+																																																																																																																																														_0: 'Mauritius',
+																																																																																																																																														_1: {
+																																																																																																																																															ctor: '::',
+																																																																																																																																															_0: 'Mayotte',
+																																																																																																																																															_1: {
+																																																																																																																																																ctor: '::',
+																																																																																																																																																_0: 'Mexico',
+																																																																																																																																																_1: {
+																																																																																																																																																	ctor: '::',
+																																																																																																																																																	_0: 'Micronesia, Federated States of',
+																																																																																																																																																	_1: {
+																																																																																																																																																		ctor: '::',
+																																																																																																																																																		_0: 'Moldova, Republic of',
+																																																																																																																																																		_1: {
+																																																																																																																																																			ctor: '::',
+																																																																																																																																																			_0: 'Monaco',
+																																																																																																																																																			_1: {
+																																																																																																																																																				ctor: '::',
+																																																																																																																																																				_0: 'Mongolia',
+																																																																																																																																																				_1: {
+																																																																																																																																																					ctor: '::',
+																																																																																																																																																					_0: 'Montenegro',
+																																																																																																																																																					_1: {
+																																																																																																																																																						ctor: '::',
+																																																																																																																																																						_0: 'Montserrat',
+																																																																																																																																																						_1: {
+																																																																																																																																																							ctor: '::',
+																																																																																																																																																							_0: 'Morocco',
+																																																																																																																																																							_1: {
+																																																																																																																																																								ctor: '::',
+																																																																																																																																																								_0: 'Mozambique',
+																																																																																																																																																								_1: {
+																																																																																																																																																									ctor: '::',
+																																																																																																																																																									_0: 'Myanmar',
+																																																																																																																																																									_1: {
+																																																																																																																																																										ctor: '::',
+																																																																																																																																																										_0: 'Namibia',
+																																																																																																																																																										_1: {
+																																																																																																																																																											ctor: '::',
+																																																																																																																																																											_0: 'Nauru',
+																																																																																																																																																											_1: {
+																																																																																																																																																												ctor: '::',
+																																																																																																																																																												_0: 'Nepal',
+																																																																																																																																																												_1: {
+																																																																																																																																																													ctor: '::',
+																																																																																																																																																													_0: 'Netherlands',
+																																																																																																																																																													_1: {
+																																																																																																																																																														ctor: '::',
+																																																																																																																																																														_0: 'New-Caledonia',
+																																																																																																																																																														_1: {
+																																																																																																																																																															ctor: '::',
+																																																																																																																																																															_0: 'New Zealand',
+																																																																																																																																																															_1: {
+																																																																																																																																																																ctor: '::',
+																																																																																																																																																																_0: 'Nicaragua',
+																																																																																																																																																																_1: {
+																																																																																																																																																																	ctor: '::',
+																																																																																																																																																																	_0: 'Niger',
+																																																																																																																																																																	_1: {
+																																																																																																																																																																		ctor: '::',
+																																																																																																																																																																		_0: 'Nigeria',
+																																																																																																																																																																		_1: {
+																																																																																																																																																																			ctor: '::',
+																																																																																																																																																																			_0: 'Niue',
+																																																																																																																																																																			_1: {
+																																																																																																																																																																				ctor: '::',
+																																																																																																																																																																				_0: 'Norfolk Island',
+																																																																																																																																																																				_1: {
+																																																																																																																																																																					ctor: '::',
+																																																																																																																																																																					_0: 'Northern Mariana Islands',
+																																																																																																																																																																					_1: {
+																																																																																																																																																																						ctor: '::',
+																																																																																																																																																																						_0: 'Norway',
+																																																																																																																																																																						_1: {
+																																																																																																																																																																							ctor: '::',
+																																																																																																																																																																							_0: 'Oman',
+																																																																																																																																																																							_1: {
+																																																																																																																																																																								ctor: '::',
+																																																																																																																																																																								_0: 'Pakistan',
+																																																																																																																																																																								_1: {
+																																																																																																																																																																									ctor: '::',
+																																																																																																																																																																									_0: 'Palau',
+																																																																																																																																																																									_1: {
+																																																																																																																																																																										ctor: '::',
+																																																																																																																																																																										_0: 'Palestine',
+																																																																																																																																																																										_1: {
+																																																																																																																																																																											ctor: '::',
+																																																																																																																																																																											_0: 'Panama',
+																																																																																																																																																																											_1: {
+																																																																																																																																																																												ctor: '::',
+																																																																																																																																																																												_0: 'Papua New Guinea',
+																																																																																																																																																																												_1: {
+																																																																																																																																																																													ctor: '::',
+																																																																																																																																																																													_0: 'Paraguay',
+																																																																																																																																																																													_1: {
+																																																																																																																																																																														ctor: '::',
+																																																																																																																																																																														_0: 'Peru',
+																																																																																																																																																																														_1: {
+																																																																																																																																																																															ctor: '::',
+																																																																																																																																																																															_0: 'Philippines',
+																																																																																																																																																																															_1: {
+																																																																																																																																																																																ctor: '::',
+																																																																																																																																																																																_0: 'Pitcairn',
+																																																																																																																																																																																_1: {
+																																																																																																																																																																																	ctor: '::',
+																																																																																																																																																																																	_0: 'Poland',
+																																																																																																																																																																																	_1: {
+																																																																																																																																																																																		ctor: '::',
+																																																																																																																																																																																		_0: 'Portugal',
+																																																																																																																																																																																		_1: {
+																																																																																																																																																																																			ctor: '::',
+																																																																																																																																																																																			_0: 'Puerto Rico',
+																																																																																																																																																																																			_1: {
+																																																																																																																																																																																				ctor: '::',
+																																																																																																																																																																																				_0: 'Qatar',
+																																																																																																																																																																																				_1: {
+																																																																																																																																																																																					ctor: '::',
+																																																																																																																																																																																					_0: 'Réunion',
+																																																																																																																																																																																					_1: {
+																																																																																																																																																																																						ctor: '::',
+																																																																																																																																																																																						_0: 'Romania',
+																																																																																																																																																																																						_1: {
+																																																																																																																																																																																							ctor: '::',
+																																																																																																																																																																																							_0: 'Russian Federation',
+																																																																																																																																																																																							_1: {
+																																																																																																																																																																																								ctor: '::',
+																																																																																																																																																																																								_0: 'Rwanda',
+																																																																																																																																																																																								_1: {
+																																																																																																																																																																																									ctor: '::',
+																																																																																																																																																																																									_0: 'Saint-Barthélemy',
+																																																																																																																																																																																									_1: {
+																																																																																																																																																																																										ctor: '::',
+																																																																																																																																																																																										_0: 'Saint-Helena, Ascension and Tristan da Cunha',
+																																																																																																																																																																																										_1: {
+																																																																																																																																																																																											ctor: '::',
+																																																																																																																																																																																											_0: 'Saint-Kitts and Nevis',
+																																																																																																																																																																																											_1: {
+																																																																																																																																																																																												ctor: '::',
+																																																																																																																																																																																												_0: 'Saint-Lucia',
+																																																																																																																																																																																												_1: {
+																																																																																																																																																																																													ctor: '::',
+																																																																																																																																																																																													_0: 'Saint-Martin (French part)',
+																																																																																																																																																																																													_1: {
+																																																																																																																																																																																														ctor: '::',
+																																																																																																																																																																																														_0: 'Saint-Pierre and Miquelon',
+																																																																																																																																																																																														_1: {
+																																																																																																																																																																																															ctor: '::',
+																																																																																																																																																																																															_0: 'Saint-Vincent and the Grenadines',
+																																																																																																																																																																																															_1: {
+																																																																																																																																																																																																ctor: '::',
+																																																																																																																																																																																																_0: 'Samoa',
+																																																																																																																																																																																																_1: {
+																																																																																																																																																																																																	ctor: '::',
+																																																																																																																																																																																																	_0: 'San Marino',
+																																																																																																																																																																																																	_1: {
+																																																																																																																																																																																																		ctor: '::',
+																																																																																																																																																																																																		_0: 'Sao Tome and Principe',
+																																																																																																																																																																																																		_1: {
+																																																																																																																																																																																																			ctor: '::',
+																																																																																																																																																																																																			_0: 'Saudi Arabia',
+																																																																																																																																																																																																			_1: {
+																																																																																																																																																																																																				ctor: '::',
+																																																																																																																																																																																																				_0: 'Senegal',
+																																																																																																																																																																																																				_1: {
+																																																																																																																																																																																																					ctor: '::',
+																																																																																																																																																																																																					_0: 'Serbia',
+																																																																																																																																																																																																					_1: {
+																																																																																																																																																																																																						ctor: '::',
+																																																																																																																																																																																																						_0: 'Seychelles',
+																																																																																																																																																																																																						_1: {
+																																																																																																																																																																																																							ctor: '::',
+																																																																																																																																																																																																							_0: 'Sierra Leone',
+																																																																																																																																																																																																							_1: {
+																																																																																																																																																																																																								ctor: '::',
+																																																																																																																																																																																																								_0: 'Singapore',
+																																																																																																																																																																																																								_1: {
+																																																																																																																																																																																																									ctor: '::',
+																																																																																																																																																																																																									_0: 'Sint Maarten (Dutch part)',
+																																																																																																																																																																																																									_1: {
+																																																																																																																																																																																																										ctor: '::',
+																																																																																																																																																																																																										_0: 'Slovakia',
+																																																																																																																																																																																																										_1: {
+																																																																																																																																																																																																											ctor: '::',
+																																																																																																																																																																																																											_0: 'Slovenia',
+																																																																																																																																																																																																											_1: {
+																																																																																																																																																																																																												ctor: '::',
+																																																																																																																																																																																																												_0: 'Solomon Islands',
+																																																																																																																																																																																																												_1: {
+																																																																																																																																																																																																													ctor: '::',
+																																																																																																																																																																																																													_0: 'Somalia',
+																																																																																																																																																																																																													_1: {
+																																																																																																																																																																																																														ctor: '::',
+																																																																																																																																																																																																														_0: 'South Africa',
+																																																																																																																																																																																																														_1: {
+																																																																																																																																																																																																															ctor: '::',
+																																																																																																																																																																																																															_0: 'South-Georgia and the South Sandwich Islands',
+																																																																																																																																																																																																															_1: {
+																																																																																																																																																																																																																ctor: '::',
+																																																																																																																																																																																																																_0: 'South-Sudan',
+																																																																																																																																																																																																																_1: {
+																																																																																																																																																																																																																	ctor: '::',
+																																																																																																																																																																																																																	_0: 'Spain',
+																																																																																																																																																																																																																	_1: {
+																																																																																																																																																																																																																		ctor: '::',
+																																																																																																																																																																																																																		_0: 'Sri Lanka',
+																																																																																																																																																																																																																		_1: {
+																																																																																																																																																																																																																			ctor: '::',
+																																																																																																																																																																																																																			_0: 'Sudan',
+																																																																																																																																																																																																																			_1: {
+																																																																																																																																																																																																																				ctor: '::',
+																																																																																																																																																																																																																				_0: 'Suriname',
+																																																																																																																																																																																																																				_1: {
+																																																																																																																																																																																																																					ctor: '::',
+																																																																																																																																																																																																																					_0: 'Svalbard and Jan Mayen',
+																																																																																																																																																																																																																					_1: {
+																																																																																																																																																																																																																						ctor: '::',
+																																																																																																																																																																																																																						_0: 'Swaziland',
+																																																																																																																																																																																																																						_1: {
+																																																																																																																																																																																																																							ctor: '::',
+																																																																																																																																																																																																																							_0: 'Sweden',
+																																																																																																																																																																																																																							_1: {
+																																																																																																																																																																																																																								ctor: '::',
+																																																																																																																																																																																																																								_0: 'Switzerland',
+																																																																																																																																																																																																																								_1: {
+																																																																																																																																																																																																																									ctor: '::',
+																																																																																																																																																																																																																									_0: 'Syrian Arab Republic',
+																																																																																																																																																																																																																									_1: {
+																																																																																																																																																																																																																										ctor: '::',
+																																																																																																																																																																																																																										_0: 'Taiwan, Province of China',
+																																																																																																																																																																																																																										_1: {
+																																																																																																																																																																																																																											ctor: '::',
+																																																																																																																																																																																																																											_0: 'Tajikistan',
+																																																																																																																																																																																																																											_1: {
+																																																																																																																																																																																																																												ctor: '::',
+																																																																																																																																																																																																																												_0: 'Tanzania, United Republic of',
+																																																																																																																																																																																																																												_1: {
+																																																																																																																																																																																																																													ctor: '::',
+																																																																																																																																																																																																																													_0: 'Thailand',
+																																																																																																																																																																																																																													_1: {
+																																																																																																																																																																																																																														ctor: '::',
+																																																																																																																																																																																																																														_0: 'Timor-Leste',
+																																																																																																																																																																																																																														_1: {
+																																																																																																																																																																																																																															ctor: '::',
+																																																																																																																																																																																																																															_0: 'Togo',
+																																																																																																																																																																																																																															_1: {
+																																																																																																																																																																																																																																ctor: '::',
+																																																																																																																																																																																																																																_0: 'Tokelau',
+																																																																																																																																																																																																																																_1: {
+																																																																																																																																																																																																																																	ctor: '::',
+																																																																																																																																																																																																																																	_0: 'Tonga',
+																																																																																																																																																																																																																																	_1: {
+																																																																																																																																																																																																																																		ctor: '::',
+																																																																																																																																																																																																																																		_0: 'Trinidad and Tobago',
+																																																																																																																																																																																																																																		_1: {
+																																																																																																																																																																																																																																			ctor: '::',
+																																																																																																																																																																																																																																			_0: 'Tunisia',
+																																																																																																																																																																																																																																			_1: {
+																																																																																																																																																																																																																																				ctor: '::',
+																																																																																																																																																																																																																																				_0: 'Turkey',
+																																																																																																																																																																																																																																				_1: {
+																																																																																																																																																																																																																																					ctor: '::',
+																																																																																																																																																																																																																																					_0: 'Turkmenistan',
+																																																																																																																																																																																																																																					_1: {
+																																																																																																																																																																																																																																						ctor: '::',
+																																																																																																																																																																																																																																						_0: 'Turks and Caicos Islands',
+																																																																																																																																																																																																																																						_1: {
+																																																																																																																																																																																																																																							ctor: '::',
+																																																																																																																																																																																																																																							_0: 'Tuvalu',
+																																																																																																																																																																																																																																							_1: {
+																																																																																																																																																																																																																																								ctor: '::',
+																																																																																																																																																																																																																																								_0: 'Uganda',
+																																																																																																																																																																																																																																								_1: {
+																																																																																																																																																																																																																																									ctor: '::',
+																																																																																																																																																																																																																																									_0: 'Ukraine',
+																																																																																																																																																																																																																																									_1: {
+																																																																																																																																																																																																																																										ctor: '::',
+																																																																																																																																																																																																																																										_0: 'UAE',
+																																																																																																																																																																																																																																										_1: {
+																																																																																																																																																																																																																																											ctor: '::',
+																																																																																																																																																																																																																																											_0: 'United Kingdom',
+																																																																																																																																																																																																																																											_1: {
+																																																																																																																																																																																																																																												ctor: '::',
+																																																																																																																																																																																																																																												_0: 'USA',
+																																																																																																																																																																																																																																												_1: {
+																																																																																																																																																																																																																																													ctor: '::',
+																																																																																																																																																																																																																																													_0: 'United States Minor Outlying Islands',
+																																																																																																																																																																																																																																													_1: {
+																																																																																																																																																																																																																																														ctor: '::',
+																																																																																																																																																																																																																																														_0: 'Uruguay',
+																																																																																																																																																																																																																																														_1: {
+																																																																																																																																																																																																																																															ctor: '::',
+																																																																																																																																																																																																																																															_0: 'Uzbekistan',
+																																																																																																																																																																																																																																															_1: {
+																																																																																																																																																																																																																																																ctor: '::',
+																																																																																																																																																																																																																																																_0: 'Vanuatu',
+																																																																																																																																																																																																																																																_1: {
+																																																																																																																																																																																																																																																	ctor: '::',
+																																																																																																																																																																																																																																																	_0: 'Venezuela, Bolivarian Republic of',
+																																																																																																																																																																																																																																																	_1: {
+																																																																																																																																																																																																																																																		ctor: '::',
+																																																																																																																																																																																																																																																		_0: 'Vietnam',
+																																																																																																																																																																																																																																																		_1: {
+																																																																																																																																																																																																																																																			ctor: '::',
+																																																																																																																																																																																																																																																			_0: 'Virgin-Islands, British',
+																																																																																																																																																																																																																																																			_1: {
+																																																																																																																																																																																																																																																				ctor: '::',
+																																																																																																																																																																																																																																																				_0: 'Virgin-Islands, U.S.',
+																																																																																																																																																																																																																																																				_1: {
+																																																																																																																																																																																																																																																					ctor: '::',
+																																																																																																																																																																																																																																																					_0: 'Wallis and Futuna',
+																																																																																																																																																																																																																																																					_1: {
+																																																																																																																																																																																																																																																						ctor: '::',
+																																																																																																																																																																																																																																																						_0: 'Western Sahara',
+																																																																																																																																																																																																																																																						_1: {
+																																																																																																																																																																																																																																																							ctor: '::',
+																																																																																																																																																																																																																																																							_0: 'Yemen',
+																																																																																																																																																																																																																																																							_1: {
+																																																																																																																																																																																																																																																								ctor: '::',
+																																																																																																																																																																																																																																																								_0: 'Zambia',
+																																																																																																																																																																																																																																																								_1: {
+																																																																																																																																																																																																																																																									ctor: '::',
+																																																																																																																																																																																																																																																									_0: 'Zimbabwe',
+																																																																																																																																																																																																																																																									_1: {ctor: '[]'}
+																																																																																																																																																																																																																																																								}
+																																																																																																																																																																																																																																																							}
+																																																																																																																																																																																																																																																						}
+																																																																																																																																																																																																																																																					}
+																																																																																																																																																																																																																																																				}
+																																																																																																																																																																																																																																																			}
+																																																																																																																																																																																																																																																		}
+																																																																																																																																																																																																																																																	}
+																																																																																																																																																																																																																																																}
+																																																																																																																																																																																																																																															}
+																																																																																																																																																																																																																																														}
+																																																																																																																																																																																																																																													}
+																																																																																																																																																																																																																																												}
+																																																																																																																																																																																																																																											}
+																																																																																																																																																																																																																																										}
+																																																																																																																																																																																																																																									}
+																																																																																																																																																																																																																																								}
+																																																																																																																																																																																																																																							}
+																																																																																																																																																																																																																																						}
+																																																																																																																																																																																																																																					}
+																																																																																																																																																																																																																																				}
+																																																																																																																																																																																																																																			}
+																																																																																																																																																																																																																																		}
+																																																																																																																																																																																																																																	}
+																																																																																																																																																																																																																																}
+																																																																																																																																																																																																																															}
+																																																																																																																																																																																																																														}
+																																																																																																																																																																																																																													}
+																																																																																																																																																																																																																												}
+																																																																																																																																																																																																																											}
+																																																																																																																																																																																																																										}
+																																																																																																																																																																																																																									}
+																																																																																																																																																																																																																								}
+																																																																																																																																																																																																																							}
+																																																																																																																																																																																																																						}
+																																																																																																																																																																																																																					}
+																																																																																																																																																																																																																				}
+																																																																																																																																																																																																																			}
+																																																																																																																																																																																																																		}
+																																																																																																																																																																																																																	}
+																																																																																																																																																																																																																}
+																																																																																																																																																																																																															}
+																																																																																																																																																																																																														}
+																																																																																																																																																																																																													}
+																																																																																																																																																																																																												}
+																																																																																																																																																																																																											}
+																																																																																																																																																																																																										}
+																																																																																																																																																																																																									}
+																																																																																																																																																																																																								}
+																																																																																																																																																																																																							}
+																																																																																																																																																																																																						}
+																																																																																																																																																																																																					}
+																																																																																																																																																																																																				}
+																																																																																																																																																																																																			}
+																																																																																																																																																																																																		}
+																																																																																																																																																																																																	}
+																																																																																																																																																																																																}
+																																																																																																																																																																																															}
+																																																																																																																																																																																														}
+																																																																																																																																																																																													}
+																																																																																																																																																																																												}
+																																																																																																																																																																																											}
+																																																																																																																																																																																										}
+																																																																																																																																																																																									}
+																																																																																																																																																																																								}
+																																																																																																																																																																																							}
+																																																																																																																																																																																						}
+																																																																																																																																																																																					}
+																																																																																																																																																																																				}
+																																																																																																																																																																																			}
+																																																																																																																																																																																		}
+																																																																																																																																																																																	}
+																																																																																																																																																																																}
+																																																																																																																																																																															}
+																																																																																																																																																																														}
+																																																																																																																																																																													}
+																																																																																																																																																																												}
+																																																																																																																																																																											}
+																																																																																																																																																																										}
+																																																																																																																																																																									}
+																																																																																																																																																																								}
+																																																																																																																																																																							}
+																																																																																																																																																																						}
+																																																																																																																																																																					}
+																																																																																																																																																																				}
+																																																																																																																																																																			}
+																																																																																																																																																																		}
+																																																																																																																																																																	}
+																																																																																																																																																																}
+																																																																																																																																																															}
+																																																																																																																																																														}
+																																																																																																																																																													}
+																																																																																																																																																												}
+																																																																																																																																																											}
+																																																																																																																																																										}
+																																																																																																																																																									}
+																																																																																																																																																								}
+																																																																																																																																																							}
+																																																																																																																																																						}
+																																																																																																																																																					}
+																																																																																																																																																				}
+																																																																																																																																																			}
+																																																																																																																																																		}
+																																																																																																																																																	}
+																																																																																																																																																}
+																																																																																																																																															}
+																																																																																																																																														}
+																																																																																																																																													}
+																																																																																																																																												}
+																																																																																																																																											}
+																																																																																																																																										}
+																																																																																																																																									}
+																																																																																																																																								}
+																																																																																																																																							}
+																																																																																																																																						}
+																																																																																																																																					}
+																																																																																																																																				}
+																																																																																																																																			}
+																																																																																																																																		}
+																																																																																																																																	}
+																																																																																																																																}
+																																																																																																																															}
+																																																																																																																														}
+																																																																																																																													}
+																																																																																																																												}
+																																																																																																																											}
+																																																																																																																										}
+																																																																																																																									}
+																																																																																																																								}
+																																																																																																																							}
+																																																																																																																						}
+																																																																																																																					}
+																																																																																																																				}
+																																																																																																																			}
+																																																																																																																		}
+																																																																																																																	}
+																																																																																																																}
+																																																																																																															}
+																																																																																																														}
+																																																																																																													}
+																																																																																																												}
+																																																																																																											}
+																																																																																																										}
+																																																																																																									}
+																																																																																																								}
+																																																																																																							}
+																																																																																																						}
+																																																																																																					}
+																																																																																																				}
+																																																																																																			}
+																																																																																																		}
+																																																																																																	}
+																																																																																																}
+																																																																																															}
+																																																																																														}
+																																																																																													}
+																																																																																												}
+																																																																																											}
+																																																																																										}
+																																																																																									}
+																																																																																								}
+																																																																																							}
+																																																																																						}
+																																																																																					}
+																																																																																				}
+																																																																																			}
+																																																																																		}
+																																																																																	}
+																																																																																}
+																																																																															}
+																																																																														}
+																																																																													}
+																																																																												}
+																																																																											}
+																																																																										}
+																																																																									}
+																																																																								}
+																																																																							}
+																																																																						}
+																																																																					}
+																																																																				}
+																																																																			}
+																																																																		}
+																																																																	}
+																																																																}
+																																																															}
+																																																														}
+																																																													}
+																																																												}
+																																																											}
+																																																										}
+																																																									}
+																																																								}
+																																																							}
+																																																						}
+																																																					}
+																																																				}
+																																																			}
+																																																		}
+																																																	}
+																																																}
+																																															}
+																																														}
+																																													}
+																																												}
+																																											}
+																																										}
+																																									}
+																																								}
+																																							}
+																																						}
+																																					}
+																																				}
+																																			}
+																																		}
+																																	}
+																																}
+																															}
+																														}
+																													}
+																												}
+																											}
+																										}
+																									}
+																								}
+																							}
+																						}
+																					}
+																				}
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+};
+var _user$project$Countries$options = function (selectedValue) {
+	return A2(
+		_elm_lang$core$Basics_ops['++'],
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$option,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$value(''),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$selected(
+							_elm_lang$core$Native_Utils.eq(selectedValue, '')),
+						_1: {ctor: '[]'}
+					}
+				},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text(''),
+					_1: {ctor: '[]'}
+				}),
+			_1: {ctor: '[]'}
+		},
+		A2(
+			_elm_lang$core$List$map,
+			function (c) {
+				return A2(
+					_elm_lang$html$Html$option,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$value(c),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$selected(
+								_elm_lang$core$Native_Utils.eq(selectedValue, c)),
+							_1: {ctor: '[]'}
+						}
+					},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text(c),
+						_1: {ctor: '[]'}
+					});
+			},
+			_user$project$Countries$list));
+};

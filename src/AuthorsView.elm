@@ -9,7 +9,6 @@ import MainMessages exposing (..)
 import MainModel exposing (..)
 import MainUpdate exposing (..)
 import Encoders exposing (..)
-import Json.Decode
 
 
 view : Model -> Html Msg
@@ -261,7 +260,7 @@ renderAffiliation model authorId ( affiliation, index ) =
                         [ class "country form__input form__input--dropdown"
                         , list "countries-list"
                         , name "country"
-                        , onChange (UpdateCountry authorId affiliation.id)
+                        , onInput (UpdateCountry authorId affiliation.id)
                         , onFocus (SetFocusedIds authorId affiliation.id)
                         , value affiliation.country
                         ]
@@ -311,8 +310,3 @@ renderDataLists affiliations =
 
 renderOption x =
     option [ value x ] []
-
-
-onChange : (String -> msg) -> Attribute msg
-onChange handler =
-    on "change" <| Json.Decode.map handler <| Json.Decode.at [ "target", "value" ] Json.Decode.string

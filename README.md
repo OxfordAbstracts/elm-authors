@@ -1,3 +1,4 @@
+### Elm-authors version 1.0.22
 
 Run npm start to see this module in action, in the browser.
 
@@ -25,4 +26,4 @@ to the main application, and to listen form changes in the CSS classes
 The author fields are fully customizable.
 The affiliation fields can be toggled on and off.
 
-To run: `elm-make Main.elm --output=index.js`
+To build: `elm-make Main.elm --output=index.js`

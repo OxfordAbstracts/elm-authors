@@ -1,77 +1,24 @@
 {
-  "_args": [
-    [
-      "elm-authors@1.0.21",
-      "/Users/marziyehahmed/Coding/Oxford Abstracts/application"
-    ]
-  ],
-  "_from": "elm-authors@1.0.21",
-  "_id": "elm-authors@1.0.21",
-  "_inCache": true,
-  "_installable": true,
-  "_location": "/elm-authors",
-  "_nodeVersion": "6.0.0",
-  "_npmOperationalInternal": {
-    "host": "packages-18-east.internal.npmjs.com",
-    "tmp": "tmp/elm-authors-1.0.21.tgz_1490365114817_0.6517067714594305"
-  },
-  "_npmUser": {
-    "email": "conorc1000@gmail.com",
-    "name": "conorc1000"
-  },
-  "_npmVersion": "3.8.6",
-  "_phantomChildren": {},
-  "_requested": {
-    "name": "elm-authors",
-    "raw": "elm-authors@1.0.21",
-    "rawSpec": "1.0.21",
-    "scope": null,
-    "spec": "1.0.21",
-    "type": "version"
-  },
-  "_requiredBy": [
-    "/"
-  ],
-  "_resolved": "https://registry.npmjs.org/elm-authors/-/elm-authors-1.0.21.tgz",
-  "_shasum": "0874deb898b203c554a57571a75ab25a03e7ddb3",
-  "_shrinkwrap": null,
-  "_spec": "elm-authors@1.0.21",
-  "_where": "/Users/marziyehahmed/Coding/Oxford Abstracts/application",
-  "author": "",
-  "bugs": {
-    "url": "https://github.com/OxfordAbstracts/elm-authors/issues"
-  },
-  "dependencies": {
-    "elm-test": "^0.18.2"
-  },
-  "description": "To open compiled code open index.html",
-  "devDependencies": {},
-  "directories": {},
-  "dist": {
-    "shasum": "0874deb898b203c554a57571a75ab25a03e7ddb3",
-    "tarball": "https://registry.npmjs.org/elm-authors/-/elm-authors-1.0.21.tgz"
-  },
-  "gitHead": "e1e2a79f497013b8223ad9a339f94b49380e9ff9",
-  "homepage": "https://github.com/OxfordAbstracts/elm-authors#readme",
-  "license": "ISC",
-  "main": "index.js",
-  "maintainers": [
-    {
-      "email": "conorc1000@gmail.com",
-      "name": "conorc1000"
-    }
-  ],
   "name": "elm-authors",
-  "optionalDependencies": {},
-  "readme": "ERROR: No README data found!",
+  "version": "1.0.21",
+  "description": "To open compiled code open index.html",
+  "main": "index.js",
+  "scripts": {
+    "test": "elm-test",
+    "start": "elm-live Main.elm --output=index.js --open",
+    "build": "elm-make Main.elm --output=index.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/OxfordAbstracts/elm-authors.git"
   },
-  "scripts": {
-    "build": "elm-make Main.elm --output=index.js",
-    "start": "elm-live Main.elm --output=index.js --open",
-    "test": "elm-test"
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/OxfordAbstracts/elm-authors/issues"
   },
-  "version": "1.0.21"
+  "homepage": "https://github.com/OxfordAbstracts/elm-authors#readme",
+  "dependencies": {
+    "elm-test": "^0.18.2"
+  }
 }

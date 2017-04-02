@@ -217,6 +217,8 @@ renderAffiliation model authorId ( affiliation, index ) =
                         , for ("affiliationInstitution-" ++ toString index)
                         ]
                         [ text "Institution" ]
+                    , div [] [ text (toString authorId) ]
+                    , div [] [ text (toString affiliation.id) ]
                     , input
                         [ class "form__input institution"
                         , list "institutions-list"
@@ -256,6 +258,8 @@ renderAffiliation model authorId ( affiliation, index ) =
             if model.showCountry then
                 div [ class "inline-element" ]
                     [ label [ class "form__label" ] [ text "Country" ]
+                    , div [] [ text (toString authorId) ]
+                    , div [] [ text (toString affiliation.id) ]
                     , select
                         [ class "country form__input form__input--dropdown"
                         , list "countries-list"
@@ -282,6 +286,9 @@ renderAffiliation model authorId ( affiliation, index ) =
                 , cityDiv
                 , countryDiv
                 ]
+            , div
+                []
+                [ text (toString model) ]
             ]
 
 

@@ -1,4 +1,4 @@
-### Elm-authors version 1.0.22
+### Elm-authors version 1.0.26
 
 Run npm start to see this module in action, in the browser.
 

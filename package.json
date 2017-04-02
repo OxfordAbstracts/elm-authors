@@ -6,8 +6,7 @@
   "scripts": {
     "test": "elm-test",
     "start": "elm-live Main.elm --output=index.js --open",
-    "build": "elm-make Main.elm --output=index.js",
-    "prepublish": "npm run build"
+    "build": "elm-make Main.elm --output=index.js"
   },
   "repository": {
     "type": "git",

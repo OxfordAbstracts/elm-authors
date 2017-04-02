@@ -24,3 +24,5 @@ to the main application, and to listen form changes in the CSS classes
 
 The author fields are fully customizable.
 The affiliation fields can be toggled on and off.
+
+To run: `elm-make Main.elm --output=index.js`

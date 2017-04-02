@@ -27,7 +27,7 @@ dummyAuthors =
 dummyAuthor1 : Author
 dummyAuthor1 =
     assignMaxAffiliationId
-        { fields = dummyFieldResponses
+        { authorFieldResponses = dummyFieldResponses
         , affiliations = dummyAffiliations
         , maxAffiliationId = 0
         , id = 1
@@ -37,7 +37,7 @@ dummyAuthor1 =
 dummyAuthor2 : Author
 dummyAuthor2 =
     assignMaxAffiliationId
-        { fields = dummyFieldResponses
+        { authorFieldResponses = dummyFieldResponses
         , affiliations = dummyAffiliations
         , maxAffiliationId = 0
         , id = 2
@@ -63,6 +63,7 @@ dummyAuthorField1 =
     , title = "First Name"
     , description = "Please put your first name here"
     , inputType = StringType
+    , questionType = "string"
     }
 
 
@@ -72,6 +73,7 @@ dummyAuthorField2 =
     , title = "Last Initial"
     , description = "Please put your last initial here"
     , inputType = StringType
+    , questionType = "string"
     }
 
 
@@ -81,6 +83,7 @@ dummyAuthorField3 =
     , title = "Presenting Paper"
     , description = "are you presenting"
     , inputType = BoolType
+    , questionType = "bool"
     }
 
 

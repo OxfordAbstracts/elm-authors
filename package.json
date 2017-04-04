@@ -1,6 +1,6 @@
 {
   "name": "elm-authors",
-  "version": "1.0.21",
+  "version": "1.0.26",
   "description": "To open compiled code open index.html",
   "main": "index.js",
   "scripts": {

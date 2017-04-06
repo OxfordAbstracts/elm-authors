@@ -25,6 +25,7 @@ type alias Flags =
     , showInstitution : Bool
     , showCity : Bool
     , showCountry : Bool
+    , class : String
     }
 
 

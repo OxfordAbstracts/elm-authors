@@ -10,6 +10,8 @@ import MainModel exposing (..)
 import MainUpdate exposing (..)
 import Encoders exposing (..)
 import Json.Decode
+import List.Extra exposing (indexedFoldr, updateAt)
+import Exts.List exposing (chunk)
 
 
 view : Model -> Html Msg
@@ -64,12 +66,15 @@ renderAuthor model ( author, index ) =
             else
                 div []
                     []
+
+        chunkifiedAuthorFields =
+            chunk 3 model.authorFields
     in
         div [ class "author form__question-sub-section" ]
             [ div [ class "form__label" ] [ text ("Author " ++ toString index) ]
             , div [ class "form__question-sub-section--inline" ]
                 --for each of the authorFields we want to add a div like this
-                [ div [ class "form__question-sub-section--inline" ] (List.map (renderFieldResponses model author.authorFieldResponses author.id) model.authorFields)
+                [ div [ class "form__question-sub-section--inline" ] (List.map (renderFieldResponsesLine model author.authorFieldResponses author.id) chunkifiedAuthorFields)
                 ]
             , span [ class "remove button button--secondary" ]
                 [ div
@@ -80,6 +85,11 @@ renderAuthor model ( author, index ) =
                 [ (renderAffiliations model author.affiliations author.id) ]
             , addAffiliationButton
             ]
+
+
+renderFieldResponsesLine model authorFieldResponses authorId authorFieldLine =
+    div [ class "form__question-sub-section form__question-sub-section--inline" ]
+        (List.map (renderFieldResponses model authorFieldResponses authorId) authorFieldLine)
 
 
 renderFieldResponses model authorFieldResponses authorId authorField =
@@ -214,7 +224,7 @@ renderAffiliation model authorId ( affiliation, index ) =
             if model.showInstitution then
                 div [ class "inline-element" ]
                     [ label
-                        [ class "form__label"]
+                        [ class "form__label" ]
                         [ text "Institution" ]
                     , input
                         [ class "form__input institution"
@@ -234,7 +244,7 @@ renderAffiliation model authorId ( affiliation, index ) =
             if model.showCity then
                 div [ class "inline-element" ]
                     [ label
-                        [ class "form__label"]
+                        [ class "form__label" ]
                         [ text "City" ]
                     , input
                         [ class "city form__input"

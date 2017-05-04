@@ -45,6 +45,7 @@ body {
   font-family: 'Roboto', Helvetica, Ariel, sans-serif;
   font-weight: 400;
   background-color: #f6f6f6;
+  color: #0E0B0F; /* Stage 3 - Black colour */
 }
 blockquote, q {
   quotes: none;
@@ -178,6 +179,10 @@ pre {
     }
     .button--new:hover {
       color: #ffffff;
+    }
+    .button--delete {
+      color: #B91500; /* Stage 3 - Error Colour */
+      font-weight: 600;
     }
     .button--cta {
       font-size: 1.25em;
@@ -347,7 +352,8 @@ pre {
     height: 3.125rem;
   }
 
-  .nav__link {
+  .nav__link,
+  .nav__link:link {
     display: inline-block;
     height: 2.1875rem; /* 35px */
     /* ensures equal vertical sizing across navbar */
@@ -371,6 +377,9 @@ pre {
   .nav__link:active {
       color: #ffffff;
   }
+    .nav__link—-brandcolour, .nav__link--brandcolour:link {
+      color: #003066;
+   }
   /* "New" state styles for child elements */
   .nav--new .nav__link,
   .nav--new .nav__link:visited {
@@ -394,19 +403,11 @@ pre {
       .nav__link--copy:hover {
         cursor: default;
       }
-      .nav__link—-brandcolour, .nav__link--brandcolour:link {
-        color: #003066;
-      }
 
   .nav__breadcrumb-chevron {
       color: #dedede;
       font-size: 0.8em;
   }
-@media (max-width: 48rem) {
-  .nav__link--greeting {
-    display: none;
-  }
-}
 
 /*=======================================================
   Banner
@@ -1517,48 +1518,11 @@ pre {
 
   .form__subtitle {
     display: block;
-    color: #003066;
-    font-weight: 700;
-    line-height: 1rem;
+    color: #073D79; /* Stage 3 - Primary Blue Colour */
+    font-weight: 900;
+    line-height: 1.5rem;
     margin-bottom: 1.5rem;
-    font-size: 1.125rem;
   }
-
-
-.form__question-sub-section--inline > .inline-element{
-display: table-cell;
-padding-right: 1em;
-}
-
-@media (max-width: 40rem) {
-.form__question-sub-section--inline > .inline-element {
-display: block;
-}
-}
-
-.form__question-sub-section.author{
-position: relative;
-padding: 1em;
-background: #e6e6e6;
-}
-
-.form__question-sub-section.affiliation {
-position: relative;
-padding-top: 1em;
-padding-right: 1em;
-padding-left: 1em;
-background: #e6e6e6;
-margin-bottom : 0em;
-}
-
-.form__input.city:invalid,
-.form__input.institution:invalid,
-.form__input.first-name:invalid,
-.form__input.last-name:invalid {
-outline: #9c2c00 solid 2px;
-}
-
-
 
   /* "form__question" becomes a namespace for sub-components of one question */
   .form__question {
@@ -1602,6 +1566,7 @@ outline: #9c2c00 solid 2px;
 
   .form__question-sub-section {
     margin-bottom: 1.5rem;
+    position: relative;
   }
       .form__question-sub-section--table { /* to be used with form__question-section--table */
         display: table-cell;
@@ -1625,13 +1590,14 @@ outline: #9c2c00 solid 2px;
     margin-bottom: 0.5rem;
     letter-spacing: 0.5px;
     line-height: 1.25;
+    font-size: 0.875rem;
   }
   .form__question-section--read-only .form__label:first-child {
     /* .form__question-section--read-only is a
       Read-only variant which has effect on child-elems
       to be refactored WITH the removal of datatables.
       (child selector used to overcome limitations of datatables) */
-    font-size: 1.125rem;
+    font-size: 1rem;
     color: #000000;
     font-weight: bold;
     line-height: 1.25;
@@ -1644,7 +1610,6 @@ outline: #9c2c00 solid 2px;
     margin: 0 0 0.5rem;
     letter-spacing: 0.5px;
     line-height: 1.25;
-    font-size: 0.875rem;
   }
       .form__label--sub { /* for additional input description */
         font-size: 0.875rem; /* 14px */
@@ -1677,6 +1642,10 @@ outline: #9c2c00 solid 2px;
     display: block;
     height: 2.625rem;
     width: 100%;
+    background-color: #FCFCFC; /* Stage 3 - White colour */
+    -webkit-box-shadow: inset 0 1px 2px 0 rgba(14,11,15,0.5);
+    -moz-box-shadow: inset 0 1px 2px 0 rgba(14,11,15,0.5);
+    box-shadow: inset 0 1px 2px 0 rgba(14,11,15,0.5);
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
@@ -1684,7 +1653,7 @@ outline: #9c2c00 solid 2px;
     margin: 0 0 1rem;
     color: #00AA61;
     font-size: 0.875rem;
-    border: 1px solid #bdbdbd;
+    border: 1px solid rgba(14,11,15,0.5); /* Stage 3 - Black colour */
     border-radius: 3px;
     -webkit-transition: all 0.2s linear;
     -moz-transition: all 0.2s linear;
@@ -1802,6 +1771,7 @@ outline: #9c2c00 solid 2px;
     outline-offset: 1px;
   }
   .form__checkbox-label {
+    font-size: 0.875rem;
     display: block;
     padding-left: 1rem;
     text-indent: -1rem;
@@ -2498,9 +2468,7 @@ outline: #9c2c00 solid 2px;
   Table
 =======================================================*/
 
-.table {
-  margin-bottom: 5rem;
-}
+.table {}
 
   .table__row {}
       .table__row--incomplete-submission {
@@ -2977,6 +2945,19 @@ font-size: 1.125rem;
 }
 
 
+/* @Conorc1000 */
+        .form__question-sub-section.author{
+        padding: 1em;
+        background: #e6e6e6;
+        }
+
+        .form__input.city:invalid,
+        .form__input.institution:invalid,
+        .form__input.first-name:invalid,
+        .form__input.last-name:invalid {
+        outline: #9c2c00 solid 2px;
+        }
+/**/
 /* @naazy */
         .prog-cell { /*
           SUGGESTED: convert to .prog-table__cell */
@@ -3248,3 +3229,83 @@ font-size: 1.125rem;
   padding:0.5rem;
   cursor:pointer;
 }
+
+/*=======================================================
+  Authors & Affiliations
+  (for custom styles in the Authors & Affils question)
+=======================================================*/
+
+.aa {
+  background-color: #f6f6f6;
+  padding: 1.125rem 1rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+  border-bottom: 1px solid #0E0B0F; /* Stage 3 - Black Colour */
+}
+  .aa__sub-section {
+    position: relative;
+  }
+      .aa__sub-section--table {
+        display: table;
+        table-layout: fixed;
+        width: 100%;
+      }
+  .aa__field {
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+  }
+  .aa__field:first-child {
+    padding-left: 0;
+  }
+  .aa__field:last-child {
+    padding-right: 0;
+  }
+      .aa__field--tablecell {
+        display: table-cell;
+      }
+
+  .aa__add-author-button {
+    background-color: #073D79; /* Stage 3 - Primary Blue Colour */
+    margin-left: 1rem;
+    color: #fcfcfc; /* Stage 3 - White Colour */
+    border-color: #666666; /* Stage 3 - Tertiary Colour */
+  }
+  .aa__remove-button {
+    position: absolute;
+    top: 0rem;
+    right: 0rem;
+  }
+      .aa__remove-button--top-indent {
+        top: 1.125rem;
+        right: 1rem;
+      }
+
+  .aa__subtitle {
+    display: block;
+    color: #073D79; /* Stage 3 - Primary Blue Colour */
+    font-weight: 900;
+    line-height: 1.5rem;
+  }
+      .aa__subtitle--small {
+        font-size: 0.875rem;
+      }
+
+  .aa__dividing-title {
+    padding-bottom: 0.625rem;
+    margin-bottom: 0.625rem;
+  }
+      .aa__dividing-title--linebreak {
+        border-bottom: 1px solid #dbdbdb; /* Stage 3 - Secondary Colour */
+      }
+
+  .aa__inner-container {
+    padding: 1rem;
+    margin-bottom: 0rem;
+  }
+
+  @media (max-width: 40rem) {
+    .aa__field--tablecell {
+      display: block;
+      padding: 0;
+    }
+  }

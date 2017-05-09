@@ -1,0 +1,58 @@
+var _user$project$DummyTypes$dummyAffiliation2 = {institution: 'UCL', city: 'London', country: 'United Kingdom', id: 2};
+var _user$project$DummyTypes$dummyAffiliation1 = {institution: 'Leeds University', city: 'Leeds', country: 'United Kingdom', id: 1};
+var _user$project$DummyTypes$dummyAffiliations = {
+	ctor: '::',
+	_0: _user$project$DummyTypes$dummyAffiliation1,
+	_1: {
+		ctor: '::',
+		_0: _user$project$DummyTypes$dummyAffiliation2,
+		_1: {ctor: '[]'}
+	}
+};
+var _user$project$DummyTypes$dummyAuthorField3 = {id: 2, title: 'Presenting Paper', description: 'are you presenting', inputType: _user$project$MainModel$BoolType, questionType: 'bool'};
+var _user$project$DummyTypes$dummyAuthorField2 = {id: 1, title: 'Last Initial', description: 'Please put your last initial here', inputType: _user$project$MainModel$StringType, questionType: 'string'};
+var _user$project$DummyTypes$dummyAuthorField1 = {id: 0, title: 'First Name', description: 'Please put your first name here', inputType: _user$project$MainModel$StringType, questionType: 'string'};
+var _user$project$DummyTypes$dummyFieldResponses = {
+	ctor: '::',
+	_0: {id: 0, authorFieldId: 0, value: 'Conor'},
+	_1: {
+		ctor: '::',
+		_0: {id: 1, authorFieldId: 1, value: 'Campbell'},
+		_1: {ctor: '[]'}
+	}
+};
+var _user$project$DummyTypes$dummyAuthor2 = _user$project$MainModel$assignMaxAffiliationId(
+	{authorFieldResponses: _user$project$DummyTypes$dummyFieldResponses, affiliations: _user$project$DummyTypes$dummyAffiliations, maxAffiliationId: 0, id: 2});
+var _user$project$DummyTypes$dummyAuthor1 = _user$project$MainModel$assignMaxAffiliationId(
+	{authorFieldResponses: _user$project$DummyTypes$dummyFieldResponses, affiliations: _user$project$DummyTypes$dummyAffiliations, maxAffiliationId: 0, id: 1});
+var _user$project$DummyTypes$dummyAuthors = {
+	ctor: '::',
+	_0: _user$project$DummyTypes$dummyAuthor1,
+	_1: {
+		ctor: '::',
+		_0: _user$project$DummyTypes$dummyAuthor2,
+		_1: {ctor: '[]'}
+	}
+};
+var _user$project$DummyTypes$dummyIniatialModel = _user$project$MainModel$initialModel;
+var _user$project$DummyTypes$dummyModel = _elm_lang$core$Native_Utils.update(
+	_user$project$DummyTypes$dummyIniatialModel,
+	{
+		authors: _user$project$DummyTypes$dummyAuthors,
+		authorMaxId: _user$project$MainModel$getMaxAuthorId(_user$project$DummyTypes$dummyAuthors),
+		focusedAffiliationId: 1,
+		focusedAuthorId: 1,
+		authorFields: {
+			ctor: '::',
+			_0: _user$project$DummyTypes$dummyAuthorField1,
+			_1: {
+				ctor: '::',
+				_0: _user$project$DummyTypes$dummyAuthorField2,
+				_1: {
+					ctor: '::',
+					_0: _user$project$DummyTypes$dummyAuthorField3,
+					_1: {ctor: '[]'}
+				}
+			}
+		}
+	});

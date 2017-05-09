@@ -21,8 +21,7 @@ init flags =
 
         authors =
             Decoders.authors flags.authorsList
-
-        { affiliationLimit, authorLimit, showInstitution, showCity, showCountry, class} = flags
+        { affiliationLimit, authorLimit, showInstitution, showCity, showState, showCountry, class} = flags
 
         authorsWithBlankResponses =
             List.map (addBlankResponsesToAuthor authorFields) authors
@@ -53,6 +52,7 @@ init flags =
                 , authorFields = authorFields
                 , showInstitution = showInstitution
                 , showCity = showCity
+                , showState = showState
                 , showCountry = showCountry
                 , class = class
             }

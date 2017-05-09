@@ -1,0 +1,115 @@
+var _user$project$MainUpdateTests$all = A2(
+	_elm_community$elm_test$Test$describe,
+	'MainUpdate tests',
+	{
+		ctor: '::',
+		_0: A2(
+			_elm_community$elm_test$Test$test,
+			'getBlurredAuthorAffiliations get a list of all the affiliations which are not focused on',
+			function (_p0) {
+				var _p1 = _p0;
+				var blurredAuthorAffiliations = _user$project$MainUpdate$getBlurredAuthorAffiliations(_user$project$DummyTypes$dummyModel);
+				return A2(_elm_community$elm_test$Expect$equal, blurredAuthorAffiliations, _user$project$DummyTypes$dummyAffiliations);
+			}),
+		_1: {
+			ctor: '::',
+			_0: A2(
+				_elm_community$elm_test$Test$test,
+				'The updateInstitution case of the update function returns the model and Cmd tuple with the updated institution',
+				function (_p2) {
+					var _p3 = _p2;
+					var expectedAuthor1 = _elm_lang$core$Native_Utils.update(
+						_user$project$DummyTypes$dummyAuthor1,
+						{
+							affiliations: {
+								ctor: '::',
+								_0: _elm_lang$core$Native_Utils.update(
+									_user$project$DummyTypes$dummyAffiliation1,
+									{institution: 'New Institution'}),
+								_1: {
+									ctor: '::',
+									_0: _user$project$DummyTypes$dummyAffiliation2,
+									_1: {ctor: '[]'}
+								}
+							}
+						});
+					var expectedAuthors = {
+						ctor: '::',
+						_0: expectedAuthor1,
+						_1: {
+							ctor: '::',
+							_0: _user$project$DummyTypes$dummyAuthor2,
+							_1: {ctor: '[]'}
+						}
+					};
+					var expectedModel = _elm_lang$core$Native_Utils.update(
+						_user$project$DummyTypes$dummyModel,
+						{authors: expectedAuthors});
+					var encodedAuthors = _user$project$Encoders$authors(expectedModel.authors);
+					var tuple = A2(
+						_user$project$MainUpdate$update,
+						A3(_user$project$MainMessages$UpdateInstitution, 1, 1, 'New Institution'),
+						_user$project$DummyTypes$dummyModel);
+					return A2(
+						_elm_community$elm_test$Expect$equal,
+						tuple,
+						{
+							ctor: '_Tuple2',
+							_0: expectedModel,
+							_1: _user$project$Ports$checkAuthorsComplete(encodedAuthors)
+						});
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_community$elm_test$Test$test,
+					'The updateInstitution case. The Institution, City and Country have all been updated as the\n        lastAffiliationKey was a (-1)',
+					function (_p4) {
+						var _p5 = _p4;
+						var expectedAuthor1 = _elm_lang$core$Native_Utils.update(
+							_user$project$DummyTypes$dummyAuthor1,
+							{
+								affiliations: {
+									ctor: '::',
+									_0: _elm_lang$core$Native_Utils.update(
+										_user$project$DummyTypes$dummyAffiliation2,
+										{id: 1}),
+									_1: {
+										ctor: '::',
+										_0: _user$project$DummyTypes$dummyAffiliation2,
+										_1: {ctor: '[]'}
+									}
+								}
+							});
+						var expectedAuthors = {
+							ctor: '::',
+							_0: expectedAuthor1,
+							_1: {
+								ctor: '::',
+								_0: _user$project$DummyTypes$dummyAuthor2,
+								_1: {ctor: '[]'}
+							}
+						};
+						var expectedModel = _elm_lang$core$Native_Utils.update(
+							_user$project$DummyTypes$dummyModel,
+							{authors: expectedAuthors});
+						var encodedAuthors = _user$project$Encoders$authors(expectedModel.authors);
+						var tuple = A2(
+							_user$project$MainUpdate$update,
+							A3(_user$project$MainMessages$UpdateInstitution, 1, 1, 'UCL'),
+							_elm_lang$core$Native_Utils.update(
+								_user$project$DummyTypes$dummyModel,
+								{lastAffiliationKey: -1}));
+						return A2(
+							_elm_community$elm_test$Expect$equal,
+							tuple,
+							{
+								ctor: '_Tuple2',
+								_0: expectedModel,
+								_1: _user$project$Ports$checkAuthorsComplete(encodedAuthors)
+							});
+					}),
+				_1: {ctor: '[]'}
+			}
+		}
+	});

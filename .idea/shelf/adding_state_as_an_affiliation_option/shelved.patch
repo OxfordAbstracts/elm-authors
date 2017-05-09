@@ -1,0 +1,53 @@
+Index: index.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!doctype html>\n\n<head>\n\n    <script src=\"./index.js\"></script>\n    <link rel=\"stylesheet\" href=\"./app.css\"></link>\n</head>\n\n<body>\n    <div> ELM AUTHORS</div>\n    <div id=\"elm-authors\"></div>\n\n    <script>\n        var authorFields =\n\n            JSON.stringify([{\n                \"id\": 1,\n                \"title\": \"First Name\",\n                \"description\": \"from flag\",\n                \"inputType\": \"string\",\n                \"questionType\": \"firstName\"\n            }, {\n                \"id\": 3,\n                \"title\": \"Last Name\",\n                \"description\": \"from flag\",\n                \"inputType\": \"string\",\n                \"questionType\": \"lastName\"\n            }, {\n                \"id\": 4,\n                \"title\": \"Presenting\",\n                \"description\": \"Only one author may present\",\n                \"inputType\": \"singlePresenter\",\n                \"questionType\": \"presenting\"\n            }, {\n                \"id\": 5,\n                \"title\": \"email\",\n                \"description\": \"add your email here\",\n                \"inputType\": \"string\",\n                \"questionType\": \"custom\"\n            }, {\n                \"id\": 6,\n                \"title\": \"Under 21\",\n                \"description\": \"are you under 21\",\n                \"inputType\": \"bool\",\n                \"questionType\": \"custom\"\n            }])\n\n        var node = document.getElementById('elm-authors');\n        var authorsArray = JSON.stringify([{\n            id: 1,\n            authorFieldResponses: [{\n                    id: 1,\n                    authorFieldId: 1,\n                    value: \"Rory\"\n                },\n                {\n                    id: 3,\n                    authorFieldId: 3,\n                    value: \"C\"\n                },\n                {\n                    id: 4,\n                    authorFieldId: 4,\n                    value: \"true\"\n                },\n                {\n                    id: 5,\n                    authorFieldId: 5,\n                    value: \"email@email.com\"\n                }\n            ],\n            affiliations: [{\n                id: 1,\n                institution: \"Test inst\",\n                city: \"city 1\",\n                country: \"Albania\"\n            }]\n        }]);\n\n        var app = Elm.Main.embed(node, {\n            authorsList: authorsArray,\n            affiliationLimit: 3,\n            authorLimit: 5,\n            authorFields: authorFields,\n            showInstitution: true,\n            showCity: false,\n            showCountry: true,\n            class: 'incomplete'\n        });\n\n        var authorsPort = function(authors) {\n            jsonAuthors = JSON.stringify(authors)\n            app.ports.authors.send(jsonAuthors)\n        }\n    </script>\n</body>\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- index.html	(date 1493908747000)
++++ index.html	(revision )
+@@ -73,6 +73,7 @@
+                 id: 1,
+                 institution: "Test inst",
+                 city: "city 1",
++                state: "State 37"
+                 country: "Albania"
+             }]
+         }]);
+@@ -84,7 +85,9 @@
+             authorFields: authorFields,
+             showInstitution: true,
+             showCity: false,
++            showState: true,
+             showCountry: true,
++            
+             class: 'incomplete'
+         });
+ 
+Index: Main.elm
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>module Main exposing (..)\n\nimport Html exposing (..)\nimport MainModel exposing (..)\nimport MainUpdate exposing (..)\nimport MainMessages exposing (..)\nimport AuthorsView exposing (view)\nimport Decoders exposing (..)\nimport Ports exposing (..)\n\n\n-- MODEL\n\n\ninit : Flags -> ( Model, Cmd Msg )\ninit flags =\n    let\n        --do we want to decode the authorFields first then pass them to the authors\n        authorFields =\n            Decoders.authorFields flags.authorFields\n\n        authors =\n            Decoders.authors flags.authorsList\n\n        { affiliationLimit, authorLimit, showInstitution, showCity, showCountry, class} = flags\n\n        authorsWithBlankResponses =\n            List.map (addBlankResponsesToAuthor authorFields) authors\n\n        addBlankResponsesToAuthor authorFields author =\n            { author\n                | authorFieldResponses = List.map (addBlankResponseIfNoResponse author) authorFields\n            }\n\n        addBlankResponseIfNoResponse author authorField =\n            let\n                authorFieldResponse =\n                    author.authorFieldResponses\n                        |> List.filter (\\a -> a.authorFieldId == authorField.id)\n                        |> List.head\n                        |> Maybe.withDefault (AuthorFieldResponse authorField.id authorField.id \"\")\n            in\n                authorFieldResponse\n\n        model =\n            { initialModel\n                | authors =\n                    convertAuthorsListForModel authorsWithBlankResponses\n                , authorMaxId =\n                    getMaxAuthorId authors\n                , affiliationLimit = affiliationLimit\n                , authorLimit = authorLimit\n                , authorFields = authorFields\n                , showInstitution = showInstitution\n                , showCity = showCity\n                , showCountry = showCountry\n                , class = class\n            }\n    in\n        ( model, Cmd.none )\n\n\ntype Focused\n    = Simple\n    | Sections\n    | None\n\n\n\n-- VIEW\n\n\nview : Model -> Html Msg\nview model =\n    div []\n        [ AuthorsView.view model\n        ]\n\n\n\n-- SUBSCRIPTIONS\n\n\nsubscriptions : Model -> Sub Msg\nsubscriptions model =\n    Sub.batch\n        [ Ports.authorsClass NewClass\n        , Ports.authors SetAuthors\n        ]\n\n\n\n-- MAIN\n\n\nmain : Program Flags Model Msg\nmain =\n    programWithFlags\n        { init = init\n        , view = view\n        , update = update\n        , subscriptions = subscriptions\n        }\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- Main.elm	(date 1493908747000)
++++ Main.elm	(revision )
+@@ -22,7 +22,7 @@
+         authors =
+             Decoders.authors flags.authorsList
+ 
+-        { affiliationLimit, authorLimit, showInstitution, showCity, showCountry, class} = flags
++        { affiliationLimit, authorLimit, showInstitution, showCity, showState, showCountry, class} = flags
+ 
+         authorsWithBlankResponses =
+             List.map (addBlankResponsesToAuthor authorFields) authors
+@@ -53,6 +53,7 @@
+                 , authorFields = authorFields
+                 , showInstitution = showInstitution
+                 , showCity = showCity
++                , showState = showState
+                 , showCountry = showCountry
+                 , class = class
+             }

@@ -1,0 +1,49 @@
+var _user$project$MainMessages$NewClass = function (a) {
+	return {ctor: 'NewClass', _0: a};
+};
+var _user$project$MainMessages$SetAuthors = function (a) {
+	return {ctor: 'SetAuthors', _0: a};
+};
+var _user$project$MainMessages$SetAffiliationKeyDown = F2(
+	function (a, b) {
+		return {ctor: 'SetAffiliationKeyDown', _0: a, _1: b};
+	});
+var _user$project$MainMessages$SetFocusedIds = F2(
+	function (a, b) {
+		return {ctor: 'SetFocusedIds', _0: a, _1: b};
+	});
+var _user$project$MainMessages$DeleteAffiliation = F2(
+	function (a, b) {
+		return {ctor: 'DeleteAffiliation', _0: a, _1: b};
+	});
+var _user$project$MainMessages$UpdateState = F3(
+	function (a, b, c) {
+		return {ctor: 'UpdateState', _0: a, _1: b, _2: c};
+	});
+var _user$project$MainMessages$UpdateCity = F3(
+	function (a, b, c) {
+		return {ctor: 'UpdateCity', _0: a, _1: b, _2: c};
+	});
+var _user$project$MainMessages$UpdateCountry = F3(
+	function (a, b, c) {
+		return {ctor: 'UpdateCountry', _0: a, _1: b, _2: c};
+	});
+var _user$project$MainMessages$UpdateInstitution = F3(
+	function (a, b, c) {
+		return {ctor: 'UpdateInstitution', _0: a, _1: b, _2: c};
+	});
+var _user$project$MainMessages$AddAffiliation = function (a) {
+	return {ctor: 'AddAffiliation', _0: a};
+};
+var _user$project$MainMessages$UpdateAuthorFieldBool = F2(
+	function (a, b) {
+		return {ctor: 'UpdateAuthorFieldBool', _0: a, _1: b};
+	});
+var _user$project$MainMessages$UpdateAuthorFieldString = F3(
+	function (a, b, c) {
+		return {ctor: 'UpdateAuthorFieldString', _0: a, _1: b, _2: c};
+	});
+var _user$project$MainMessages$DeleteAuthor = function (a) {
+	return {ctor: 'DeleteAuthor', _0: a};
+};
+var _user$project$MainMessages$AddAuthor = {ctor: 'AddAuthor'};

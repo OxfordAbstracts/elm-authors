@@ -11,6 +11,7 @@ type alias Model =
     , authorLimit : Int
     , showInstitution : Bool
     , showCity : Bool
+    , showState : Bool
     , showCountry : Bool
     , class : String
     , authorFields : List AuthorField
@@ -24,6 +25,7 @@ type alias Flags =
     , authorFields : String
     , showInstitution : Bool
     , showCity : Bool
+    , showState : Bool
     , showCountry : Bool
     , class : String
     }
@@ -40,6 +42,7 @@ initialModel =
     , authorLimit = 5
     , showInstitution = True
     , showCity = False
+    , showState = True
     , showCountry = False
     , class = "complete"
     , authorFields = [ defaultAuthorField1, defaultAuthorField2, defaultAuthorField3 ]
@@ -79,6 +82,7 @@ type alias Author =
 type alias Affiliation =
     { institution : String
     , city : String
+    , state : String
     , country : String
     , id : Int
     }
@@ -136,7 +140,7 @@ blankAuthorFieldResponse ( authorFieldId, index ) =
 
 blankAffiliation : Int -> Affiliation
 blankAffiliation id =
-    Affiliation "" "" "" id
+    Affiliation "" "" "" "" id
 
 
 assignMaxAffiliationId : Author -> Author

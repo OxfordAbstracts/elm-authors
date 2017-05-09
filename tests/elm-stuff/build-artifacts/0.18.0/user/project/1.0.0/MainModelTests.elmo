@@ -1,0 +1,20 @@
+var _user$project$MainModelTests$all = A2(
+	_elm_community$elm_test$Test$describe,
+	'MainModel tests',
+	{
+		ctor: '::',
+		_0: A2(
+			_elm_community$elm_test$Test$test,
+			'assignMaxAffiliationId change the maxAffiliationId property on the author',
+			function (_p0) {
+				var _p1 = _p0;
+				var testAuthor = _elm_lang$core$Native_Utils.update(
+					_user$project$DummyTypes$dummyAuthor1,
+					{
+						affiliations: _elm_lang$core$List$singleton(_user$project$DummyTypes$dummyAffiliation1)
+					});
+				var author = _user$project$MainModel$assignMaxAffiliationId(testAuthor);
+				return A2(_elm_community$elm_test$Expect$equal, author.maxAffiliationId, 1);
+			}),
+		_1: {ctor: '[]'}
+	});

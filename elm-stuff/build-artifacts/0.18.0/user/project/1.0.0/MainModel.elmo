@@ -1,0 +1,165 @@
+var _user$project$MainModel$getMaxAuthorId = function (authors) {
+	return A2(
+		_elm_lang$core$Maybe$withDefault,
+		-1,
+		_elm_lang$core$List$maximum(
+			A2(
+				_elm_lang$core$List$map,
+				function (_) {
+					return _.id;
+				},
+				authors)));
+};
+var _user$project$MainModel$assignMaxAffiliationId = function (author) {
+	var maxAffiliationId = A2(
+		_elm_lang$core$Maybe$withDefault,
+		-1,
+		_elm_lang$core$List$maximum(
+			A2(
+				_elm_lang$core$List$map,
+				function (_) {
+					return _.id;
+				},
+				function (_) {
+					return _.affiliations;
+				}(author))));
+	return _elm_lang$core$Native_Utils.update(
+		author,
+		{maxAffiliationId: maxAffiliationId});
+};
+var _user$project$MainModel$convertAuthorsListForModel = function (authors) {
+	return A2(_elm_lang$core$List$map, _user$project$MainModel$assignMaxAffiliationId, authors);
+};
+var _user$project$MainModel$Model = function (a) {
+	return function (b) {
+		return function (c) {
+			return function (d) {
+				return function (e) {
+					return function (f) {
+						return function (g) {
+							return function (h) {
+								return function (i) {
+									return function (j) {
+										return function (k) {
+											return function (l) {
+												return function (m) {
+													return {authorMaxId: a, authors: b, focusedAuthorId: c, focusedAffiliationId: d, lastAffiliationKey: e, affiliationLimit: f, authorLimit: g, showInstitution: h, showCity: i, showState: j, showCountry: k, $class: l, authorFields: m};
+												};
+											};
+										};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};
+var _user$project$MainModel$Flags = F9(
+	function (a, b, c, d, e, f, g, h, i) {
+		return {authorsList: a, affiliationLimit: b, authorLimit: c, authorFields: d, showInstitution: e, showCity: f, showState: g, showCountry: h, $class: i};
+	});
+var _user$project$MainModel$AuthorField = F5(
+	function (a, b, c, d, e) {
+		return {id: a, title: b, description: c, inputType: d, questionType: e};
+	});
+var _user$project$MainModel$AuthorFieldResponse = F3(
+	function (a, b, c) {
+		return {id: a, authorFieldId: b, value: c};
+	});
+var _user$project$MainModel$defaultAuthorFieldResponse1 = A3(_user$project$MainModel$AuthorFieldResponse, 0, 2, '');
+var _user$project$MainModel$blankAuthorFieldResponse = function (_p0) {
+	var _p1 = _p0;
+	return A3(_user$project$MainModel$AuthorFieldResponse, _p1._1, _p1._0, '');
+};
+var _user$project$MainModel$Author = F4(
+	function (a, b, c, d) {
+		return {authorFieldResponses: a, affiliations: b, maxAffiliationId: c, id: d};
+	});
+var _user$project$MainModel$Affiliation = F5(
+	function (a, b, c, d, e) {
+		return {institution: a, city: b, state: c, country: d, id: e};
+	});
+var _user$project$MainModel$blankAffiliation = function (id) {
+	return A5(_user$project$MainModel$Affiliation, '', '', '', '', id);
+};
+var _user$project$MainModel$blankAuthor = F2(
+	function (id, authorFieldIds) {
+		var authorFieldIdIndexTuples = A3(
+			_elm_lang$core$List$map2,
+			F2(
+				function (v0, v1) {
+					return {ctor: '_Tuple2', _0: v0, _1: v1};
+				}),
+			authorFieldIds,
+			A2(
+				_elm_lang$core$List$range,
+				0,
+				_elm_lang$core$List$length(authorFieldIds)));
+		var blankAuthorFieldResponses = A2(_elm_lang$core$List$map, _user$project$MainModel$blankAuthorFieldResponse, authorFieldIdIndexTuples);
+		return A4(
+			_user$project$MainModel$Author,
+			blankAuthorFieldResponses,
+			{
+				ctor: '::',
+				_0: _user$project$MainModel$blankAffiliation(0),
+				_1: {ctor: '[]'}
+			},
+			1,
+			id);
+	});
+var _user$project$MainModel$SinglePresenterType = {ctor: 'SinglePresenterType'};
+var _user$project$MainModel$StringType = {ctor: 'StringType'};
+var _user$project$MainModel$defaultAuthorField0 = A5(_user$project$MainModel$AuthorField, 0, 'Default', 'This is the default description', _user$project$MainModel$StringType, 'default');
+var _user$project$MainModel$defaultAuthorField1 = A5(_user$project$MainModel$AuthorField, 0, 'First Name', 'This is the first name description', _user$project$MainModel$StringType, 'default');
+var _user$project$MainModel$defaultAuthorField2 = A5(_user$project$MainModel$AuthorField, 1, 'Last Name', 'This is the last name description', _user$project$MainModel$StringType, 'default');
+var _user$project$MainModel$BoolType = {ctor: 'BoolType'};
+var _user$project$MainModel$defaultAuthorField3 = A5(_user$project$MainModel$AuthorField, 2, 'Presenting', 'This is the Presenting description', _user$project$MainModel$BoolType, 'default');
+var _user$project$MainModel$initialModel = {
+	authorMaxId: 0,
+	authors: {
+		ctor: '::',
+		_0: A2(
+			_user$project$MainModel$blankAuthor,
+			0,
+			{
+				ctor: '::',
+				_0: 0,
+				_1: {
+					ctor: '::',
+					_0: 1,
+					_1: {
+						ctor: '::',
+						_0: 2,
+						_1: {ctor: '[]'}
+					}
+				}
+			}),
+		_1: {ctor: '[]'}
+	},
+	focusedAuthorId: 0,
+	focusedAffiliationId: 0,
+	lastAffiliationKey: -1,
+	affiliationLimit: 5,
+	authorLimit: 5,
+	showInstitution: true,
+	showCity: false,
+	showState: true,
+	showCountry: false,
+	$class: 'complete',
+	authorFields: {
+		ctor: '::',
+		_0: _user$project$MainModel$defaultAuthorField1,
+		_1: {
+			ctor: '::',
+			_0: _user$project$MainModel$defaultAuthorField2,
+			_1: {
+				ctor: '::',
+				_0: _user$project$MainModel$defaultAuthorField3,
+				_1: {ctor: '[]'}
+			}
+		}
+	}
+};

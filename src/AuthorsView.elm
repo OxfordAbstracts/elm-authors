@@ -263,6 +263,25 @@ renderAffiliation model authorId ( affiliation, index ) =
             else
                 text ""
 
+        stateDiv =
+            if model.showState then
+                div [ class "aa__field aa__field--tablecell" ]
+                    [ label
+                        [ class "form__label" ]
+                        [ text "State" ]
+                    , input
+                        [ class "state form__input"
+                        , list "states-list"
+                        , name "state"
+                        , onInput (UpdateState authorId affiliation.id)
+                        , onFocus (SetFocusedIds authorId affiliation.id)
+                        , value affiliation.state
+                        ]
+                        []
+                    ]
+            else
+                text ""
+
         countryDiv =
             if model.showCountry then
                 div [ class "aa__field aa__field--tablecell" ]
@@ -293,6 +312,7 @@ renderAffiliation model authorId ( affiliation, index ) =
             , div [ class "aa__sub-section aa__sub-section--table" ]
                 [ institutionDiv
                 , cityDiv
+                , stateDiv
                 , countryDiv
                 ]
             ]

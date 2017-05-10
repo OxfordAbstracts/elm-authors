@@ -12069,7 +12069,7 @@ var _user$project$AuthorsView$renderAffiliation = F3(
 				_1: {
 					ctor: '::',
 					_0: A2(
-						_elm_lang$html$Html$button,
+						_elm_lang$html$Html$a,
 						{
 							ctor: '::',
 							_0: _elm_lang$html$Html_Attributes$class('remove aa__remove-button button button--secondary button--delete'),
@@ -12366,12 +12366,13 @@ var _user$project$AuthorsView$renderFieldResponsesLine = F4(
 var _user$project$AuthorsView$renderAuthor = F2(
 	function (model, _p3) {
 		var _p4 = _p3;
+		var _p6 = _p4._1;
 		var _p5 = _p4._0;
 		var chunkifiedAuthorFields = A2(_krisajenkins$elm_exts$Exts_List$chunk, 3, model.authorFields);
 		var addAffiliationButton = (_elm_lang$core$Native_Utils.cmp(
 			model.affiliationLimit,
 			_elm_lang$core$List$length(_p5.affiliations)) > 0) ? A2(
-			_elm_lang$html$Html$button,
+			_elm_lang$html$Html$a,
 			{
 				ctor: '::',
 				_0: _elm_lang$html$Html_Attributes$class('add-affiliation-to-author button button--secondary'),
@@ -12421,7 +12422,7 @@ var _user$project$AuthorsView$renderAuthor = F2(
 									A2(
 										_elm_lang$core$Basics_ops['++'],
 										'Author ',
-										_elm_lang$core$Basics$toString(_p4._1))),
+										_elm_lang$core$Basics$toString(_p6))),
 								_1: {ctor: '[]'}
 							}),
 						_1: {ctor: '[]'}
@@ -12429,7 +12430,7 @@ var _user$project$AuthorsView$renderAuthor = F2(
 				_1: {
 					ctor: '::',
 					_0: A2(
-						_elm_lang$html$Html$button,
+						_elm_lang$html$Html$a,
 						{
 							ctor: '::',
 							_0: _elm_lang$html$Html_Attributes$class('remove aa__remove-button aa__remove-button--top-indent button button--secondary button--delete'),
@@ -12504,7 +12505,7 @@ var _user$project$AuthorsView$renderAuthor = F2(
 															'Author ',
 															A2(
 																_elm_lang$core$Basics_ops['++'],
-																_elm_lang$core$Basics$toString(_p5.id),
+																_elm_lang$core$Basics$toString(_p6),
 																' Affiliations'))),
 													_1: {ctor: '[]'}
 												}),

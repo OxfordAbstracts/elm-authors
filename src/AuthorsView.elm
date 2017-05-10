@@ -59,7 +59,7 @@ renderAuthor model ( author, index ) =
     let
         addAffiliationButton =
             if model.affiliationLimit > (List.length author.affiliations) then
-                button
+                a
                     [ class "add-affiliation-to-author button button--secondary"
                     , onClick (AddAffiliation author.id)
                     ]
@@ -76,7 +76,7 @@ renderAuthor model ( author, index ) =
                 [ span [ class "aa__subtitle" ]
                     [ text ("Author " ++ toString index) ]
                 ]
-            , button
+            , a
                 [ class "remove aa__remove-button aa__remove-button--top-indent button button--secondary button--delete"
                 , onClick (DeleteAuthor author.id)
                 ]
@@ -88,7 +88,7 @@ renderAuthor model ( author, index ) =
             , div [ class "aa__inner-container" ]
                 [ div [ class "aa__dividing-title aa__dividing-title--linebreak" ]
                     [ span [ class "aa__subtitle" ]
-                        [ text ("Author " ++ toString author.id ++ " Affiliations") ]
+                        [ text ("Author " ++ toString index ++ " Affiliations") ]
                     ]
                 , (renderAffiliations model author.affiliations author.id)
                 , addAffiliationButton
@@ -304,7 +304,7 @@ renderAffiliation model authorId ( affiliation, index ) =
                 [ span [ class "aa__subtitle aa__subtitle--small" ]
                     [ text ("Affiliation " ++ toString index) ]
                 ]
-            , button
+            , a
                 [ class "remove aa__remove-button button button--secondary button--delete"
                 , onClick (DeleteAffiliation authorId affiliation.id)
                 ]

@@ -96,6 +96,7 @@ dummyAffiliation1 : Affiliation
 dummyAffiliation1 =
     { institution = "Leeds University"
     , city = "Leeds"
+    , state = "North"
     , country = "United Kingdom"
     , id = 1
     }
@@ -105,6 +106,7 @@ dummyAffiliation2 : Affiliation
 dummyAffiliation2 =
     { institution = "UCL"
     , city = "London"
+    , state = "South East"
     , country = "United Kingdom"
     , id = 2
     }

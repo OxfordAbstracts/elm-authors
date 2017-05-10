@@ -80,7 +80,7 @@ renderAuthor model ( author, index ) =
                 [ class "remove aa__remove-button aa__remove-button--top-indent button button--secondary button--delete"
                 , onClick (DeleteAuthor author.id)
                 ]
-                [ text ("Remove Author " ++ toString author.id) ]
+                [ text ("Remove Author") ]
             , div [ class "aa__sub-section aa__sub-section--table" ]
                 --for each of the authorFields we want to add a div like this:
                 [ div [ class "aa__field aa__field--tablecell" ] (List.map (renderFieldResponsesLine model author.authorFieldResponses author.id) chunkifiedAuthorFields)

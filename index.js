@@ -12442,11 +12442,7 @@ var _user$project$AuthorsView$renderAuthor = F2(
 						},
 						{
 							ctor: '::',
-							_0: _elm_lang$html$Html$text(
-								A2(
-									_elm_lang$core$Basics_ops['++'],
-									'Remove Author ',
-									_elm_lang$core$Basics$toString(_p5.id))),
+							_0: _elm_lang$html$Html$text('Remove Author'),
 							_1: {ctor: '[]'}
 						}),
 					_1: {

@@ -77,7 +77,7 @@ renderAuthor model ( author, index ) =
                     [ text ("Author " ++ toString index) ]
                 ]
             , a
-                [ class "remove aa__remove-button aa__remove-button--top-indent button button--secondary button--delete"
+                [ class "remove aa__remove-button aa__remove-button--top-indent button button--secondary"
                 , onClick (DeleteAuthor author.id)
                 ]
                 [ text ("Remove Author") ]
@@ -305,7 +305,7 @@ renderAffiliation model authorId ( affiliation, index ) =
                     [ text ("Affiliation " ++ toString index) ]
                 ]
             , a
-                [ class "remove aa__remove-button button button--secondary button--delete"
+                [ class "remove aa__remove-button button button--secondary"
                 , onClick (DeleteAffiliation authorId affiliation.id)
                 ]
                 [ text "Remove Affiliation" ]

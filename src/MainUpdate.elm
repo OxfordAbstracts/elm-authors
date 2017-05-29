@@ -70,11 +70,12 @@ update msg model =
                                     getBlurredAuthorAffiliations model
                                         |> List.filter (\a -> a.institution == input)
                                         |> List.head
-                                        |> Maybe.withDefault (Affiliation input affiliation.city affiliation.country affiliation.id)
+                                        |> Maybe.withDefault (Affiliation input affiliation.city affiliation.state affiliation.country affiliation.id)
                             in
                                 { affiliation
                                     | institution = matchingAffiliation.institution
                                     , city = matchingAffiliation.city
+                                    , state = matchingAffiliation.state
                                     , country = matchingAffiliation.country
                                 }
                         else
@@ -105,6 +106,13 @@ update msg model =
                 let
                     updateInstitution affiliation =
                         { affiliation | city = new }
+                in
+                    updateAffiliation model authorId affiliationId updateInstitution
+
+            UpdateState authorId affiliationId new ->
+                let
+                    updateInstitution affiliation =
+                        { affiliation | state = new }
                 in
                     updateAffiliation model authorId affiliationId updateInstitution
 

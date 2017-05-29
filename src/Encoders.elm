@@ -8,6 +8,7 @@ getAffilitionValue affiliation =
         [ ( "id", JsonEncode.int affiliation.id )
         , ( "institution", JsonEncode.string affiliation.institution )
         , ( "city", JsonEncode.string affiliation.city )
+        , ( "state", JsonEncode.string affiliation.state )
         , ( "country", JsonEncode.string affiliation.country )
         ]
 

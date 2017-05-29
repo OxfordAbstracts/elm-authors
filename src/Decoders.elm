@@ -24,6 +24,7 @@ affiliationDecoder =
     decode Affiliation
         |> required "institution" string
         |> required "city" string
+        |> required "state" string
         |> required "country" string
         |> required "id" int
 

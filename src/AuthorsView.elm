@@ -10,6 +10,8 @@ import MainModel exposing (..)
 import MainUpdate exposing (..)
 import Encoders exposing (..)
 import Json.Decode
+import List.Extra exposing (indexedFoldr, updateAt)
+import Exts.List exposing (chunk)
 
 
 view : Model -> Html Msg
@@ -36,7 +38,7 @@ renderAuthors model =
 
         addAuthorButton =
             if model.authorLimit > (List.length model.authors) then
-                div [ class "button button--tertiary", onClick AddAuthor ] [ text "Add Another Author" ]
+                div [ class "button button--secondary aa__add-author-button", onClick AddAuthor ] [ text "Add Another Author" ]
             else
                 div []
                     []
@@ -57,29 +59,46 @@ renderAuthor model ( author, index ) =
     let
         addAffiliationButton =
             if model.affiliationLimit > (List.length author.affiliations) then
-                div [ class "add-affiliation-to-author button button--tertiary" ]
-                    [ div [ onClick (AddAffiliation author.id) ]
-                        [ text "Add Another Affiliation to Author" ]
+                a
+                    [ class "add-affiliation-to-author button button--secondary"
+                    , onClick (AddAffiliation author.id)
                     ]
+                    [ text "+ Add Affiliation" ]
             else
                 div []
                     []
+
+        chunkifiedAuthorFields =
+            chunk 3 model.authorFields
     in
-        div [ class "author form__question-sub-section" ]
-            [ div [ class "form__label" ] [ text ("Author " ++ toString index) ]
-            , div [ class "form__question-sub-section--inline" ]
-                --for each of the authorFields we want to add a div like this
-                [ div [ class "form__question-sub-section--inline" ] (List.map (renderFieldResponses model author.authorFieldResponses author.id) model.authorFields)
+        div [ class "author aa" ]
+            [ div [ class "aa__dividing-title" ]
+                [ span [ class "aa__subtitle" ]
+                    [ text ("Author " ++ toString index) ]
                 ]
-            , span [ class "remove button button--secondary" ]
-                [ div
-                    [ onClick (DeleteAuthor author.id) ]
-                    [ text "Remove Author" ]
+            , a
+                [ class "remove aa__remove-button aa__remove-button--top-indent button button--secondary"
+                , onClick (DeleteAuthor author.id)
                 ]
-            , div [ class "" ]
-                [ (renderAffiliations model author.affiliations author.id) ]
-            , addAffiliationButton
+                [ text ("Remove Author") ]
+            , div [ class "aa__sub-section aa__sub-section--table" ]
+                --for each of the authorFields we want to add a div like this:
+                [ div [ class "aa__field aa__field--tablecell" ] (List.map (renderFieldResponsesLine model author.authorFieldResponses author.id) chunkifiedAuthorFields)
+                ]
+            , div [ class "aa__inner-container" ]
+                [ div [ class "aa__dividing-title aa__dividing-title--linebreak" ]
+                    [ span [ class "aa__subtitle" ]
+                        [ text ("Author " ++ toString index ++ " Affiliations") ]
+                    ]
+                , (renderAffiliations model author.affiliations author.id)
+                , addAffiliationButton
+                ]
             ]
+
+
+renderFieldResponsesLine model authorFieldResponses authorId authorFieldLine =
+    div [ class "aa__sub-section aa__sub-section--table" ]
+        (List.map (renderFieldResponses model authorFieldResponses authorId) authorFieldLine)
 
 
 renderFieldResponses model authorFieldResponses authorId authorField =
@@ -93,7 +112,9 @@ renderFieldResponses model authorFieldResponses authorId authorField =
         labelX =
             if authorField.description /= "" then
                 label
-                    [ class "form__label tooltip" ]
+                    [ class "form__label tooltip"
+                    , for (authorField.title)
+                    ]
                     [ text authorField.title
                     , span [ class "tooltip__box" ] [ text authorField.description ]
                     ]
@@ -105,10 +126,11 @@ renderFieldResponses model authorFieldResponses authorId authorField =
         inputHtml =
             if authorField.inputType == BoolType then
                 -- checkbox
-                div [ class "inline-element" ]
+                div [ class "aa__field aa__field--tablecell" ]
                     [ labelX
                     , input
                         [ type_ "checkbox"
+                        , id (authorField.title)
                         , class "form__input"
                         , checked (authorFieldResponse.value == "true")
                         , onClick (UpdateAuthorFieldBool authorId authorField.id)
@@ -117,10 +139,11 @@ renderFieldResponses model authorFieldResponses authorId authorField =
                     ]
             else if authorField.inputType == SinglePresenterType then
                 -- checkbox only one can be checked across all the authors
-                div [ class "inline-element" ]
+                div [ class "aa__field aa__field--tablecell" ]
                     [ labelX
                     , input
                         [ type_ "checkbox"
+                        , id (authorField.title)
                         , class "form__input"
                         , checked (authorFieldResponse.value == "true")
                           -- if one of the other(!) inputs with SinglePresenterType === checked then disable
@@ -130,7 +153,7 @@ renderFieldResponses model authorFieldResponses authorId authorField =
                         []
                     ]
             else
-                div [ class "inline-element" ]
+                div [ class "aa__field aa__field--tablecell" ]
                     [ labelX
                     , input
                         [ type_ "text"
@@ -195,16 +218,7 @@ renderAffiliations model affiliations authorId =
         affilIndexTuples =
             List.map2 (,) affiliations indexList
     in
-        div []
-            [ affiliationsHeader
-            , div [] (List.map (renderAffiliation model authorId) affilIndexTuples)
-            ]
-
-
-affiliationsHeader : Html Msg
-affiliationsHeader =
-    div [ class "clearfix" ]
-        []
+        div [] (List.map (renderAffiliation model authorId) affilIndexTuples)
 
 
 renderAffiliation : Model -> Int -> ( Affiliation, Int ) -> Html Msg
@@ -212,9 +226,9 @@ renderAffiliation model authorId ( affiliation, index ) =
     let
         institutionDiv =
             if model.showInstitution then
-                div [ class "inline-element" ]
+                div [ class "aa__field aa__field--tablecell" ]
                     [ label
-                        [ class "form__label"]
+                        [ class "form__label" ]
                         [ text "Institution" ]
                     , input
                         [ class "form__input institution"
@@ -232,9 +246,9 @@ renderAffiliation model authorId ( affiliation, index ) =
 
         cityDiv =
             if model.showCity then
-                div [ class "inline-element" ]
+                div [ class "aa__field aa__field--tablecell" ]
                     [ label
-                        [ class "form__label"]
+                        [ class "form__label" ]
                         [ text "City" ]
                     , input
                         [ class "city form__input"
@@ -249,9 +263,28 @@ renderAffiliation model authorId ( affiliation, index ) =
             else
                 text ""
 
+        stateDiv =
+            if model.showState then
+                div [ class "aa__field aa__field--tablecell" ]
+                    [ label
+                        [ class "form__label" ]
+                        [ text "State" ]
+                    , input
+                        [ class "state form__input"
+                        , list "states-list"
+                        , name "state"
+                        , onInput (UpdateState authorId affiliation.id)
+                        , onFocus (SetFocusedIds authorId affiliation.id)
+                        , value affiliation.state
+                        ]
+                        []
+                    ]
+            else
+                text ""
+
         countryDiv =
             if model.showCountry then
-                div [ class "inline-element" ]
+                div [ class "aa__field aa__field--tablecell" ]
                     [ label [ class "form__label" ] [ text "Country" ]
                     , select
                         [ class "country form__input form__input--dropdown"
@@ -266,17 +299,20 @@ renderAffiliation model authorId ( affiliation, index ) =
             else
                 text ""
     in
-        div [ class "affiliation form__question-sub-section" ]
-            [ div [ class "form__label" ] [ text ("Affiliation " ++ toString index) ]
-            , div
-                [ class "remove button button--secondary"
+        div [ class "aa__sub-section" ]
+            [ div [ class "aa__dividing-title" ]
+                [ span [ class "aa__subtitle aa__subtitle--small" ]
+                    [ text ("Affiliation " ++ toString index) ]
+                ]
+            , a
+                [ class "remove aa__remove-button button button--secondary"
                 , onClick (DeleteAffiliation authorId affiliation.id)
                 ]
                 [ text "Remove Affiliation" ]
-            , div
-                [ class "form__question-sub-section--inline" ]
+            , div [ class "aa__sub-section aa__sub-section--table" ]
                 [ institutionDiv
                 , cityDiv
+                , stateDiv
                 , countryDiv
                 ]
             ]

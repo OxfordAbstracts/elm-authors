@@ -2,7 +2,7 @@ module Decoders exposing (..)
 
 import MainModel exposing (..)
 import Json.Decode exposing (..)
-import Json.Decode.Pipeline exposing (required, decode, hardcoded)
+import Json.Decode.Pipeline exposing (required, optional, decode, hardcoded)
 
 
 authorDecoder : Decoder Author
@@ -42,6 +42,7 @@ authorFieldDecoder =
         |> required "description" string
         |> required "inputType" (map fieldTypeHelper string)
         |> required "questionType" string
+        |> optional "mandatory" string ""
 
 
 authorFieldResponseDecoder : Decoder AuthorFieldResponse

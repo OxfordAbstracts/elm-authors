@@ -11073,7 +11073,15 @@ var _user$project$MainModel$Model = function (a) {
 										return function (k) {
 											return function (l) {
 												return function (m) {
-													return {authorMaxId: a, authors: b, focusedAuthorId: c, focusedAffiliationId: d, lastAffiliationKey: e, affiliationLimit: f, authorLimit: g, showInstitution: h, showCity: i, showState: j, showCountry: k, $class: l, authorFields: m};
+													return function (n) {
+														return function (o) {
+															return function (p) {
+																return function (q) {
+																	return {authorMaxId: a, authors: b, focusedAuthorId: c, focusedAffiliationId: d, lastAffiliationKey: e, affiliationLimit: f, authorLimit: g, showInstitution: h, showCity: i, showState: j, showCountry: k, mandatoryInstitution: l, mandatoryCity: m, mandatoryState: n, mandatoryCountry: o, $class: p, authorFields: q};
+																};
+															};
+														};
+													};
 												};
 											};
 										};
@@ -11087,13 +11095,36 @@ var _user$project$MainModel$Model = function (a) {
 		};
 	};
 };
-var _user$project$MainModel$Flags = F9(
-	function (a, b, c, d, e, f, g, h, i) {
-		return {authorsList: a, affiliationLimit: b, authorLimit: c, authorFields: d, showInstitution: e, showCity: f, showState: g, showCountry: h, $class: i};
-	});
-var _user$project$MainModel$AuthorField = F5(
-	function (a, b, c, d, e) {
-		return {id: a, title: b, description: c, inputType: d, questionType: e};
+var _user$project$MainModel$Flags = function (a) {
+	return function (b) {
+		return function (c) {
+			return function (d) {
+				return function (e) {
+					return function (f) {
+						return function (g) {
+							return function (h) {
+								return function (i) {
+									return function (j) {
+										return function (k) {
+											return function (l) {
+												return function (m) {
+													return {authorsList: a, affiliationLimit: b, authorLimit: c, authorFields: d, showInstitution: e, showCity: f, showState: g, showCountry: h, mandatoryInstitution: i, mandatoryCity: j, mandatoryState: k, mandatoryCountry: l, $class: m};
+												};
+											};
+										};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};
+var _user$project$MainModel$AuthorField = F6(
+	function (a, b, c, d, e, f) {
+		return {id: a, title: b, description: c, inputType: d, questionType: e, mandatory: f};
 	});
 var _user$project$MainModel$AuthorFieldResponse = F3(
 	function (a, b, c) {
@@ -11142,11 +11173,11 @@ var _user$project$MainModel$blankAuthor = F2(
 	});
 var _user$project$MainModel$SinglePresenterType = {ctor: 'SinglePresenterType'};
 var _user$project$MainModel$StringType = {ctor: 'StringType'};
-var _user$project$MainModel$defaultAuthorField0 = A5(_user$project$MainModel$AuthorField, 0, 'Default', 'This is the default description', _user$project$MainModel$StringType, 'default');
-var _user$project$MainModel$defaultAuthorField1 = A5(_user$project$MainModel$AuthorField, 0, 'First Name', 'This is the first name description', _user$project$MainModel$StringType, 'default');
-var _user$project$MainModel$defaultAuthorField2 = A5(_user$project$MainModel$AuthorField, 1, 'Last Name', 'This is the last name description', _user$project$MainModel$StringType, 'default');
+var _user$project$MainModel$defaultAuthorField0 = A6(_user$project$MainModel$AuthorField, 0, 'Default', 'This is the default description', _user$project$MainModel$StringType, 'default', 'on');
+var _user$project$MainModel$defaultAuthorField1 = A6(_user$project$MainModel$AuthorField, 0, 'First Name', 'This is the first name description', _user$project$MainModel$StringType, 'default', 'on');
+var _user$project$MainModel$defaultAuthorField2 = A6(_user$project$MainModel$AuthorField, 1, 'Last Name', 'This is the last name description', _user$project$MainModel$StringType, 'default', 'on');
 var _user$project$MainModel$BoolType = {ctor: 'BoolType'};
-var _user$project$MainModel$defaultAuthorField3 = A5(_user$project$MainModel$AuthorField, 2, 'Presenting', 'This is the Presenting description', _user$project$MainModel$BoolType, 'default');
+var _user$project$MainModel$defaultAuthorField3 = A6(_user$project$MainModel$AuthorField, 2, 'Presenting', 'This is the Presenting description', _user$project$MainModel$BoolType, 'default', '');
 var _user$project$MainModel$initialModel = {
 	authorMaxId: 0,
 	authors: {
@@ -11178,6 +11209,10 @@ var _user$project$MainModel$initialModel = {
 	showCity: false,
 	showState: true,
 	showCountry: false,
+	mandatoryInstitution: true,
+	mandatoryCity: false,
+	mandatoryState: false,
+	mandatoryCountry: true,
 	$class: 'complete',
 	authorFields: {
 		ctor: '::',
@@ -11339,27 +11374,32 @@ var _user$project$Decoders$authorFieldResponseDecoder = A3(
 			'id',
 			_elm_lang$core$Json_Decode$int,
 			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_user$project$MainModel$AuthorFieldResponse))));
-var _user$project$Decoders$authorFieldDecoder = A3(
-	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-	'questionType',
+var _user$project$Decoders$authorFieldDecoder = A4(
+	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
+	'mandatory',
 	_elm_lang$core$Json_Decode$string,
+	'',
 	A3(
 		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-		'inputType',
-		A2(_elm_lang$core$Json_Decode$map, _user$project$Decoders$fieldTypeHelper, _elm_lang$core$Json_Decode$string),
+		'questionType',
+		_elm_lang$core$Json_Decode$string,
 		A3(
 			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-			'description',
-			_elm_lang$core$Json_Decode$string,
+			'inputType',
+			A2(_elm_lang$core$Json_Decode$map, _user$project$Decoders$fieldTypeHelper, _elm_lang$core$Json_Decode$string),
 			A3(
 				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-				'title',
+				'description',
 				_elm_lang$core$Json_Decode$string,
 				A3(
 					_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-					'id',
-					_elm_lang$core$Json_Decode$int,
-					_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_user$project$MainModel$AuthorField))))));
+					'title',
+					_elm_lang$core$Json_Decode$string,
+					A3(
+						_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+						'id',
+						_elm_lang$core$Json_Decode$int,
+						_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_user$project$MainModel$AuthorField)))))));
 var _user$project$Decoders$authorFields = function (authorFields) {
 	return A2(
 		_elm_lang$core$Result$withDefault,
@@ -11801,6 +11841,7 @@ var _user$project$AuthorsView$renderAffiliation = F3(
 	function (model, authorId, _p0) {
 		var _p1 = _p0;
 		var _p2 = _p1._0;
+		var countryRequiredText = model.mandatoryCountry ? 'Country (Required)' : 'Country';
 		var countryDiv = model.showCountry ? A2(
 			_elm_lang$html$Html$div,
 			{
@@ -11819,7 +11860,7 @@ var _user$project$AuthorsView$renderAffiliation = F3(
 					},
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html$text('Country'),
+						_0: _elm_lang$html$Html$text(countryRequiredText),
 						_1: {ctor: '[]'}
 					}),
 				_1: {
@@ -11857,6 +11898,7 @@ var _user$project$AuthorsView$renderAffiliation = F3(
 					_1: {ctor: '[]'}
 				}
 			}) : _elm_lang$html$Html$text('');
+		var stateRequiredText = model.mandatoryState ? 'State (Required)' : 'State';
 		var stateDiv = model.showState ? A2(
 			_elm_lang$html$Html$div,
 			{
@@ -11875,7 +11917,7 @@ var _user$project$AuthorsView$renderAffiliation = F3(
 					},
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html$text('State'),
+						_0: _elm_lang$html$Html$text(stateRequiredText),
 						_1: {ctor: '[]'}
 					}),
 				_1: {
@@ -11913,6 +11955,7 @@ var _user$project$AuthorsView$renderAffiliation = F3(
 					_1: {ctor: '[]'}
 				}
 			}) : _elm_lang$html$Html$text('');
+		var cityRequiredText = model.mandatoryCity ? 'City (Required)' : 'City';
 		var cityDiv = model.showCity ? A2(
 			_elm_lang$html$Html$div,
 			{
@@ -11931,7 +11974,7 @@ var _user$project$AuthorsView$renderAffiliation = F3(
 					},
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html$text('City'),
+						_0: _elm_lang$html$Html$text(cityRequiredText),
 						_1: {ctor: '[]'}
 					}),
 				_1: {
@@ -11969,6 +12012,7 @@ var _user$project$AuthorsView$renderAffiliation = F3(
 					_1: {ctor: '[]'}
 				}
 			}) : _elm_lang$html$Html$text('');
+		var institutionRequiredText = model.mandatoryInstitution ? 'Institution (Required)' : 'Institution';
 		var institutionDiv = model.showInstitution ? A2(
 			_elm_lang$html$Html$div,
 			{
@@ -11987,7 +12031,7 @@ var _user$project$AuthorsView$renderAffiliation = F3(
 					},
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html$text('Institution'),
+						_0: _elm_lang$html$Html$text(institutionRequiredText),
 						_1: {ctor: '[]'}
 					}),
 				_1: {
@@ -12072,7 +12116,7 @@ var _user$project$AuthorsView$renderAffiliation = F3(
 						_elm_lang$html$Html$a,
 						{
 							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('remove aa__remove-button button button--secondary button--delete'),
+							_0: _elm_lang$html$Html_Attributes$class('remove aa__remove-button button button--secondary'),
 							_1: {
 								ctor: '::',
 								_0: _elm_lang$html$Html_Events$onClick(
@@ -12170,6 +12214,7 @@ var _user$project$AuthorsView$disableThePresentingCheckbox = F3(
 	});
 var _user$project$AuthorsView$renderFieldResponses = F4(
 	function (model, authorFieldResponses, authorId, authorField) {
+		var requiredText = _elm_lang$core$Native_Utils.eq(authorField.mandatory, 'on') ? ' (Required)' : '';
 		var labelX = (!_elm_lang$core$Native_Utils.eq(authorField.description, '')) ? A2(
 			_elm_lang$html$Html$label,
 			{
@@ -12183,7 +12228,8 @@ var _user$project$AuthorsView$renderFieldResponses = F4(
 			},
 			{
 				ctor: '::',
-				_0: _elm_lang$html$Html$text(authorField.title),
+				_0: _elm_lang$html$Html$text(
+					A2(_elm_lang$core$String$append, authorField.title, requiredText)),
 				_1: {
 					ctor: '::',
 					_0: A2(
@@ -12209,9 +12255,11 @@ var _user$project$AuthorsView$renderFieldResponses = F4(
 			},
 			{
 				ctor: '::',
-				_0: _elm_lang$html$Html$text(authorField.title),
+				_0: _elm_lang$html$Html$text(
+					A2(_elm_lang$core$String$append, authorField.title, requiredText)),
 				_1: {ctor: '[]'}
 			});
+		var debug = A2(_elm_lang$core$Debug$log, 'authorField', authorField);
 		var authorFieldResponse = A2(
 			_elm_lang$core$Maybe$withDefault,
 			_user$project$MainModel$defaultAuthorFieldResponse1,
@@ -12433,7 +12481,7 @@ var _user$project$AuthorsView$renderAuthor = F2(
 						_elm_lang$html$Html$a,
 						{
 							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('remove aa__remove-button aa__remove-button--top-indent button button--secondary button--delete'),
+							_0: _elm_lang$html$Html_Attributes$class('remove aa__remove-button aa__remove-button--top-indent button button--secondary'),
 							_1: {
 								ctor: '::',
 								_0: _elm_lang$html$Html_Events$onClick(
@@ -12690,6 +12738,10 @@ var _user$project$Main$init = function (flags) {
 	var showCity = _p0.showCity;
 	var showState = _p0.showState;
 	var showCountry = _p0.showCountry;
+	var mandatoryInstitution = _p0.mandatoryInstitution;
+	var mandatoryCity = _p0.mandatoryCity;
+	var mandatoryState = _p0.mandatoryState;
+	var mandatoryCountry = _p0.mandatoryCountry;
 	var $class = _p0.$class;
 	var authors = _user$project$Decoders$authors(flags.authorsList);
 	var authorFields = _user$project$Decoders$authorFields(flags.authorFields);
@@ -12709,6 +12761,10 @@ var _user$project$Main$init = function (flags) {
 			showCity: showCity,
 			showState: showState,
 			showCountry: showCountry,
+			mandatoryInstitution: mandatoryInstitution,
+			mandatoryCity: mandatoryCity,
+			mandatoryState: mandatoryState,
+			mandatoryCountry: mandatoryCountry,
 			$class: $class
 		});
 	return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
@@ -12732,26 +12788,46 @@ var _user$project$Main$main = _elm_lang$html$Html$programWithFlags(
 										function ($class) {
 											return A2(
 												_elm_lang$core$Json_Decode$andThen,
-												function (showCity) {
+												function (mandatoryCity) {
 													return A2(
 														_elm_lang$core$Json_Decode$andThen,
-														function (showCountry) {
+														function (mandatoryCountry) {
 															return A2(
 																_elm_lang$core$Json_Decode$andThen,
-																function (showInstitution) {
+																function (mandatoryInstitution) {
 																	return A2(
 																		_elm_lang$core$Json_Decode$andThen,
-																		function (showState) {
-																			return _elm_lang$core$Json_Decode$succeed(
-																				{affiliationLimit: affiliationLimit, authorFields: authorFields, authorLimit: authorLimit, authorsList: authorsList, $class: $class, showCity: showCity, showCountry: showCountry, showInstitution: showInstitution, showState: showState});
+																		function (mandatoryState) {
+																			return A2(
+																				_elm_lang$core$Json_Decode$andThen,
+																				function (showCity) {
+																					return A2(
+																						_elm_lang$core$Json_Decode$andThen,
+																						function (showCountry) {
+																							return A2(
+																								_elm_lang$core$Json_Decode$andThen,
+																								function (showInstitution) {
+																									return A2(
+																										_elm_lang$core$Json_Decode$andThen,
+																										function (showState) {
+																											return _elm_lang$core$Json_Decode$succeed(
+																												{affiliationLimit: affiliationLimit, authorFields: authorFields, authorLimit: authorLimit, authorsList: authorsList, $class: $class, mandatoryCity: mandatoryCity, mandatoryCountry: mandatoryCountry, mandatoryInstitution: mandatoryInstitution, mandatoryState: mandatoryState, showCity: showCity, showCountry: showCountry, showInstitution: showInstitution, showState: showState});
+																										},
+																										A2(_elm_lang$core$Json_Decode$field, 'showState', _elm_lang$core$Json_Decode$bool));
+																								},
+																								A2(_elm_lang$core$Json_Decode$field, 'showInstitution', _elm_lang$core$Json_Decode$bool));
+																						},
+																						A2(_elm_lang$core$Json_Decode$field, 'showCountry', _elm_lang$core$Json_Decode$bool));
+																				},
+																				A2(_elm_lang$core$Json_Decode$field, 'showCity', _elm_lang$core$Json_Decode$bool));
 																		},
-																		A2(_elm_lang$core$Json_Decode$field, 'showState', _elm_lang$core$Json_Decode$bool));
+																		A2(_elm_lang$core$Json_Decode$field, 'mandatoryState', _elm_lang$core$Json_Decode$bool));
 																},
-																A2(_elm_lang$core$Json_Decode$field, 'showInstitution', _elm_lang$core$Json_Decode$bool));
+																A2(_elm_lang$core$Json_Decode$field, 'mandatoryInstitution', _elm_lang$core$Json_Decode$bool));
 														},
-														A2(_elm_lang$core$Json_Decode$field, 'showCountry', _elm_lang$core$Json_Decode$bool));
+														A2(_elm_lang$core$Json_Decode$field, 'mandatoryCountry', _elm_lang$core$Json_Decode$bool));
 												},
-												A2(_elm_lang$core$Json_Decode$field, 'showCity', _elm_lang$core$Json_Decode$bool));
+												A2(_elm_lang$core$Json_Decode$field, 'mandatoryCity', _elm_lang$core$Json_Decode$bool));
 										},
 										A2(_elm_lang$core$Json_Decode$field, 'class', _elm_lang$core$Json_Decode$string));
 								},

@@ -18,13 +18,15 @@
                 "title": "First Name",
                 "description": "from flag",
                 "inputType": "string",
-                "questionType": "firstName"
+                "questionType": "firstName",
+                "mandatory": "on"
             }, {
                 "id": 3,
                 "title": "Last Name",
                 "description": "from flag",
                 "inputType": "string",
-                "questionType": "lastName"
+                "questionType": "lastName",
+                "mandatory": "on"
             }, {
                 "id": 4,
                 "title": "Presenting",
@@ -36,7 +38,8 @@
                 "title": "email",
                 "description": "add your email here",
                 "inputType": "string",
-                "questionType": "custom"
+                "questionType": "custom",
+                "mandatory": "on"
             }, {
                 "id": 6,
                 "title": "Under 21",
@@ -84,13 +87,15 @@
             authorLimit: 5,
             authorFields: authorFields,
             showInstitution: true,
-            showCity: true,
+            showCity: false,
             showState: true,
             showCountry: true,
-
-            class: 'incomplete'
+            mandatoryInstitution : true,
+            mandatoryCity : true,
+            mandatoryState : false,
+            mandatoryCountry : true,
+            class: 'complete'
         });
-
         var authorsPort = function(authors) {
             jsonAuthors = JSON.stringify(authors)
             app.ports.authors.send(jsonAuthors)

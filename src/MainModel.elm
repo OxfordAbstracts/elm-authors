@@ -13,6 +13,10 @@ type alias Model =
     , showCity : Bool
     , showState : Bool
     , showCountry : Bool
+    , mandatoryInstitution : Bool
+    , mandatoryCity : Bool
+    , mandatoryState : Bool
+    , mandatoryCountry : Bool
     , class : String
     , authorFields : List AuthorField
     }
@@ -26,7 +30,11 @@ type alias Flags =
     , showInstitution : Bool
     , showCity : Bool
     , showState : Bool
-    , showCountry : Bool
+    , showCountry : Bool  
+    , mandatoryInstitution : Bool
+    , mandatoryCity : Bool
+    , mandatoryState : Bool
+    , mandatoryCountry : Bool
     , class : String
     }
 
@@ -44,6 +52,10 @@ initialModel =
     , showCity = False
     , showState = True
     , showCountry = False
+    , mandatoryInstitution = True
+    , mandatoryCity = False
+    , mandatoryState = False
+    , mandatoryCountry = True
     , class = "complete"
     , authorFields = [ defaultAuthorField1, defaultAuthorField2, defaultAuthorField3 ]
     }
@@ -61,6 +73,7 @@ type alias AuthorField =
     , description : String
     , inputType : FieldType
     , questionType : String
+    , mandatory : String
     }
 
 
@@ -90,22 +103,22 @@ type alias Affiliation =
 
 defaultAuthorField0 : AuthorField
 defaultAuthorField0 =
-    AuthorField 0 "Default" "This is the default description" StringType "default"
+    AuthorField 0 "Default" "This is the default description" StringType "default" "on"
 
 
 defaultAuthorField1 : AuthorField
 defaultAuthorField1 =
-    AuthorField 0 "First Name" "This is the first name description" StringType "default"
+    AuthorField 0 "First Name" "This is the first name description" StringType "default" "on"
 
 
 defaultAuthorField2 : AuthorField
 defaultAuthorField2 =
-    AuthorField 1 "Last Name" "This is the last name description" StringType "default"
+    AuthorField 1 "Last Name" "This is the last name description" StringType "default" "on"
 
 
 defaultAuthorField3 : AuthorField
 defaultAuthorField3 =
-    AuthorField 2 "Presenting" "This is the Presenting description" BoolType "default"
+    AuthorField 2 "Presenting" "This is the Presenting description" BoolType "default" ""
 
 
 defaultAuthorFieldResponse1 : AuthorFieldResponse

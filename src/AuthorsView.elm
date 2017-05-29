@@ -109,19 +109,26 @@ renderFieldResponses model authorFieldResponses authorId authorField =
                 |> List.head
                 |> Maybe.withDefault defaultAuthorFieldResponse1
 
+
+        requiredText =
+          if authorField.mandatory == "on" then
+            " (Required)"
+          else
+            ""
+
         labelX =
             if authorField.description /= "" then
                 label
                     [ class "form__label tooltip"
                     , for (authorField.title)
                     ]
-                    [ text authorField.title
+                    [ text (String.append authorField.title requiredText)
                     , span [ class "tooltip__box" ] [ text authorField.description ]
                     ]
             else
                 label
                     [ class "form__label" ]
-                    [ text authorField.title ]
+                    [ text (String.append authorField.title requiredText)]
 
         inputHtml =
             if authorField.inputType == BoolType then
@@ -224,12 +231,19 @@ renderAffiliations model affiliations authorId =
 renderAffiliation : Model -> Int -> ( Affiliation, Int ) -> Html Msg
 renderAffiliation model authorId ( affiliation, index ) =
     let
+
+        institutionRequiredText =
+          if model.mandatoryInstitution then
+            "Institution (Required)"
+          else
+            "Institution"
+
         institutionDiv =
             if model.showInstitution then
                 div [ class "aa__field aa__field--tablecell" ]
                     [ label
                         [ class "form__label" ]
-                        [ text "Institution" ]
+                        [ text institutionRequiredText ]
                     , input
                         [ class "form__input institution"
                         , list "institutions-list"
@@ -244,12 +258,18 @@ renderAffiliation model authorId ( affiliation, index ) =
             else
                 text ""
 
+        cityRequiredText =
+          if model.mandatoryCity then
+            "City (Required)"
+          else
+            "City"
+
         cityDiv =
             if model.showCity then
                 div [ class "aa__field aa__field--tablecell" ]
                     [ label
                         [ class "form__label" ]
-                        [ text "City" ]
+                        [ text cityRequiredText ]
                     , input
                         [ class "city form__input"
                         , list "cities-list"
@@ -263,12 +283,18 @@ renderAffiliation model authorId ( affiliation, index ) =
             else
                 text ""
 
+        stateRequiredText =
+          if model.mandatoryState then
+            "State (Required)"
+          else
+            "State"
+
         stateDiv =
             if model.showState then
                 div [ class "aa__field aa__field--tablecell" ]
                     [ label
                         [ class "form__label" ]
-                        [ text "State" ]
+                        [ text stateRequiredText ]
                     , input
                         [ class "state form__input"
                         , list "states-list"
@@ -282,10 +308,17 @@ renderAffiliation model authorId ( affiliation, index ) =
             else
                 text ""
 
+        countryRequiredText =
+          if model.mandatoryCountry then
+            "Country (Required)"
+          else
+            "Country"
+
         countryDiv =
             if model.showCountry then
                 div [ class "aa__field aa__field--tablecell" ]
-                    [ label [ class "form__label" ] [ text "Country" ]
+                    [ label [ class "form__label" ]
+                    [ text countryRequiredText ]
                     , select
                         [ class "country form__input form__input--dropdown"
                         , list "countries-list"

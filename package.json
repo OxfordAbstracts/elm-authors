@@ -6,9 +6,8 @@
   "scripts": {
     "test": "elm-test tests/MainTests.elm",
     "start": "elm-live src/Main.elm --output=index.js --open",
-    "build": "elm-make src/Main.elm --output=index.js",
-    "prepublishOnly": "npm run build"
-  },
+    "build": "elm-make src/Main.elm --output=index.js"
+    },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/OxfordAbstracts/elm-authors.git"

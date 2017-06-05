@@ -1,13 +1,13 @@
 {
   "name": "elm-authors",
-  "version": "2.0.6",
+  "version": "2.0.7",
   "description": "To open compiled code open index.html",
   "main": "index.js",
   "scripts": {
     "test": "elm-test tests/MainTests.elm",
     "start": "elm-live src/Main.elm --output=index.js --open",
     "build": "elm-make src/Main.elm --output=index.js"
-    },
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/OxfordAbstracts/elm-authors.git"

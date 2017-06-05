@@ -10586,7 +10586,7 @@ var _user$project$Countries$list = {
 																																																																																																																																																																																																																									_0: 'Syrian Arab Republic',
 																																																																																																																																																																																																																									_1: {
 																																																																																																																																																																																																																										ctor: '::',
-																																																																																																																																																																																																																										_0: 'Taiwan, Province of China',
+																																																																																																																																																																																																																										_0: 'Taiwan',
 																																																																																																																																																																																																																										_1: {
 																																																																																																																																																																																																																											ctor: '::',
 																																																																																																																																																																																																																											_0: 'Tajikistan',
@@ -12259,7 +12259,6 @@ var _user$project$AuthorsView$renderFieldResponses = F4(
 					A2(_elm_lang$core$String$append, authorField.title, requiredText)),
 				_1: {ctor: '[]'}
 			});
-		var debug = A2(_elm_lang$core$Debug$log, 'authorField', authorField);
 		var authorFieldResponse = A2(
 			_elm_lang$core$Maybe$withDefault,
 			_user$project$MainModel$defaultAuthorFieldResponse1,

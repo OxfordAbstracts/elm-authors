@@ -4,9 +4,9 @@
   "description": "To open compiled code open index.html",
   "main": "index.js",
   "scripts": {
-    "test": "elm-test",
-    "start": "elm-live Main.elm --output=index.js --open",
-    "build": "elm-make Main.elm --output=index.js"
+    "test": "elm-test tests/MainTests.elm",
+    "start": "elm-live src/Main.elm --output=index.js --open",
+    "build": "elm-make src/Main.elm --output=index.js"
   },
   "repository": {
     "type": "git",
@@ -19,6 +19,6 @@
   },
   "homepage": "https://github.com/OxfordAbstracts/elm-authors#readme",
   "dependencies": {
-    "elm-test": "^0.18.2"
+    "elm-test": "0.18.2"
   }
 }

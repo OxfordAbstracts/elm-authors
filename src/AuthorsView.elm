@@ -59,7 +59,7 @@ renderAuthor model ( author, index ) =
     let
         addAffiliationButton =
             if model.affiliationLimit > (List.length author.affiliations) then
-                button
+                a
                     [ class "add-affiliation-to-author button button--secondary"
                     , onClick (AddAffiliation author.id)
                     ]
@@ -76,11 +76,11 @@ renderAuthor model ( author, index ) =
                 [ span [ class "aa__subtitle" ]
                     [ text ("Author " ++ toString index) ]
                 ]
-            , button
-                [ class "remove aa__remove-button aa__remove-button--top-indent button button--secondary button--delete"
+            , a
+                [ class "remove aa__remove-button aa__remove-button--top-indent button button--secondary"
                 , onClick (DeleteAuthor author.id)
                 ]
-                [ text ("Remove Author " ++ toString author.id) ]
+                [ text ("Remove Author") ]
             , div [ class "aa__sub-section aa__sub-section--table" ]
                 --for each of the authorFields we want to add a div like this:
                 [ div [ class "aa__field aa__field--tablecell" ] (List.map (renderFieldResponsesLine model author.authorFieldResponses author.id) chunkifiedAuthorFields)
@@ -88,7 +88,7 @@ renderAuthor model ( author, index ) =
             , div [ class "aa__inner-container" ]
                 [ div [ class "aa__dividing-title aa__dividing-title--linebreak" ]
                     [ span [ class "aa__subtitle" ]
-                        [ text ("Author " ++ toString author.id ++ " Affiliations") ]
+                        [ text ("Author " ++ toString index ++ " Affiliations") ]
                     ]
                 , (renderAffiliations model author.affiliations author.id)
                 , addAffiliationButton
@@ -109,19 +109,26 @@ renderFieldResponses model authorFieldResponses authorId authorField =
                 |> List.head
                 |> Maybe.withDefault defaultAuthorFieldResponse1
 
+
+        requiredText =
+          if authorField.mandatory == "on" then
+            " (Required)"
+          else
+            ""
+
         labelX =
             if authorField.description /= "" then
                 label
                     [ class "form__label tooltip"
                     , for (authorField.title)
                     ]
-                    [ text authorField.title
+                    [ text (String.append authorField.title requiredText)
                     , span [ class "tooltip__box" ] [ text authorField.description ]
                     ]
             else
                 label
                     [ class "form__label" ]
-                    [ text authorField.title ]
+                    [ text (String.append authorField.title requiredText)]
 
         inputHtml =
             if authorField.inputType == BoolType then
@@ -224,12 +231,19 @@ renderAffiliations model affiliations authorId =
 renderAffiliation : Model -> Int -> ( Affiliation, Int ) -> Html Msg
 renderAffiliation model authorId ( affiliation, index ) =
     let
+
+        institutionRequiredText =
+          if model.mandatoryInstitution then
+            "Institution (Required)"
+          else
+            "Institution"
+
         institutionDiv =
             if model.showInstitution then
                 div [ class "aa__field aa__field--tablecell" ]
                     [ label
                         [ class "form__label" ]
-                        [ text "Institution" ]
+                        [ text institutionRequiredText ]
                     , input
                         [ class "form__input institution"
                         , list "institutions-list"
@@ -244,12 +258,18 @@ renderAffiliation model authorId ( affiliation, index ) =
             else
                 text ""
 
+        cityRequiredText =
+          if model.mandatoryCity then
+            "City (Required)"
+          else
+            "City"
+
         cityDiv =
             if model.showCity then
                 div [ class "aa__field aa__field--tablecell" ]
                     [ label
                         [ class "form__label" ]
-                        [ text "City" ]
+                        [ text cityRequiredText ]
                     , input
                         [ class "city form__input"
                         , list "cities-list"
@@ -263,10 +283,42 @@ renderAffiliation model authorId ( affiliation, index ) =
             else
                 text ""
 
+        stateRequiredText =
+          if model.mandatoryState then
+            "State (Required)"
+          else
+            "State"
+
+        stateDiv =
+            if model.showState then
+                div [ class "aa__field aa__field--tablecell" ]
+                    [ label
+                        [ class "form__label" ]
+                        [ text stateRequiredText ]
+                    , input
+                        [ class "state form__input"
+                        , list "states-list"
+                        , name "state"
+                        , onInput (UpdateState authorId affiliation.id)
+                        , onFocus (SetFocusedIds authorId affiliation.id)
+                        , value affiliation.state
+                        ]
+                        []
+                    ]
+            else
+                text ""
+
+        countryRequiredText =
+          if model.mandatoryCountry then
+            "Country (Required)"
+          else
+            "Country"
+
         countryDiv =
             if model.showCountry then
                 div [ class "aa__field aa__field--tablecell" ]
-                    [ label [ class "form__label" ] [ text "Country" ]
+                    [ label [ class "form__label" ]
+                    [ text countryRequiredText ]
                     , select
                         [ class "country form__input form__input--dropdown"
                         , list "countries-list"
@@ -285,14 +337,15 @@ renderAffiliation model authorId ( affiliation, index ) =
                 [ span [ class "aa__subtitle aa__subtitle--small" ]
                     [ text ("Affiliation " ++ toString index) ]
                 ]
-            , button
-                [ class "remove aa__remove-button button button--secondary button--delete"
+            , a
+                [ class "remove aa__remove-button button button--secondary"
                 , onClick (DeleteAffiliation authorId affiliation.id)
                 ]
                 [ text "Remove Affiliation" ]
             , div [ class "aa__sub-section aa__sub-section--table" ]
                 [ institutionDiv
                 , cityDiv
+                , stateDiv
                 , countryDiv
                 ]
             ]

@@ -64,6 +64,7 @@ dummyAuthorField1 =
     , description = "Please put your first name here"
     , inputType = StringType
     , questionType = "string"
+    , mandatory = "on"
     }
 
 
@@ -74,6 +75,7 @@ dummyAuthorField2 =
     , description = "Please put your last initial here"
     , inputType = StringType
     , questionType = "string"
+    , mandatory = "on"
     }
 
 
@@ -84,6 +86,7 @@ dummyAuthorField3 =
     , description = "are you presenting"
     , inputType = BoolType
     , questionType = "bool"
+    , mandatory = "on"
     }
 
 
@@ -96,6 +99,7 @@ dummyAffiliation1 : Affiliation
 dummyAffiliation1 =
     { institution = "Leeds University"
     , city = "Leeds"
+    , state = "North"
     , country = "United Kingdom"
     , id = 1
     }
@@ -105,6 +109,7 @@ dummyAffiliation2 : Affiliation
 dummyAffiliation2 =
     { institution = "UCL"
     , city = "London"
+    , state = "South East"
     , country = "United Kingdom"
     , id = 2
     }

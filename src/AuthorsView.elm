@@ -127,13 +127,15 @@ renderFullWidthFieldResponse authorFieldResponses authorId authorField =
           else
             ""
 
+        maxCharactersString = " (Max 500 Characters)"
+
         labelX =
             if authorField.description /= "" then
                 label
                     [ class "form__label tooltip"
                     , for (authorField.title)
                     ]
-                    [ text (String.append authorField.title requiredText)
+                    [ text (authorField.title ++ maxCharactersString ++ requiredText)
                     , span [ class "tooltip__box" ] [ text authorField.description ]
                     ]
             else
@@ -147,6 +149,7 @@ renderFullWidthFieldResponse authorFieldResponses authorId authorField =
                 , textarea
                     [
                     rows 5
+                    , maxlength 500
                     , class "form__input--textarea-author-field"
                     , onInput (UpdateAuthorFieldString authorId authorField.id)
                     , value authorFieldResponse.value

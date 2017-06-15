@@ -63,7 +63,7 @@ renderAuthor model ( author, index ) =
                     [ class "add-affiliation-to-author button button--secondary"
                     , onClick (AddAffiliation author.id)
                     ]
-                    [ text "+ Add Affiliation" ]
+                    [ text "+ Add Another Affiliation" ]
             else
                 div []
                     []

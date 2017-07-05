@@ -62,6 +62,9 @@ fieldTypeHelper inputType =
         "singlePresenter" ->
             SinglePresenterType
 
+        "longString" ->
+            LongStringType
+
         _ ->
             StringType
 

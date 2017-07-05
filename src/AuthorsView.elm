@@ -68,8 +68,23 @@ renderAuthor model ( author, index ) =
                 div []
                     []
 
+        isFullWidth authorField =
+            authorField.inputType == LongStringType
+
+        -- needs to filter out the full width responses from the model.authorFields
+        fullWidthAuthorFields =
+            List.filter isFullWidth model.authorFields
+
+        authorFields =
+            List.filter (not << isFullWidth) model.authorFields
+
         chunkifiedAuthorFields =
-            chunk 3 model.authorFields
+            chunk 3 authorFields
+
+        fieldsHtml =
+            List.append
+                (List.map (renderFieldResponsesLine model author.authorFieldResponses author.id) chunkifiedAuthorFields)
+                (List.map (renderFullWidthFieldResponse author.authorFieldResponses author.id) fullWidthAuthorFields)
     in
         div [ class "author aa" ]
             [ div [ class "aa__dividing-title" ]
@@ -83,7 +98,8 @@ renderAuthor model ( author, index ) =
                 [ text ("Remove Author") ]
             , div [ class "aa__sub-section aa__sub-section--table" ]
                 --for each of the authorFields we want to add a div like this:
-                [ div [ class "aa__field aa__field--tablecell" ] (List.map (renderFieldResponsesLine model author.authorFieldResponses author.id) chunkifiedAuthorFields)
+                [ div [ class "aa__field aa__field--tablecell" ]
+                    fieldsHtml
                 ]
             , div [ class "aa__inner-container" ]
                 [ div [ class "aa__dividing-title aa__dividing-title--linebreak" ]
@@ -96,12 +112,7 @@ renderAuthor model ( author, index ) =
             ]
 
 
-renderFieldResponsesLine model authorFieldResponses authorId authorFieldLine =
-    div [ class "aa__sub-section aa__sub-section--table" ]
-        (List.map (renderFieldResponses model authorFieldResponses authorId) authorFieldLine)
-
-
-renderFieldResponses model authorFieldResponses authorId authorField =
+renderFullWidthFieldResponse authorFieldResponses authorId authorField =
     let
         authorFieldResponse =
             authorFieldResponses
@@ -109,12 +120,64 @@ renderFieldResponses model authorFieldResponses authorId authorField =
                 |> List.head
                 |> Maybe.withDefault defaultAuthorFieldResponse1
 
+        requiredText =
+            if authorField.mandatory == "on" then
+                " (Required)"
+            else
+                ""
+
+        maxCharactersString =
+            " (Max 500 Characters)"
+
+        label =
+            if authorField.description /= "" then
+                label
+                    [ class "form__label tooltip"
+                    , for (authorField.title)
+                    ]
+                    [ text (authorField.title ++ maxCharactersString ++ requiredText)
+                    , span [ class "tooltip__box" ] [ text authorField.description ]
+                    ]
+            else
+                label
+                    [ class "form__label" ]
+                    [ text (String.append authorField.title requiredText) ]
+
+        inputHtml =
+            div [ class "aa__field aa__field--tablecell" ]
+                [ label
+                , textarea
+                    [ rows 5
+                    , maxlength 500
+                    , class "form__input--textarea-author-field"
+                    , onInput (UpdateAuthorFieldString authorId authorField.id)
+                    , value authorFieldResponse.value
+                    ]
+                    []
+                ]
+    in
+        div [ class "aa__sub-section aa__sub-section--table" ]
+            [ inputHtml ]
+
+
+renderFieldResponsesLine model authorFieldResponses authorId authorFieldLine =
+    div [ class "aa__sub-section aa__sub-section--table" ]
+        (List.map (renderFieldResponse model authorFieldResponses authorId) authorFieldLine)
+
+
+renderFieldResponse model authorFieldResponses authorId authorField =
+    let
+        authorFieldResponse =
+            authorFieldResponses
+                |> List.filter (\a -> a.authorFieldId == authorField.id)
+                |> List.head
+                |> Maybe.withDefault defaultAuthorFieldResponse1
 
         requiredText =
-          if authorField.mandatory == "on" then
-            " (Required)"
-          else
-            ""
+            if authorField.mandatory == "on" then
+                " (Required)"
+            else
+                ""
 
         labelX =
             if authorField.description /= "" then
@@ -128,7 +191,7 @@ renderFieldResponses model authorFieldResponses authorId authorField =
             else
                 label
                     [ class "form__label" ]
-                    [ text (String.append authorField.title requiredText)]
+                    [ text (String.append authorField.title requiredText) ]
 
         inputHtml =
             if authorField.inputType == BoolType then
@@ -153,7 +216,8 @@ renderFieldResponses model authorFieldResponses authorId authorField =
                         , id (authorField.title)
                         , class "form__input"
                         , checked (authorFieldResponse.value == "true")
-                          -- if one of the other(!) inputs with SinglePresenterType === checked then disable
+
+                        -- if one of the other(!) inputs with SinglePresenterType === checked then disable
                         , disabled (disableThePresentingCheckbox model (authorFieldResponse.value == "true") authorField.id)
                         , onClick (UpdateAuthorFieldBool authorId authorField.id)
                         ]
@@ -231,12 +295,11 @@ renderAffiliations model affiliations authorId =
 renderAffiliation : Model -> Int -> ( Affiliation, Int ) -> Html Msg
 renderAffiliation model authorId ( affiliation, index ) =
     let
-
         institutionRequiredText =
-          if model.mandatoryInstitution then
-            "Institution (Required)"
-          else
-            "Institution"
+            if model.mandatoryInstitution then
+                "Institution (Required)"
+            else
+                "Institution"
 
         institutionDiv =
             if model.showInstitution then
@@ -259,10 +322,10 @@ renderAffiliation model authorId ( affiliation, index ) =
                 text ""
 
         cityRequiredText =
-          if model.mandatoryCity then
-            "City (Required)"
-          else
-            "City"
+            if model.mandatoryCity then
+                "City (Required)"
+            else
+                "City"
 
         cityDiv =
             if model.showCity then
@@ -284,10 +347,10 @@ renderAffiliation model authorId ( affiliation, index ) =
                 text ""
 
         stateRequiredText =
-          if model.mandatoryState then
-            "State (Required)"
-          else
-            "State"
+            if model.mandatoryState then
+                "State (Required)"
+            else
+                "State"
 
         stateDiv =
             if model.showState then
@@ -309,16 +372,16 @@ renderAffiliation model authorId ( affiliation, index ) =
                 text ""
 
         countryRequiredText =
-          if model.mandatoryCountry then
-            "Country (Required)"
-          else
-            "Country"
+            if model.mandatoryCountry then
+                "Country (Required)"
+            else
+                "Country"
 
         countryDiv =
             if model.showCountry then
                 div [ class "aa__field aa__field--tablecell" ]
                     [ label [ class "form__label" ]
-                    [ text countryRequiredText ]
+                        [ text countryRequiredText ]
                     , select
                         [ class "country form__input form__input--dropdown"
                         , list "countries-list"

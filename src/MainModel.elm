@@ -34,7 +34,7 @@ type alias Flags =
     , showInstitution : Bool
     , showCity : Bool
     , showState : Bool
-    , showCountry : Bool  
+    , showCountry : Bool
     , mandatoryInstitution : Bool
     , mandatoryCity : Bool
     , mandatoryState : Bool
@@ -76,6 +76,7 @@ initialModel =
 type FieldType
     = BoolType
     | StringType
+    | LongStringType
     | SinglePresenterType
 
 

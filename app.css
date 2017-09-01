@@ -1689,6 +1689,15 @@ pre {
         padding-top: 0.5rem;
         line-height: 1.5;
       }
+
+      .form__input--textarea-author-field {
+        resize: vertical;
+        min-height: 5rem;
+        padding-top: 0.5rem;
+        line-height: 1.5;
+        width: 100%
+      }
+
       .form__input--textarea-no-min-height {
         resize: vertical;
         height: inherit;

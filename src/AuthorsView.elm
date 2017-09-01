@@ -234,9 +234,9 @@ renderAffiliation model authorId ( affiliation, index ) =
 
         institutionRequiredText =
           if model.mandatoryInstitution then
-            "Institution (Required)"
+            String.append model.institutionLabel " (Required)"
           else
-            "Institution"
+            model.institutionLabel
 
         institutionDiv =
             if model.showInstitution then
@@ -260,9 +260,9 @@ renderAffiliation model authorId ( affiliation, index ) =
 
         cityRequiredText =
           if model.mandatoryCity then
-            "City (Required)"
+            String.append model.cityLabel " (Required)"
           else
-            "City"
+            model.cityLabel
 
         cityDiv =
             if model.showCity then
@@ -285,9 +285,9 @@ renderAffiliation model authorId ( affiliation, index ) =
 
         stateRequiredText =
           if model.mandatoryState then
-            "State (Required)"
+            String.append model.stateLabel " (Required)"
           else
-            "State"
+            model.stateLabel
 
         stateDiv =
             if model.showState then
@@ -310,9 +310,9 @@ renderAffiliation model authorId ( affiliation, index ) =
 
         countryRequiredText =
           if model.mandatoryCountry then
-            "Country (Required)"
+            String.append model.countryLabel " (Required)"
           else
-            "Country"
+            model.countryLabel
 
         countryDiv =
             if model.showCountry then

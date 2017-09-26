@@ -61,7 +61,7 @@ init flags =
                 , mandatoryState = mandatoryState
                 , mandatoryCountry = mandatoryCountry
                 , class = class
-                , countries = (Debug.log "flag countries" flags.countries)
+                , countries = flags.countries
             }
     in
         ( model, Cmd.none )

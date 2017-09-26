@@ -19,6 +19,10 @@ type alias Model =
     , mandatoryCountry : Bool
     , class : String
     , authorFields : List AuthorField
+    , institutionLabel : String
+    , cityLabel : String
+    , stateLabel : String
+    , countryLabel : String
     }
 
 
@@ -36,6 +40,10 @@ type alias Flags =
     , mandatoryState : Bool
     , mandatoryCountry : Bool
     , class : String
+    , institutionLabel : String
+    , cityLabel : String
+    , stateLabel : String
+    , countryLabel : String
     }
 
 
@@ -58,6 +66,10 @@ initialModel =
     , mandatoryCountry = True
     , class = "complete"
     , authorFields = [ defaultAuthorField1, defaultAuthorField2, defaultAuthorField3 ]
+    , institutionLabel = "Institution"
+    , cityLabel = "City"
+    , stateLabel = "State"
+    , countryLabel = "Country"
     }
 
 

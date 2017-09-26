@@ -296,10 +296,10 @@ renderAffiliation : Model -> Int -> ( Affiliation, Int ) -> Html Msg
 renderAffiliation model authorId ( affiliation, index ) =
     let
         institutionRequiredText =
-            if model.mandatoryInstitution then
-                "Institution (Required)"
-            else
-                "Institution"
+          if model.mandatoryInstitution then
+            String.append model.institutionLabel " (Required)"
+          else
+            model.institutionLabel
 
         institutionDiv =
             if model.showInstitution then
@@ -322,10 +322,10 @@ renderAffiliation model authorId ( affiliation, index ) =
                 text ""
 
         cityRequiredText =
-            if model.mandatoryCity then
-                "City (Required)"
-            else
-                "City"
+          if model.mandatoryCity then
+            String.append model.cityLabel " (Required)"
+          else
+            model.cityLabel
 
         cityDiv =
             if model.showCity then
@@ -347,10 +347,10 @@ renderAffiliation model authorId ( affiliation, index ) =
                 text ""
 
         stateRequiredText =
-            if model.mandatoryState then
-                "State (Required)"
-            else
-                "State"
+          if model.mandatoryState then
+            String.append model.stateLabel " (Required)"
+          else
+            model.stateLabel
 
         stateDiv =
             if model.showState then
@@ -372,10 +372,10 @@ renderAffiliation model authorId ( affiliation, index ) =
                 text ""
 
         countryRequiredText =
-            if model.mandatoryCountry then
-                "Country (Required)"
-            else
-                "Country"
+          if model.mandatoryCountry then
+            String.append model.countryLabel " (Required)"
+          else
+            model.countryLabel
 
         countryDiv =
             if model.showCountry then

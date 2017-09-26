@@ -23,6 +23,7 @@ type alias Model =
     , cityLabel : String
     , stateLabel : String
     , countryLabel : String
+    , countries : List String
     }
 
 
@@ -44,6 +45,7 @@ type alias Flags =
     , cityLabel : String
     , stateLabel : String
     , countryLabel : String
+    , countries : List String
     }
 
 
@@ -70,6 +72,7 @@ initialModel =
     , cityLabel = "City"
     , stateLabel = "State"
     , countryLabel = "Country"
+    , countries = []
     }
 
 

@@ -22,9 +22,8 @@ init flags =
         authors =
             Decoders.authors flags.authorsList
 
-        { affiliationLimit, authorLimit, showInstitution, showCity, showState, showCountry, mandatoryInstitution,
-          mandatoryCity, mandatoryState, mandatoryCountry, class, institutionLabel, cityLabel, stateLabel, countryLabel}
-          = flags
+        { affiliationLimit, authorLimit, showInstitution, showCity, showState, showCountry, mandatoryInstitution, mandatoryCity, mandatoryState, mandatoryCountry, class } =
+            flags
 
         authorsWithBlankResponses =
             List.map (addBlankResponsesToAuthor authorFields) authors
@@ -61,11 +60,8 @@ init flags =
                 , mandatoryCity = mandatoryCity
                 , mandatoryState = mandatoryState
                 , mandatoryCountry = mandatoryCountry
-                , institutionLabel = institutionLabel
-                , cityLabel = cityLabel
-                , stateLabel = stateLabel
-                , countryLabel = countryLabel
                 , class = class
+                , countries = (Debug.log "flag countries" flags.countries)
             }
     in
         ( model, Cmd.none )

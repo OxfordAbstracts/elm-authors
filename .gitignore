@@ -3,3 +3,4 @@ elm-stuff
 node_modules
 tests/elm-stuff
 index.js
+npm-debug.log

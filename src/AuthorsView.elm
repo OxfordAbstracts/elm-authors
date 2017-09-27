@@ -129,7 +129,7 @@ renderFullWidthFieldResponse authorFieldResponses authorId authorField =
         maxCharactersString =
             " (Max 500 Characters)"
 
-        label =
+        label_ =
             if authorField.description /= "" then
                 label
                     [ class "form__label tooltip"
@@ -145,7 +145,7 @@ renderFullWidthFieldResponse authorFieldResponses authorId authorField =
 
         inputHtml =
             div [ class "aa__field aa__field--tablecell" ]
-                [ label
+                [ label_
                 , textarea
                     [ rows 5
                     , maxlength 500
@@ -216,8 +216,7 @@ renderFieldResponse model authorFieldResponses authorId authorField =
                         , id (authorField.title)
                         , class "form__input"
                         , checked (authorFieldResponse.value == "true")
-
-                        -- if one of the other(!) inputs with SinglePresenterType === checked then disable
+                          -- if one of the other(!) inputs with SinglePresenterType === checked then disable
                         , disabled (disableThePresentingCheckbox model (authorFieldResponse.value == "true") authorField.id)
                         , onClick (UpdateAuthorFieldBool authorId authorField.id)
                         ]
@@ -296,10 +295,10 @@ renderAffiliation : Model -> Int -> ( Affiliation, Int ) -> Html Msg
 renderAffiliation model authorId ( affiliation, index ) =
     let
         institutionRequiredText =
-          if model.mandatoryInstitution then
-            String.append model.institutionLabel " (Required)"
-          else
-            model.institutionLabel
+            if model.mandatoryInstitution then
+                String.append model.institutionLabel " (Required)"
+            else
+                model.institutionLabel
 
         institutionDiv =
             if model.showInstitution then
@@ -322,10 +321,10 @@ renderAffiliation model authorId ( affiliation, index ) =
                 text ""
 
         cityRequiredText =
-          if model.mandatoryCity then
-            String.append model.cityLabel " (Required)"
-          else
-            model.cityLabel
+            if model.mandatoryCity then
+                String.append model.cityLabel " (Required)"
+            else
+                model.cityLabel
 
         cityDiv =
             if model.showCity then
@@ -347,10 +346,10 @@ renderAffiliation model authorId ( affiliation, index ) =
                 text ""
 
         stateRequiredText =
-          if model.mandatoryState then
-            String.append model.stateLabel " (Required)"
-          else
-            model.stateLabel
+            if model.mandatoryState then
+                String.append model.stateLabel " (Required)"
+            else
+                model.stateLabel
 
         stateDiv =
             if model.showState then
@@ -372,10 +371,10 @@ renderAffiliation model authorId ( affiliation, index ) =
                 text ""
 
         countryRequiredText =
-          if model.mandatoryCountry then
-            String.append model.countryLabel " (Required)"
-          else
-            model.countryLabel
+            if model.mandatoryCountry then
+                String.append model.countryLabel " (Required)"
+            else
+                model.countryLabel
 
         countryDiv =
             if model.showCountry then
@@ -390,7 +389,7 @@ renderAffiliation model authorId ( affiliation, index ) =
                         , onFocus (SetFocusedIds authorId affiliation.id)
                         , value affiliation.country
                         ]
-                        (Countries.options affiliation.country)
+                        (Countries.options model.countries affiliation.country)
                     ]
             else
                 text ""

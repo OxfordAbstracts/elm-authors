@@ -41,7 +41,17 @@ renderAuthors model =
                 div [ class "button button--secondary aa__add-author-button", onClick AddAuthor ] [ text "Add Another Author" ]
             else
                 div []
-                    []
+                    [ label
+                      [class "form__label"]
+                      [text model.etAlQuestionText]
+                    , input
+                      [type_ "checkbox"
+                      , class "form__input"
+                      , checked model.etAl
+                      , name "etAl"
+                      ]
+                      []
+                    ]
     in
         div [ class model.class ]
             [ div [ class "" ] (List.map (renderAuthor model) authorIndexTuples)

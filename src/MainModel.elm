@@ -24,6 +24,9 @@ type alias Model =
     , stateLabel : String
     , countryLabel : String
     , countries : List String
+    , etAl : Bool
+    , hasEtAlToggle : Bool
+    , etAlQuestionText : String
     }
 
 
@@ -46,6 +49,9 @@ type alias Flags =
     , stateLabel : String
     , countryLabel : String
     , countries : List String
+    , etAl : Bool
+    , hasEtAlToggle : Bool
+    , etAlQuestionText : String
     }
 
 
@@ -73,6 +79,10 @@ initialModel =
     , stateLabel = "State"
     , countryLabel = "Country"
     , countries = []
+    , etAl = False
+    , hasEtAlToggle = False
+    , etAlQuestionText = "Check this box to add et al after the list of authors"
+
     }
 
 

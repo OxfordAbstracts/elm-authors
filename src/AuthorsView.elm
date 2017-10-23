@@ -39,9 +39,22 @@ renderAuthors model =
         addAuthorButton =
             if model.authorLimit > (List.length model.authors) then
                 div [ class "button button--secondary aa__add-author-button", onClick AddAuthor ] [ text "Add Another Author" ]
+            else if model.hasEtAlToggle then
+                div []
+                    [ label
+                      [class "form__label"]
+                      [text model.etAlQuestionText]
+                    , input
+                      [type_ "checkbox"
+                      , class "form__input"
+                      , checked model.etAl
+                      , name "etAl"
+                      ]
+                      []
+                    ]
             else
                 div []
-                    []
+                []
     in
         div [ class model.class ]
             [ div [ class "" ] (List.map (renderAuthor model) authorIndexTuples)

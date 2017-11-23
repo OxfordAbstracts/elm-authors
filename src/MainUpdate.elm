@@ -6,6 +6,7 @@ import Encoders
 import Decoders
 import Json.Decode as Json
 import Ports exposing (..)
+import List.Extra
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -152,6 +153,24 @@ update msg model =
                       }
                     , checkAuthorsComplete encodedAuthors
                     )
+
+            MoveAuthorUp authorIndex ->
+                let
+                    newAuthors =
+                        model.authors
+                            |> List.Extra.swapAt (authorIndex - 1) (authorIndex - 2)
+                            |> Maybe.withDefault []
+                in
+                    ( { model | authors = newAuthors }, Cmd.none )
+
+            MoveAuthorDown authorIndex ->
+                let
+                    newAuthors =
+                        model.authors
+                            |> List.Extra.swapAt (authorIndex - 1) (authorIndex)
+                            |> Maybe.withDefault []
+                in
+                    ( { model | authors = newAuthors }, Cmd.none )
 
 
 getBlurredAuthorAffiliations : Model -> List Affiliation

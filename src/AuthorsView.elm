@@ -42,19 +42,19 @@ renderAuthors model =
             else if model.hasEtAlToggle then
                 div []
                     [ label
-                      [class "form__label"]
-                      [text model.etAlQuestionText]
+                        [ class "form__label" ]
+                        [ text model.etAlQuestionText ]
                     , input
-                      [type_ "checkbox"
-                      , class "form__input"
-                      , checked model.etAl
-                      , name "etAl"
-                      ]
-                      []
+                        [ type_ "checkbox"
+                        , class "form__input"
+                        , checked model.etAl
+                        , name "etAl"
+                        ]
+                        []
                     ]
             else
                 div []
-                []
+                    []
     in
         div [ class model.class ]
             [ div [ class "" ] (List.map (renderAuthor model) authorIndexTuples)
@@ -98,29 +98,55 @@ renderAuthor model ( author, index ) =
             List.append
                 (List.map (renderFieldResponsesLine model author.authorFieldResponses author.id) chunkifiedAuthorFields)
                 (List.map (renderFullWidthFieldResponse author.authorFieldResponses author.id) fullWidthAuthorFields)
+
+        hideUpButtonClass =
+            if index == 1 || List.length model.authors == 1 then
+                " hidden"
+            else
+                ""
+
+        hideDownButtonClass =
+            if index == ((List.length model.authors)) || List.length model.authors == 1 then
+                " hidden"
+            else
+                ""
     in
         div [ class "author aa" ]
             [ div [ class "aa__dividing-title" ]
-                [ span [ class "aa__subtitle" ]
-                    [ text ("Author " ++ toString index) ]
-                ]
-            , a
-                [ class "remove aa__remove-button aa__remove-button--top-indent button button--secondary"
-                , onClick (DeleteAuthor author.id)
-                ]
-                [ text ("Remove Author") ]
-            , div [ class "aa__sub-section aa__sub-section--table" ]
-                --for each of the authorFields we want to add a div like this:
-                [ div [ class "aa__field aa__field--tablecell" ]
-                    fieldsHtml
-                ]
-            , div [ class "aa__inner-container" ]
-                [ div [ class "aa__dividing-title aa__dividing-title--linebreak" ]
+                [ div [ class "form__question-section form__question-section--table form__question-section--table-auto" ]
                     [ span [ class "aa__subtitle" ]
-                        [ text ("Author " ++ toString index ++ " Affiliations") ]
+                        [ text ("Author " ++ toString index) ]
+                    , a
+                        [ class "remove aa__remove-button aa__remove-button--top-indent button button--secondary"
+                        , onClick (DeleteAuthor author.id)
+                        ]
+                        [ text ("Remove Author") ]
+                    , div [ class "constructor__question-controls" ]
+                        [ a
+                            [ class ("button button--glass icon icon--up-open" ++ hideUpButtonClass)
+                            , onClick (MoveAuthorUp index)
+                            ]
+                            []
+                        , a
+                            [ class ("button button--glass icon icon--down-open" ++ hideDownButtonClass)
+                            , onClick (MoveAuthorDown index)
+                            ]
+                            []
+                        ]
                     ]
-                , (renderAffiliations model author.affiliations author.id)
-                , addAffiliationButton
+                , div [ class "aa__sub-section aa__sub-section--table" ]
+                    --for each of the authorFields we want to add a div like this:
+                    [ div [ class "aa__field aa__field--tablecell" ]
+                        fieldsHtml
+                    ]
+                , div [ class "aa__inner-container" ]
+                    [ div [ class "aa__dividing-title aa__dividing-title--linebreak" ]
+                        [ span [ class "aa__subtitle" ]
+                            [ text ("Author " ++ toString index ++ " Affiliations") ]
+                        ]
+                    , (renderAffiliations model author.affiliations author.id)
+                    , addAffiliationButton
+                    ]
                 ]
             ]
 

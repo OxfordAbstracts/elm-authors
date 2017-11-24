@@ -1,12 +1,13 @@
 {
   "name": "elm-authors",
-  "version": "3.1.1",
+  "version": "3.2.0",
   "description": "To open compiled code open index.html",
   "main": "index.js",
   "scripts": {
     "test": "elm-test tests/MainTests.elm",
     "start": "elm-live src/Main.elm --output=index.js --open",
-    "build": "elm-make src/Main.elm --output=index.js"
+    "build": "elm-make src/Main.elm --output=index.js",
+    "debug": "elm-live src/Main.elm --output=index.js --debug"
   },
   "repository": {
     "type": "git",

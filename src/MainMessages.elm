@@ -16,3 +16,5 @@ type Msg
     | SetAffiliationKeyDown Int Int
     | SetAuthors String
     | NewClass String
+    | MoveAuthorUp Int
+    | MoveAuthorDown Int
